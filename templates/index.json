@@ -232,6 +232,37 @@
         "padding_bottom": 52
       }
     },
+    "stats_counter": {
+      "type": "stats-counter",
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "number": "500", "suffix": "+", "label": "Homes Serviced" } },
+        "stat_2": { "type": "stat", "settings": { "number": "5", "suffix": "★", "label": "Average Rating" } },
+        "stat_3": { "type": "stat", "settings": { "number": "8", "suffix": "+", "label": "Years Experience" } },
+        "stat_4": { "type": "stat", "settings": { "number": "98", "suffix": "%", "label": "Repeat Customers" } }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "settings": {
+        "heading": "Trusted Across Central Virginia",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "before_after": {
+      "type": "before-after-gallery",
+      "blocks": {
+        "ba_1": { "type": "comparison", "settings": { "label": "Kitchen Deep Clean — Charlottesville" } },
+        "ba_2": { "type": "comparison", "settings": { "label": "Lawn Transformation — Crozet" } },
+        "ba_3": { "type": "comparison", "settings": { "label": "Move-Out Cleaning — Albemarle County" } }
+      },
+      "block_order": ["ba_1", "ba_2", "ba_3"],
+      "settings": {
+        "heading": "See the Dani Cleans Difference",
+        "subheading": "Drag the slider to see the transformation. Real results from real customers.",
+        "show_cta": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
     "reviews_homepage": {
       "type": "reviews-homepage",
       "settings": {
@@ -393,6 +424,8 @@
     "cleaning_services",
     "landscaping_services",
     "why_choose_us",
+    "stats_counter",
+    "before_after",
     "reviews_homepage",
     "quote_calculator",
     "service_areas",

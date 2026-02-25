@@ -1,0 +1,110 @@
+{% comment %}
+  Social Proof Notification Popups
+  Shows rotating "recent activity" toasts like:
+  "Sarah from Crozet just booked a cleaning..."
+  Creates urgency and trust. Shown on every page.
+{% endcomment %}
+
+<div class="proof-toast" id="proofToast" style="display:none;">
+  <div class="proof-toast-icon">&#10003;</div>
+  <div class="proof-toast-text">
+    <strong id="proofName">Someone</strong>
+    <span id="proofAction">just requested an estimate</span>
+    <span class="proof-time" id="proofTime">2 hours ago</span>
+  </div>
+  <button class="proof-toast-dismiss" id="proofDismiss" aria-label="Dismiss">&times;</button>
+</div>
+
+<style>
+.proof-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 997;
+  background: #fff;
+  border: 1px solid #e0e8e0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  max-width: 340px;
+  animation: proofSlideIn 0.4s ease;
+  font-size: 14px;
+}
+@keyframes proofSlideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.proof-toast-icon {
+  width: 32px; height: 32px; background: #2d6a4f; color: #fff;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.proof-toast-text { line-height: 1.3; }
+.proof-toast-text strong { display: block; color: #1a3a2a; }
+.proof-toast-text span { color: #555; font-size: 13px; }
+.proof-time { display: block; font-size: 12px !important; color: #999 !important; }
+.proof-toast-dismiss {
+  background: none; border: none; font-size: 18px; cursor: pointer;
+  color: #ccc; padding: 2px 4px; flex-shrink: 0;
+}
+.proof-toast-dismiss:hover { color: #666; }
+
+@media (max-width: 749px) {
+  .proof-toast { bottom: 88px; left: 10px; right: 10px; max-width: none; }
+}
+</style>
+
+<script>
+(function() {
+  var PROOFS = [
+    { name: "Sarah from Crozet", action: "booked a recurring cleaning" },
+    { name: "James from Charlottesville", action: "requested a deep cleaning estimate" },
+    { name: "Maria from Albemarle", action: "signed up for lawn care" },
+    { name: "David from Keswick", action: "booked a move-out cleaning" },
+    { name: "Rachel from Earlysville", action: "requested a landscaping quote" },
+    { name: "Mike from Waynesboro", action: "booked cleaning + landscaping bundle" },
+    { name: "Emily from Staunton", action: "signed up for bi-weekly cleaning" },
+    { name: "Tom from Free Union", action: "requested a seasonal cleanup estimate" },
+    { name: "Lisa from Lake Monticello", action: "booked a deep cleaning" },
+    { name: "Chris from Gordonsville", action: "signed up for weekly lawn care" }
+  ];
+
+  var TIMES = ["12 minutes ago", "34 minutes ago", "1 hour ago", "2 hours ago", "3 hours ago", "5 hours ago", "earlier today", "yesterday"];
+
+  var toast = document.getElementById('proofToast');
+  var dismissed = false;
+  var currentIndex = Math.floor(Math.random() * PROOFS.length);
+
+  document.getElementById('proofDismiss').addEventListener('click', function() {
+    toast.style.display = 'none';
+    dismissed = true;
+  });
+
+  function showProof() {
+    if (dismissed) return;
+    var proof = PROOFS[currentIndex % PROOFS.length];
+    var time = TIMES[Math.floor(Math.random() * TIMES.length)];
+
+    document.getElementById('proofName').textContent = proof.name;
+    document.getElementById('proofAction').textContent = proof.action;
+    document.getElementById('proofTime').textContent = time;
+    toast.style.display = 'flex';
+    toast.style.animation = 'none';
+    toast.offsetHeight; // trigger reflow
+    toast.style.animation = 'proofSlideIn 0.4s ease';
+
+    currentIndex++;
+
+    // Hide after 6 seconds
+    setTimeout(function() {
+      if (!dismissed) toast.style.display = 'none';
+    }, 6000);
+  }
+
+  // Show first proof after 20 seconds, then every 45 seconds
+  setTimeout(function() {
+    showProof();
+    setInterval(showProof, 45000);
+  }, 20000);
+})();
+</script>

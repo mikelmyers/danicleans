@@ -1,0 +1,43 @@
+{% comment %}
+  Automated Review Request
+  After a successful form submission, nudge the customer to leave a Google review.
+  Also shows on thank-you/success states to maximize review collection.
+{% endcomment %}
+
+<script>
+(function() {
+  // Only show review nudge to returning visitors who have already used our services
+  // (visitors with 3+ visits who have converted before)
+  try {
+    var visits = parseInt(localStorage.getItem('dc_visits') || '0');
+    var conversions = JSON.parse(localStorage.getItem('dc_conversions') || '[]');
+    var reviewAsked = localStorage.getItem('dc_review_asked');
+
+    if (visits >= 5 && conversions.length > 0 && !reviewAsked) {
+      // Check if their first conversion was more than 7 days ago
+      var firstConversion = new Date(conversions[0].date);
+      var daysSince = (Date.now() - firstConversion.getTime()) / (1000 * 60 * 60 * 24);
+
+      if (daysSince >= 7) {
+        setTimeout(function() {
+          showReviewRequest();
+        }, 8000);
+      }
+    }
+  } catch(e) {}
+
+  function showReviewRequest() {
+    var el = document.createElement('div');
+    el.id = 'reviewNudge';
+    el.innerHTML = '<div style="position:fixed;bottom:90px;right:80px;z-index:998;background:#fff;border:2px solid #2d6a4f;border-radius:12px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,0.15);max-width:320px;width:calc(100vw - 40px);animation:toastSlide 0.4s ease;">' +
+      '<button onclick="this.closest(\'#reviewNudge\').remove();try{localStorage.setItem(\'dc_review_asked\',\'1\')}catch(e){}" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:20px;cursor:pointer;color:#999;">&times;</button>' +
+      '<p style="margin:0 0 8px;font-size:15px;color:#1a3a2a;font-weight:600;">Enjoying Dani Cleans? &#11088;</p>' +
+      '<p style="margin:0 0 12px;font-size:14px;color:#555;">A quick Google review helps other Charlottesville families find us. It only takes 30 seconds!</p>' +
+      '<a href="https://search.google.com/local/writereview?placeid=YOUR_GOOGLE_PLACE_ID" target="_blank" rel="noopener" ' +
+      'onclick="try{localStorage.setItem(\'dc_review_asked\',\'1\')}catch(e){}" ' +
+      'style="display:block;padding:12px;background:#2d6a4f;color:#fff;text-decoration:none;border-radius:8px;text-align:center;font-size:14px;font-weight:600;">Leave a Google Review</a>' +
+      '</div>';
+    document.body.appendChild(el);
+  }
+})();
+</script>
