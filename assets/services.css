@@ -1,18 +1,5 @@
 /* === Services Page Styles === */
 
-/* Reset and Typography */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #333;
-    line-height: 1.6;
-}
-
 /* Container */
 .container {
     width: 90%;
@@ -22,25 +9,26 @@ body {
 
 /* Hero Section */
 .hero-services {
-    background-image: url('{{ "services-hero.jpg" | asset_url }}');
-    background-size: cover;
-    background-position: center;
+    background-color: #2d6a4f;
     color: #fff;
-    padding: 150px 0;
+    padding: 100px 0;
     text-align: center;
 }
 
 .hero-services .container {
-    max-width: 800px; /* Optional: Narrower container for the hero section */
+    max-width: 800px;
 }
 
 .hero-services h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
+    font-size: 42px;
+    margin-bottom: 16px;
+    line-height: 1.2;
 }
 
-.hero-services p {
-    font-size: 24px;
+.hero-services h3 {
+    font-size: 22px;
+    font-weight: 400;
+    opacity: 0.9;
 }
 
 /* Introduction Section */
@@ -51,7 +39,10 @@ body {
 
 .intro p {
     font-size: 18px;
-    color: #666;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
 }
 
 /* Services Section */
@@ -59,25 +50,39 @@ body {
     padding: 60px 0;
 }
 
+.services-landscape {
+    background-color: #f0f5f0;
+}
+
 .services h2 {
     text-align: center;
     margin-bottom: 40px;
     font-size: 36px;
+    color: #1a3a2a;
 }
 
 .service-item {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    border-left: 4px solid #2d6a4f;
+}
+
+.services-landscape .service-item {
+    border-left-color: #1b6b93;
 }
 
 .service-item h3 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #1a3a2a;
 }
 
 .service-item p {
     font-size: 16px;
-    color: #666;
+    color: #555;
+    margin-bottom: 12px;
 }
 
 .service-item ul {
@@ -86,7 +91,7 @@ body {
 }
 
 .service-item ul li {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-size: 16px;
     color: #333;
     display: flex;
@@ -94,23 +99,30 @@ body {
 }
 
 .service-item ul li::before {
-    content: '✔';
-    color: #333;
+    content: '\2713';
+    color: #2d6a4f;
     margin-right: 10px;
     font-size: 18px;
-    margin-top: 2px; /* Aligns the checkmark with the text */
+    font-weight: bold;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+.services-landscape .service-item ul li::before {
+    color: #1b6b93;
 }
 
 /* Why Choose Us Section */
 .why-choose-us {
     padding: 60px 0;
-    background-color: #f9f9f9;
+    background-color: #fff;
 }
 
 .why-choose-us h2 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 36px;
+    color: #1a3a2a;
 }
 
 .benefits-list {
@@ -119,6 +131,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .benefits-list li {
@@ -130,102 +144,115 @@ body {
 }
 
 .benefits-list li::before {
-    content: '✔';
-    color: #333;
+    content: '\2713';
+    color: #2d6a4f;
     margin-right: 10px;
     font-size: 18px;
+    font-weight: bold;
     margin-top: 2px;
+    flex-shrink: 0;
 }
 
 .benefits-list strong {
     font-weight: 600;
 }
 
-
 /* Testimonials Section */
 .testimonials {
     padding: 60px 0;
+    background-color: #f0f5f0;
 }
 
 .testimonials h2 {
     text-align: center;
     margin-bottom: 40px;
     font-size: 36px;
+    color: #1a3a2a;
 }
 
 .testimonial-item {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
 }
 
 .testimonial-item p {
     font-size: 16px;
-    color: #666;
+    color: #555;
+    line-height: 1.6;
+}
+
+.testimonial-item p:first-child {
+    font-style: italic;
+    font-size: 17px;
 }
 
 .testimonial-item strong {
     display: block;
     margin-top: 10px;
-    color: #333;
+    color: #1a3a2a;
 }
 
 /* Call to Action Section */
 .call-to-action {
     padding: 80px 0;
-    background-color: #333;
+    background-color: #1a3a2a;
     color: #fff;
     text-align: center;
 }
 
 .call-to-action .container {
-    max-width: 800px; /* Optional: Narrower container for the CTA */
+    max-width: 800px;
 }
 
 .call-to-action h2 {
     font-size: 36px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .call-to-action p {
     font-size: 18px;
     margin-bottom: 30px;
+    opacity: 0.9;
 }
 
 .call-to-action .btn {
     background-color: #fff;
-    color: #333;
-    padding: 15px 30px;
+    color: #1a3a2a;
+    padding: 16px 36px;
     text-decoration: none;
     font-size: 18px;
-    border-radius: 5px;
+    font-weight: 600;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 .call-to-action .btn:hover {
-    background-color: #eaeaea;
-}
-
-/* Footer */
-.footer {
-    background-color: #fff;
-    padding: 20px 0;
-    border-top: 1px solid #eaeaea;
-    text-align: center;
-}
-
-.footer p {
-    font-size: 14px;
-    color: #999;
+    background-color: #f0f5f0;
+    transform: translateY(-1px);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero-services h2 {
-        font-size: 36px;
+    .hero-services {
+        padding: 70px 0;
     }
-    .hero-services p {
-        font-size: 20px;
+    .hero-services h2 {
+        font-size: 30px;
+    }
+    .hero-services h3 {
+        font-size: 18px;
     }
     .benefits-list li {
         width: 100%;
+    }
+    .service-item {
+        padding: 20px;
     }
 }

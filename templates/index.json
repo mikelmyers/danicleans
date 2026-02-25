@@ -1,1 +1,375 @@
-{"sections":{"2b7db522-df17-4fd5-bc39-1f247e55b5be":{"type":"rich-text","blocks":{"template--20261403918658__2b7db522-df17-4fd5-bc39-1f247e55b5be-heading-1":{"type":"heading","settings":{"heading":"Unparalleled Clean for Uncompromising Tastes—Charlottesville's Elite Cleaning Solution","heading_size":"h1"}},"template--20261403918658__2b7db522-df17-4fd5-bc39-1f247e55b5be-text-1":{"type":"text","settings":{"text":"<p>For those who demand nothing but the best, Dani Cleans VA delivers an unparalleled level of cleanliness tailored to your sophisticated tastes. We transform homes and businesses into pristine spaces where luxury meets immaculate detail. Say goodbye to ordinary cleaning and embrace a service that reflects your uncompromising standards.<\/p>"}},"template--20261403918658__2b7db522-df17-4fd5-bc39-1f247e55b5be-button-1":{"type":"button","settings":{"button_label":"Book A Free Estimate","button_link":"shopify:\/\/pages\/request-a-quote","button_style_secondary":false,"button_label_2":"Have Questions? Call 434-351-0335","button_link_2":"shopify:\/\/pages\/services","button_style_secondary_2":true}}},"block_order":["template--20261403918658__2b7db522-df17-4fd5-bc39-1f247e55b5be-heading-1","template--20261403918658__2b7db522-df17-4fd5-bc39-1f247e55b5be-text-1","template--20261403918658__2b7db522-df17-4fd5-bc39-1f247e55b5be-button-1"],"custom_css":[],"settings":{"desktop_content_position":"center","content_alignment":"left","color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":52}},"9590b91b-3cfa-4414-8d6c-e745a8c57170":{"type":"rich-text","blocks":{"template--20261403918658__9590b91b-3cfa-4414-8d6c-e745a8c57170-heading-1":{"type":"heading","settings":{"heading":"<strong>Why Choose Dani Cleans?<\/strong>","heading_size":"h1"}},"template--20261403918658__9590b91b-3cfa-4414-8d6c-e745a8c57170-text-1":{"type":"text","settings":{"text":"<h2><strong>Exemplary Expertise and Trustworthiness<\/strong><\/h2><p>At Dani Cleans VA, excellence isn't just a promise—it's a standard we uphold in every space we transform. With years of refined experience and a passion for perfection, we are dedicated to treating your home or business with the meticulous care it deserves. Our commitment to unparalleled service ensures that every detail is attended to, providing you with a pristine environment that reflects your sophisticated tastes.<\/p><h5><\/h5><h2><strong>Tailored Luxury Cleaning Solutions<\/strong><\/h2><p>We understand that every client is unique, and so are their spaces. That's why we offer personalized cleaning plans crafted to meet your specific needs and preferences. Whether it's your elegant home or your professional business setting, we ensure that every corner shines with immaculate precision. Our bespoke approach guarantees that your environment not only meets but exceeds your expectations.<\/p><h2><strong>Eco-Conscious Commitment<\/strong><\/h2><p>Luxury and sustainability go hand in hand at Dani Cleans. We are dedicated to using premium, eco-friendly cleaning products and practices that are gentle on your surroundings yet uncompromising in effectiveness. This commitment not only ensures a safe and healthy environment for you, your family, or your employees but also contributes positively to our planet.<\/p><h2><strong>Unwavering Satisfaction Guarantee<\/strong><\/h2><p>Your satisfaction is our highest priority. We stand behind the quality of our services with absolute confidence. If any aspect of our work doesn't meet your expectations, we pledge to address it promptly and thoroughly. With Dani Cleans, excellence isn't just an aspiration—it's a guarantee.<\/p><h2><strong>Experienc<\/strong>{{ shop.brand.slogan }}<strong>e the Dani Cleans Difference<\/strong><\/h2><p>Elevate your space to new standards of cleanliness and luxury. Entrust your home or business to a service that embodies professionalism, discretion, and an eye for perfection. Discover how Dani Cleans can transform your environment into a sanctuary of pristine elegance.<\/p>"}}},"block_order":["template--20261403918658__9590b91b-3cfa-4414-8d6c-e745a8c57170-heading-1","template--20261403918658__9590b91b-3cfa-4414-8d6c-e745a8c57170-text-1"],"custom_css":[],"settings":{"desktop_content_position":"center","content_alignment":"left","color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":52}},"collapsible_content_6pf4yD":{"type":"collapsible-content","blocks":{"collapsible_row_6qNzMB":{"type":"collapsible_row","settings":{"heading":"Regular Luxury Maintenance","icon":"lightning_bolt","row_content":"<h3>Experience the tranquility of a consistently immaculate home with our scheduled cleaning services. Select from weekly, bi-weekly, or monthly appointments to ensure your living space remains a pristine sanctuary of elegance and comfort.<\/h3>","page":""}},"collapsible_row_bcKGNH":{"type":"collapsible_row","settings":{"heading":"Comprehensive Deep Cleaning","icon":"lightning_bolt","row_content":"<h3>Indulge in a meticulous deep cleaning that revitalizes every facet of your residence. Ideal for special occasions or when your home requires exceptional attention, we leave no detail overlooked, transforming each nook and cranny into a testament of cleanliness.<\/h3>","page":""}},"collapsible_row_rRxyPq":{"type":"collapsible_row","settings":{"heading":"Seamless Move-In\/Move-Out Cleaning","icon":"lightning_bolt","row_content":"<h3>Transition effortlessly with our specialized move-in\/move-out cleaning services. We handle every aspect of preparing your home, allowing you to focus on the excitement of new beginnings or the closure of cherished chapters, all while ensuring the space is impeccably pristine.<\/h3>","page":""}},"collapsible_row_nnJazK":{"type":"collapsible_row","settings":{"heading":"Specialized Cleaning Solutions","icon":"lightning_bolt","row_content":"<h3>Cater to your unique needs with our range of specialty cleaning services, including expert carpet care, crystal-clear window cleaning, and more. Our tailored solutions are designed to uphold the highest standards of excellence, reflecting your refined taste in every detail.<\/h3>","page":""}}},"block_order":["collapsible_row_6qNzMB","collapsible_row_bcKGNH","collapsible_row_rRxyPq","collapsible_row_nnJazK"],"custom_css":[],"settings":{"caption":"","heading":"<strong>Our Services<\/strong>","heading_size":"h0","heading_alignment":"center","layout":"row","container_color_scheme":"","color_scheme":"","open_first_collapsible_row":false,"image_ratio":"adapt","desktop_layout":"image_second","padding_top":36,"padding_bottom":36}},"reviews_homepage_Uy6pWh":{"type":"reviews-homepage","name":"Reviews Carousel","settings":{"title":"What Customers Are Saying","heading_size":24,"max_width":1200,"auto_rotate":true,"slide_duration":3,"show_form":false}},"91f41c3c-c10f-480b-baa0-1f63ad2f5cb8":{"type":"rich-text","blocks":{"template--20261403918658__91f41c3c-c10f-480b-baa0-1f63ad2f5cb8-heading-1":{"type":"heading","settings":{"heading":"<strong>Serving Charlottesville, VA and Surrounding Areas<\/strong>","heading_size":"h0"}},"template--20261403918658__91f41c3c-c10f-480b-baa0-1f63ad2f5cb8-text-1":{"type":"text","settings":{"text":"<p>We proudly serve Charlottesville and the surrounding communities, bringing our exceptional home cleaning services to local residents.<\/p>"}}},"block_order":["template--20261403918658__91f41c3c-c10f-480b-baa0-1f63ad2f5cb8-heading-1","template--20261403918658__91f41c3c-c10f-480b-baa0-1f63ad2f5cb8-text-1"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":52}},"4d9c533d-ac60-4464-ab51-f49f3f61b3be":{"type":"multicolumn","blocks":{"template--20261403918658__4d9c533d-ac60-4464-ab51-f49f3f61b3be-column-1":{"type":"column","settings":{"title":"<strong>Elevate Your Lifestyle with Dani Cleans<\/strong>","text":"<p>Imagine returning to a flawlessly clean and exquisitely fresh home, where every detail reflects unparalleled care and sophistication. With Dani Cleans VA, this vision becomes your everyday reality. We are devoted to enhancing your life by transforming your space into a sanctuary of pristine elegance and comfort.<\/p>","link_label":"","link":""}},"template--20261403918658__4d9c533d-ac60-4464-ab51-f49f3f61b3be-column-2":{"type":"column","settings":{"title":"<strong>Elevate Your Space Today—Discover the Dani Cleans Difference<\/strong>","text":"<p>Why delay embracing the luxury you deserve? Transform your home or business into a sanctuary of impeccable cleanliness and refined elegance. With Dani Cleans, you'll experience how our exceptional services not only enhance your environment but also enrich your lifestyle. <\/p>","link_label":"","link":""}},"template--20261403918658__4d9c533d-ac60-4464-ab51-f49f3f61b3be-column-3":{"type":"column","settings":{"title":"<strong>Dani Cleans VA – Redefining Luxury Cleaning in Charlottesville, VA<\/strong>","text":"<p>Elevate your living space to unparalleled standards of cleanliness and sophistication. Reach out to us today to discuss your exclusive cleaning requirements and begin experiencing the art of impeccable living.<\/p>","link_label":"","link":""}}},"block_order":["template--20261403918658__4d9c533d-ac60-4464-ab51-f49f3f61b3be-column-1","template--20261403918658__4d9c533d-ac60-4464-ab51-f49f3f61b3be-column-2","template--20261403918658__4d9c533d-ac60-4464-ab51-f49f3f61b3be-column-3"],"settings":{"title":"","heading_size":"h1","image_width":"full","image_ratio":"adapt","button_label":"Request A FREE Quote","button_link":"shopify:\/\/pages\/request-a-quote","columns_desktop":3,"column_alignment":"left","background_style":"primary","color_scheme":"","columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"newsletter_9VCqHq":{"type":"newsletter","blocks":{"heading_GJi68h":{"type":"heading","settings":{"heading":"Elevate Your Space—As a Warm Welcome, Enjoy a Special Upgrade on Your First Cleaning.","heading_size":"h1"}},"email_form_M4RnDj":{"type":"email_form","settings":{}}},"block_order":["heading_GJi68h","email_form_M4RnDj"],"settings":{"color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":52}}},"order":["2b7db522-df17-4fd5-bc39-1f247e55b5be","9590b91b-3cfa-4414-8d6c-e745a8c57170","collapsible_content_6pf4yD","reviews_homepage_Uy6pWh","91f41c3c-c10f-480b-baa0-1f63ad2f5cb8","4d9c533d-ac60-4464-ab51-f49f3f61b3be","newsletter_9VCqHq"]}
+{
+  "sections": {
+    "hero_banner": {
+      "type": "rich-text",
+      "blocks": {
+        "hero_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Charlottesville's Trusted Cleaning & Landscaping Pros",
+            "heading_size": "h0"
+          }
+        },
+        "hero_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From spotless homes to beautiful yards — Dani Cleans keeps your property looking its best. Serving Charlottesville, Albemarle County, and surrounding areas.</p>"
+          }
+        },
+        "hero_buttons": {
+          "type": "button",
+          "settings": {
+            "button_label": "Get a FREE Estimate",
+            "button_link": "shopify:\/\/pages\/request-a-quote",
+            "button_style_secondary": false,
+            "button_label_2": "Call Now: 434-351-0335",
+            "button_link_2": "tel:4343510335",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["hero_heading", "hero_text", "hero_buttons"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "accent-1",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "trust_badges": {
+      "type": "multicolumn",
+      "blocks": {
+        "badge_1": {
+          "type": "column",
+          "settings": {
+            "title": "Locally Owned",
+            "text": "<p>Proudly serving Charlottesville & Albemarle County</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "badge_2": {
+          "type": "column",
+          "settings": {
+            "title": "Insured & Bonded",
+            "text": "<p>Your property is fully protected with every service</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "badge_3": {
+          "type": "column",
+          "settings": {
+            "title": "5-Star Rated",
+            "text": "<p>Consistently top-rated by Charlottesville homeowners</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "badge_4": {
+          "type": "column",
+          "settings": {
+            "title": "100% Satisfaction",
+            "text": "<p>Not happy? We'll come back and make it right — guaranteed</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "background-2",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "cleaning_services": {
+      "type": "multicolumn",
+      "blocks": {
+        "cleaning_1": {
+          "type": "column",
+          "settings": {
+            "title": "Recurring Cleaning",
+            "text": "<p>Weekly, bi-weekly, or monthly cleaning plans that keep your home consistently fresh. Customized to your schedule and priorities.</p>",
+            "link_label": "Learn More",
+            "link": "shopify:\/\/pages\/services"
+          }
+        },
+        "cleaning_2": {
+          "type": "column",
+          "settings": {
+            "title": "Deep Cleaning",
+            "text": "<p>Top-to-bottom scrub for homes that need extra attention. We get into every corner, fixture, and surface — ideal for seasonal refreshes.</p>",
+            "link_label": "Learn More",
+            "link": "shopify:\/\/pages\/services"
+          }
+        },
+        "cleaning_3": {
+          "type": "column",
+          "settings": {
+            "title": "Move-In\/Move-Out",
+            "text": "<p>Stress-free transitions for renters, homeowners, and property managers. We handle the cleaning so you can focus on your move.</p>",
+            "link_label": "Learn More",
+            "link": "shopify:\/\/pages\/services"
+          }
+        }
+      },
+      "block_order": ["cleaning_1", "cleaning_2", "cleaning_3"],
+      "settings": {
+        "title": "Home Cleaning Services",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Get a Free Cleaning Estimate",
+        "button_link": "shopify:\/\/pages\/request-a-quote",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 52,
+        "padding_bottom": 20
+      }
+    },
+    "landscaping_services": {
+      "type": "multicolumn",
+      "blocks": {
+        "landscape_1": {
+          "type": "column",
+          "settings": {
+            "title": "Lawn Care & Mowing",
+            "text": "<p>Regular mowing, edging, and trimming to keep your lawn looking sharp all season. Flexible scheduling for residential and commercial properties.</p>",
+            "link_label": "Learn More",
+            "link": "shopify:\/\/pages\/services"
+          }
+        },
+        "landscape_2": {
+          "type": "column",
+          "settings": {
+            "title": "Landscaping & Design",
+            "text": "<p>Garden beds, mulching, shrub trimming, and seasonal plantings. We design and maintain outdoor spaces that boost your curb appeal.</p>",
+            "link_label": "Learn More",
+            "link": "shopify:\/\/pages\/services"
+          }
+        },
+        "landscape_3": {
+          "type": "column",
+          "settings": {
+            "title": "Seasonal Cleanup",
+            "text": "<p>Spring prep, fall leaf removal, gutter clearing, and storm cleanup. Keep your property tidy and protected year-round.</p>",
+            "link_label": "Learn More",
+            "link": "shopify:\/\/pages\/services"
+          }
+        }
+      },
+      "block_order": ["landscape_1", "landscape_2", "landscape_3"],
+      "settings": {
+        "title": "Landscaping & Lawn Care",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Get a Free Landscaping Estimate",
+        "button_link": "shopify:\/\/pages\/request-a-quote",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "background-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "why_choose_us": {
+      "type": "rich-text",
+      "blocks": {
+        "why_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Why Charlottesville Homeowners Choose Dani Cleans",
+            "heading_size": "h1"
+          }
+        },
+        "why_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We're not a franchise or a faceless app — we're your neighbors. Dani Cleans is a locally owned and operated business built on real relationships with Charlottesville families. We show up on time, communicate clearly, and treat your home like our own. Every team member is background-checked, trained, and committed to earning your trust with every visit.</p>"
+          }
+        },
+        "why_button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Book Your First Service",
+            "button_link": "shopify:\/\/pages\/request-a-quote",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": ["why_heading", "why_text", "why_button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "reviews_homepage": {
+      "type": "reviews-homepage",
+      "settings": {
+        "title": "What Our Customers Are Saying",
+        "heading_size": 24,
+        "max_width": 1200,
+        "auto_rotate": true,
+        "slide_duration": 5,
+        "show_form": false
+      }
+    },
+    "service_areas": {
+      "type": "collapsible-content",
+      "blocks": {
+        "area_charlottesville": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Charlottesville",
+            "icon": "map_pin",
+            "row_content": "<p>Full cleaning and landscaping services throughout the city of Charlottesville. From the Downtown Mall area to Belmont, Barracks Road to Fry's Spring — we've got you covered.</p>",
+            "page": ""
+          }
+        },
+        "area_albemarle": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Albemarle County",
+            "icon": "map_pin",
+            "row_content": "<p>Serving Crozet, Ivy, Earlysville, Keswick, Free Union, North Garden, and all communities throughout Albemarle County.</p>",
+            "page": ""
+          }
+        },
+        "area_surrounding": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Surrounding Areas",
+            "icon": "map_pin",
+            "row_content": "<p>We also serve Waynesboro, Staunton, Lake Monticello, Palmyra, Gordonsville, Orange, and Fluvanna County. Contact us to confirm availability in your area.</p>",
+            "page": ""
+          }
+        },
+        "area_commercial": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Commercial Properties",
+            "icon": "lightning_bolt",
+            "row_content": "<p>Office buildings, retail spaces, restaurants, and HOA common areas. We provide recurring cleaning and grounds maintenance contracts with flexible scheduling.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": ["area_charlottesville", "area_albemarle", "area_surrounding", "area_commercial"],
+      "settings": {
+        "caption": "We Come to You",
+        "heading": "Areas We Serve",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "row",
+        "container_color_scheme": "",
+        "color_scheme": "background-2",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "cta_bottom": {
+      "type": "rich-text",
+      "blocks": {
+        "cta_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready for a Cleaner Home and a Better-Looking Yard?",
+            "heading_size": "h1"
+          }
+        },
+        "cta_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Get your free, no-obligation estimate today. Most quotes are returned within 24 hours.</p>"
+          }
+        },
+        "cta_buttons": {
+          "type": "button",
+          "settings": {
+            "button_label": "Request a FREE Estimate",
+            "button_link": "shopify:\/\/pages\/request-a-quote",
+            "button_style_secondary": false,
+            "button_label_2": "Call 434-351-0335",
+            "button_link_2": "tel:4343510335",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["cta_heading", "cta_text", "cta_buttons"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "inverse",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "nl_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get Seasonal Tips & Exclusive Offers",
+            "heading_size": "h2"
+          }
+        },
+        "nl_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": ["nl_heading", "nl_form"],
+      "settings": {
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "hero_banner",
+    "trust_badges",
+    "cleaning_services",
+    "landscaping_services",
+    "why_choose_us",
+    "reviews_homepage",
+    "service_areas",
+    "cta_bottom",
+    "newsletter"
+  ]
+}
