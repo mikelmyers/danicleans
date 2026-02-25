@@ -1,0 +1,135 @@
+{% if customer.admin? %}
+  <div class="admin-reviews-manager">
+    <h1>Manage Customer Reviews</h1>
+    
+    <div class="info-box">
+      <p>This page allows you to manage customer reviews. Any changes you make here will update the reviews.json asset file.</p>
+      <p>To add or modify reviews, edit the page's settings in your Shopify admin.</p>
+      <p><strong>Note:</strong> You need to be logged in as an admin to see and use this page.</p>
+    </div>
+    
+    <h2>Current Reviews</h2>
+    
+    {% assign reviews = 'reviews.json' | asset_url | file_url | read_json %}
+    
+    <div class="reviews-list">
+      {% for review in reviews %}
+        <div class="review-item">
+          <div class="review-content">
+            <p class="review-author"><strong>{{ review.name }}</strong></p>
+            <div class="review-stars">
+              {% assign rating = review.rating | default: 5 %}
+              {% for i in (1..5) %}
+                {% if i <= rating %}
+                  <span class="star star-filled">★</span>
+                {% else %}
+                  <span class="star">★</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <p class="review-text">"{{ review.review }}"</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="instructions">
+      <h3>How to Edit Reviews</h3>
+      <ol>
+        <li>Go to Online Store → Themes → Current theme → Actions → Edit code</li>
+        <li>Navigate to Assets folder and find reviews.json</li>
+        <li>Edit the file to add, modify, or remove reviews</li>
+        <li>Save changes</li>
+      </ol>
+      
+      <h4>Example Format:</h4>
+      <pre>[
+  {
+    "name": "Customer Name",
+    "review": "Customer review text goes here.",
+    "rating": 5
+  },
+  {
+    "name": "Another Customer",
+    "review": "Another review text.",
+    "rating": 4
+  }
+]</pre>
+    </div>
+  </div>
+  
+  <style>
+    .admin-reviews-manager {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+    
+    .info-box {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+      border-left: 5px solid #ccc;
+    }
+    
+    .reviews-list {
+      margin: 2rem 0;
+    }
+    
+    .review-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin-bottom: 1rem;
+    }
+    
+    .review-author {
+      margin-bottom: 0.5rem;
+    }
+    
+    .review-stars {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .star {
+      color: #ddd;
+    }
+    
+    .star-filled {
+      color: #FFD700;
+    }
+    
+    .review-text {
+      font-style: italic;
+    }
+    
+    .instructions {
+      background: #f9f9f9;
+      padding: 1.5rem;
+      border-radius: 5px;
+      margin-top: 2rem;
+    }
+    
+    pre {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 3px;
+      overflow-x: auto;
+    }
+  </style>
+{% else %}
+  <div class="admin-only-message">
+    <h1>Admin Access Required</h1>
+    <p>This page is only accessible to store administrators.</p>
+  </div>
+  
+  <style>
+    .admin-only-message {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+  </style>
+{% endif %}
