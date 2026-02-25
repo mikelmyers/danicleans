@@ -1,7 +1,7 @@
 {% comment %}
-  Referral Program Section
+  Referral Program Section — Tiered Rewards
   Word of mouth is the #1 growth channel for local services.
-  This systemizes it: refer a friend, you both get $25 off.
+  Tiered system: the more you refer, the bigger the rewards.
 {% endcomment %}
 
 <section class="referral-section" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
@@ -17,17 +17,42 @@
           <h4>Share the Link</h4>
           <p>Send your unique link or just tell them your name</p>
         </div>
-        <div class="referral-arrow">→</div>
+        <div class="referral-arrow">&rarr;</div>
         <div class="referral-step">
           <div class="referral-step-num">2</div>
           <h4>They Book</h4>
           <p>Your friend mentions your name when they book</p>
         </div>
-        <div class="referral-arrow">→</div>
+        <div class="referral-arrow">&rarr;</div>
         <div class="referral-step">
           <div class="referral-step-num">3</div>
           <h4>You Both Save</h4>
           <p>$25 off for them AND $25 credit for you</p>
+        </div>
+      </div>
+
+      <!-- Tiered Rewards -->
+      <div class="referral-tiers">
+        <h3>The More You Refer, The More You Earn</h3>
+        <div class="referral-tiers-grid">
+          <div class="referral-tier-card">
+            <div class="referral-tier-icon">&#11088;</div>
+            <h4>1-2 Referrals</h4>
+            <p class="referral-tier-reward">$25 credit each</p>
+            <p class="referral-tier-desc">You and your friend each get $25 off your next service</p>
+          </div>
+          <div class="referral-tier-card active">
+            <div class="referral-tier-icon">&#127942;</div>
+            <h4>3-5 Referrals</h4>
+            <p class="referral-tier-reward">$50 credit each</p>
+            <p class="referral-tier-desc">Double the reward! Plus priority scheduling for you</p>
+          </div>
+          <div class="referral-tier-card">
+            <div class="referral-tier-icon">&#128081;</div>
+            <h4>6+ Referrals</h4>
+            <p class="referral-tier-reward">FREE Monthly Clean</p>
+            <p class="referral-tier-desc">One free cleaning every month for as long as your referrals stay active</p>
+          </div>
         </div>
       </div>
 
@@ -47,10 +72,10 @@
             <input type="text" name="contact[Referred Friend Name]" placeholder="Friend's Name" required>
             <input type="tel" name="contact[Referred Friend Phone]" placeholder="Friend's Phone or Email" required>
           </div>
-          <input type="hidden" name="contact[body]" value="REFERRAL: Customer is referring a friend for $25 off each.">
+          <input type="hidden" name="contact[body]" value="REFERRAL: Customer is referring a friend via tiered referral program.">
           <button type="submit">Send the Referral</button>
         </form>
-        <p class="referral-note">We'll reach out to your friend and mention you sent them. No limit on referrals — the more you share, the more you save!</p>
+        <p class="referral-note">We'll reach out to your friend and mention you sent them. No limit on referrals — the more you share, the more you earn!</p>
       </div>
 
       <div class="referral-share">
@@ -105,11 +130,24 @@
 .referral-share-btn.sms { background: #25D366; color: #fff; }
 .referral-share-btn.email { background: #2d6a4f; color: #fff; }
 .referral-share-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.referral-tiers { margin-top: 8px; margin-bottom: 32px; }
+.referral-tiers h3 { text-align: center; margin-bottom: 16px; font-size: 20px; color: #1a3a2a; }
+.referral-tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.referral-tier-card {
+  background: #f7faf7; border: 2px solid #e0e8e0; border-radius: 12px;
+  padding: 20px 16px; text-align: center; transition: all 0.2s;
+}
+.referral-tier-card.active { border-color: #2d6a4f; background: #fff; box-shadow: 0 4px 16px rgba(45,106,79,0.12); }
+.referral-tier-icon { font-size: 28px; margin-bottom: 8px; }
+.referral-tier-card h4 { font-size: 15px; margin-bottom: 4px; color: #1a3a2a; }
+.referral-tier-reward { font-size: 18px; font-weight: 800; color: #2d6a4f; margin-bottom: 4px; }
+.referral-tier-desc { font-size: 12px; color: #666; line-height: 1.4; }
 @media (max-width: 600px) {
   .referral-card { padding: 28px 20px; }
   .referral-form-row { flex-direction: column; }
   .referral-arrow { display: none; }
   .referral-how { gap: 20px; }
+  .referral-tiers-grid { grid-template-columns: 1fr; max-width: 280px; margin: 0 auto; }
 }
 </style>
 
