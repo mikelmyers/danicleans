@@ -299,6 +299,32 @@
         "padding_bottom": 40
       }
     },
+    "quote_calculator": {
+      "type": "quote-calculator",
+      "settings": {
+        "heading": "Get an Instant Estimate",
+        "subheading": "Answer a few quick questions and see your price in under 60 seconds.",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "smart_faq": {
+      "type": "smart-faq",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "booking_calendar": {
+      "type": "booking-calendar",
+      "settings": {
+        "heading": "Book Your Service",
+        "subheading": "Pick a day and time that works for you. We'll confirm within 24 hours.",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
     "cta_bottom": {
       "type": "rich-text",
       "blocks": {
@@ -368,7 +394,10 @@
     "landscaping_services",
     "why_choose_us",
     "reviews_homepage",
+    "quote_calculator",
     "service_areas",
+    "smart_faq",
+    "booking_calendar",
     "cta_bottom",
     "newsletter"
   ]
