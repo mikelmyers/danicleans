@@ -1,117 +1,276 @@
-{% assign form_submission_successful = false %}
-
-{% if request.query.success == 'true' and request.query.form_type == 'contact' %}
-    {% assign form_submission_successful = true %}
-{% endif %}
-
 {% comment %}
-Quote Request Landing Page — Dani Cleans (Cleaning & Landscaping)
+  Quote Request Landing Page — Dani Cleans
+  Primary lead capture page for organic traffic and navigation links.
+  Full branded design matching the rest of the site.
 {% endcomment %}
 
-<!-- Two-Column Container -->
-<div class="two-column-container">
-    <!-- Left Column: Form Container -->
-    <div class="left-column">
-        <div class="form-container">
-            <h2>Get Your FREE Estimate</h2>
-            <p>Tell us about your property and we'll get back to you within 24 hours.</p>
+{% assign form_submission_successful = false %}
+{% if request.query.success == 'true' and request.query.form_type == 'contact' %}
+  {% assign form_submission_successful = true %}
+{% endif %}
 
-            {% if form_submission_successful %}
-                <div class="success-message">
-                    <p><strong>Thank you!</strong> We've received your request and will be in touch within 24 hours. If you need immediate help, call us at <a href="tel:4343510335">434-351-0335</a>.</p>
-                </div>
-            {% else %}
-                <form method="post" action="/contact" id="ContactForm" accept-charset="UTF-8" class="contact-form">
-                    <input type="hidden" name="form_type" value="contact">
-                    <input type="hidden" name="utf8" value="✓">
-                    <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="ContactFormName">Full Name *</label>
-                            <input type="text" id="ContactFormName" name="contact[name]" required placeholder="Your full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="ContactFormEmail">Email *</label>
-                            <input type="email" id="ContactFormEmail" name="contact[email]" required placeholder="your@email.com">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="ContactFormPhone">Phone Number *</label>
-                            <input type="tel" id="ContactFormPhone" name="contact[Phone Number]" required placeholder="(434) 555-1234">
-                        </div>
-                        <div class="form-group">
-                            <label for="ContactFormAddress">Property Address *</label>
-                            <input type="text" id="ContactFormAddress" name="contact[Property Address]" required placeholder="123 Main St">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="ContactFormCity">City *</label>
-                            <input type="text" id="ContactFormCity" name="contact[City]" required placeholder="Charlottesville">
-                        </div>
-                        <div class="form-group">
-                            <label for="ContactFormZip">Zip Code *</label>
-                            <input type="text" id="ContactFormZip" name="contact[Zip Code]" required placeholder="22901">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ContactFormCategory">Service Category *</label>
-                        <select id="ContactFormCategory" name="contact[Service Category]" required>
-                            <option value="">What do you need help with?</option>
-                            <optgroup label="Cleaning Services">
-                                <option value="Recurring Cleaning">Recurring Cleaning (Weekly/Bi-weekly/Monthly)</option>
-                                <option value="Deep Cleaning">Deep Cleaning</option>
-                                <option value="Move-In/Move-Out Cleaning">Move-In / Move-Out Cleaning</option>
-                                <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
-                                <option value="Window Cleaning">Window Cleaning</option>
-                            </optgroup>
-                            <optgroup label="Landscaping & Lawn Care">
-                                <option value="Lawn Mowing & Maintenance">Lawn Mowing & Maintenance</option>
-                                <option value="Landscaping & Garden Design">Landscaping & Garden Design</option>
-                                <option value="Seasonal Cleanup">Seasonal Cleanup (Spring/Fall)</option>
-                                <option value="Commercial Grounds Maintenance">Commercial Grounds Maintenance</option>
-                            </optgroup>
-                            <optgroup label="Bundles">
-                                <option value="Cleaning + Landscaping Bundle">Cleaning + Landscaping Bundle</option>
-                            </optgroup>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ContactFormMessage">Tell Us More (optional)</label>
-                        <textarea id="ContactFormMessage" name="contact[body]" rows="4" placeholder="Property size, specific needs, preferred schedule, etc."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn">Get My Free Estimate</button>
-                </form>
-            {% endif %}
-        </div>
+<div class="quote-page">
+  <!-- Hero -->
+  <section class="quote-hero">
+    <div class="quote-container">
+      <h1>Get Your FREE Estimate</h1>
+      <p>Professional cleaning & landscaping for your Charlottesville home. Tell us about your property and we'll send a personalized quote within 24 hours.</p>
+      <div class="quote-hero-trust">
+        <span>&#10003; No Obligation</span>
+        <span>&#10003; Response in 24 Hours</span>
+        <span>&#10003; Transparent Pricing</span>
+      </div>
     </div>
+  </section>
 
-    <!-- Right Column: Benefits -->
-    <div class="right-column">
-        <div class="bullet-points">
-            <h2>Why Dani Cleans?</h2>
-            <ul>
-                <li><strong>Locally Owned in Charlottesville</strong> — We're your neighbors, not a franchise</li>
-                <li><strong>Insured & Bonded</strong> — Your property is fully protected</li>
-                <li><strong>One Company, Two Services</strong> — Cleaning + Landscaping under one roof</li>
-                <li><strong>Background-Checked Teams</strong> — Every team member is vetted</li>
-                <li><strong>Flexible Scheduling</strong> — Including weekends and evenings</li>
-                <li><strong>Eco-Friendly Options</strong> — Safe for kids, pets, and your yard</li>
-                <li><strong>Transparent Pricing</strong> — No hidden fees, no surprises</li>
-                <li><strong>100% Satisfaction Guarantee</strong> — We make it right or it's on us</li>
-            </ul>
-
-            <div class="quote-cta-phone">
-                <p>Prefer to talk? Call us directly:</p>
-                <a href="tel:4343510335" class="phone-link">434-351-0335</a>
+  <!-- Main Content -->
+  <section class="quote-main">
+    <div class="quote-container">
+      <div class="quote-grid">
+        <!-- Form -->
+        <div class="quote-form-wrap">
+          {% if form_submission_successful %}
+            <div class="quote-success">
+              <div class="quote-success-icon">&#10003;</div>
+              <h2>We Got Your Request!</h2>
+              <p>Thank you! We'll review your info and get back to you within 24 hours with a personalized estimate.</p>
+              <p>Need it sooner? Call us directly:</p>
+              <a href="tel:4343510335" class="quote-success-phone">434-351-0335</a>
             </div>
+          {% else %}
+            <h2>Tell Us About Your Property</h2>
+
+            <form method="post" action="/contact" id="ContactForm" accept-charset="UTF-8" class="quote-form">
+              <input type="hidden" name="form_type" value="contact">
+              <input type="hidden" name="utf8" value="✓">
+              <input type="hidden" name="contact[Source]" value="Quote Request Page">
+              <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
+
+              <div class="quote-form-row">
+                <div class="quote-field">
+                  <label for="ContactFormName">Full Name *</label>
+                  <input type="text" id="ContactFormName" name="contact[name]" required placeholder="Your full name">
+                </div>
+                <div class="quote-field">
+                  <label for="ContactFormEmail">Email *</label>
+                  <input type="email" id="ContactFormEmail" name="contact[email]" required placeholder="your@email.com">
+                </div>
+              </div>
+
+              <div class="quote-form-row">
+                <div class="quote-field">
+                  <label for="ContactFormPhone">Phone Number *</label>
+                  <input type="tel" id="ContactFormPhone" name="contact[Phone Number]" required placeholder="(434) 555-1234">
+                </div>
+                <div class="quote-field">
+                  <label for="ContactFormAddress">Property Address *</label>
+                  <input type="text" id="ContactFormAddress" name="contact[Property Address]" required placeholder="123 Main St, Charlottesville">
+                </div>
+              </div>
+
+              <div class="quote-form-row">
+                <div class="quote-field">
+                  <label for="ContactFormCity">City *</label>
+                  <input type="text" id="ContactFormCity" name="contact[City]" required placeholder="Charlottesville" value="Charlottesville">
+                </div>
+                <div class="quote-field">
+                  <label for="ContactFormZip">Zip Code *</label>
+                  <input type="text" id="ContactFormZip" name="contact[Zip Code]" required placeholder="22901">
+                </div>
+              </div>
+
+              <div class="quote-field">
+                <label for="ContactFormCategory">Service Category *</label>
+                <select id="ContactFormCategory" name="contact[Service Category]" required>
+                  <option value="">What do you need help with?</option>
+                  <optgroup label="Cleaning Services">
+                    <option value="Recurring Cleaning">Recurring Cleaning (Weekly/Bi-weekly/Monthly)</option>
+                    <option value="Deep Cleaning">Deep Cleaning</option>
+                    <option value="Move-In/Move-Out Cleaning">Move-In / Move-Out Cleaning</option>
+                    <option value="Post-Construction Cleaning">Post-Construction Cleaning</option>
+                  </optgroup>
+                  <optgroup label="Landscaping & Lawn Care">
+                    <option value="Lawn Mowing & Maintenance">Lawn Mowing & Maintenance</option>
+                    <option value="Landscaping & Garden Design">Landscaping & Garden Design</option>
+                    <option value="Seasonal Cleanup">Seasonal Cleanup (Spring/Fall)</option>
+                    <option value="Commercial Grounds Maintenance">Commercial Grounds Maintenance</option>
+                  </optgroup>
+                  <optgroup label="Additional Services">
+                    <option value="Pressure Washing">Pressure Washing</option>
+                    <option value="Window Cleaning">Window Cleaning</option>
+                    <option value="Holiday Light Installation">Holiday Light Installation</option>
+                    <option value="Junk Removal">Junk Removal</option>
+                  </optgroup>
+                  <optgroup label="Bundles">
+                    <option value="Cleaning + Landscaping Bundle">Cleaning + Landscaping Bundle (Save 10%)</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div class="quote-field">
+                <label for="ContactFormMessage">Tell Us More (optional)</label>
+                <textarea id="ContactFormMessage" name="contact[body]" rows="4" placeholder="Property size, specific needs, preferred schedule, etc."></textarea>
+              </div>
+
+              <button type="submit" class="quote-submit">Get My Free Estimate</button>
+              <p class="quote-fine">We'll respond within 24 hours. Your information is never shared.</p>
+            </form>
+          {% endif %}
         </div>
+
+        <!-- Sidebar -->
+        <div class="quote-sidebar">
+          <div class="quote-sidebar-card">
+            <h3>Why Dani Cleans?</h3>
+            <ul>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Locally Owned</strong><span>We're your neighbors, not a franchise</span></div>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Insured & Bonded</strong><span>Your property is fully protected</span></div>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>One Company, All Services</strong><span>Cleaning + Landscaping under one roof</span></div>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Background-Checked Teams</strong><span>Every team member is vetted</span></div>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Eco-Friendly Options</strong><span>Safe for kids, pets, and your yard</span></div>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Transparent Pricing</strong><span>No hidden fees, no surprises</span></div>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>Flexible Scheduling</strong><span>Including weekends and evenings</span></div>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><strong>100% Satisfaction Guarantee</strong><span>We make it right or it's on us</span></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="quote-sidebar-phone">
+            <p>Prefer to talk?</p>
+            <a href="tel:4343510335">434-351-0335</a>
+            <p class="quote-sidebar-hours">Mon-Sat 8am-6pm</p>
+          </div>
+
+          <div class="quote-sidebar-review">
+            <div class="quote-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>"Dani Cleans handles both our house cleaning and yard work. So convenient having one company for everything."</p>
+            <span>— Sarah L., Charlottesville</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 </div>
+
+<style>
+.quote-page { color: #1a3a2a; }
+.quote-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.quote-hero {
+  background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 100%);
+  color: #fff; padding: 64px 20px; text-align: center;
+}
+.quote-hero h1 { font-size: 40px; margin-bottom: 12px; line-height: 1.2; }
+.quote-hero > .quote-container > p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto 20px; }
+.quote-hero-trust {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  font-size: 14px; opacity: 0.85;
+}
+
+/* Main Layout */
+.quote-main { padding: 48px 20px 64px; }
+.quote-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start; }
+
+/* Form Card */
+.quote-form-wrap {
+  background: #fff; border: 2px solid #e0e8e0; border-radius: 16px; padding: 36px;
+}
+.quote-form-wrap h2 { font-size: 24px; margin-bottom: 24px; }
+.quote-form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.quote-field { flex: 1; margin-bottom: 16px; }
+.quote-form-row .quote-field { margin-bottom: 0; }
+.quote-field label {
+  display: block; font-size: 14px; font-weight: 600; color: #1a3a2a; margin-bottom: 6px;
+}
+.quote-field input, .quote-field select, .quote-field textarea {
+  width: 100%; padding: 12px 14px; border: 2px solid #e0e8e0; border-radius: 8px;
+  font-size: 15px; font-family: inherit; transition: border-color 0.2s;
+}
+.quote-field input:focus, .quote-field select:focus, .quote-field textarea:focus {
+  outline: none; border-color: #2d6a4f;
+}
+.quote-field textarea { resize: vertical; }
+.quote-submit {
+  width: 100%; padding: 16px; background: #2d6a4f; color: #fff; border: none;
+  border-radius: 8px; font-size: 17px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: background 0.2s;
+}
+.quote-submit:hover { background: #245a42; }
+.quote-fine { text-align: center; font-size: 13px; color: #999; margin-top: 12px; }
+
+/* Success */
+.quote-success { text-align: center; padding: 40px 20px; }
+.quote-success-icon {
+  width: 64px; height: 64px; background: #e8f5e8; color: #2d6a4f;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 800; margin-bottom: 16px;
+}
+.quote-success h2 { margin-bottom: 8px; }
+.quote-success p { color: #555; margin-bottom: 8px; }
+.quote-success-phone {
+  display: inline-block; padding: 12px 32px; background: #2d6a4f; color: #fff;
+  border-radius: 8px; font-size: 18px; font-weight: 700; text-decoration: none;
+  margin-top: 8px;
+}
+
+/* Sidebar */
+.quote-sidebar { display: flex; flex-direction: column; gap: 20px; }
+.quote-sidebar-card {
+  background: #f7faf7; border-radius: 12px; padding: 28px; border: 1px solid #e0e8e0;
+}
+.quote-sidebar-card h3 { font-size: 20px; margin-bottom: 16px; }
+.quote-sidebar-card ul { list-style: none; padding: 0; margin: 0; }
+.quote-sidebar-card li {
+  display: flex; gap: 12px; align-items: flex-start; padding: 10px 0;
+  border-bottom: 1px solid #e8efe8;
+}
+.quote-sidebar-card li:last-child { border-bottom: none; }
+.quote-sidebar-card li svg { margin-top: 2px; flex-shrink: 0; }
+.quote-sidebar-card li strong { display: block; font-size: 14px; color: #1a3a2a; }
+.quote-sidebar-card li span { font-size: 13px; color: #666; }
+.quote-sidebar-phone {
+  text-align: center; background: #1a3a2a; color: #fff;
+  border-radius: 12px; padding: 24px;
+}
+.quote-sidebar-phone p { margin: 0 0 4px; font-size: 14px; opacity: 0.8; }
+.quote-sidebar-phone a {
+  font-size: 24px; font-weight: 800; color: #fff; text-decoration: none;
+}
+.quote-sidebar-hours { font-size: 12px; opacity: 0.6; margin-top: 4px; }
+.quote-sidebar-review {
+  background: #fff; border: 1px solid #e0e8e0; border-radius: 12px; padding: 24px;
+}
+.quote-stars { color: #f5a623; font-size: 20px; margin-bottom: 8px; }
+.quote-sidebar-review p { font-style: italic; font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 8px; }
+.quote-sidebar-review span { font-size: 13px; color: #888; }
+
+@media (max-width: 768px) {
+  .quote-hero h1 { font-size: 28px; }
+  .quote-hero { padding: 48px 20px; }
+  .quote-grid { grid-template-columns: 1fr; }
+  .quote-form-row { flex-direction: column; gap: 0; }
+  .quote-form-wrap { padding: 24px; }
+}
+</style>

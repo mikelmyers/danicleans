@@ -9,6 +9,11 @@
   - "cleaning services [city] VA"
 {% endcomment %}
 
+{% assign form_success = false %}
+{% if request.query.success == 'true' and request.query.form_type == 'contact' %}
+  {% assign form_success = true %}
+{% endif %}
+
 {% assign city_name = page.title | remove: "Cleaning Services in " | remove: "House Cleaning in " | remove: "Lawn Care in " | remove: "Cleaning & Landscaping in " %}
 {% if city_name == page.title %}
   {% assign city_name = page.title | split: " in " | last | strip %}
@@ -67,6 +72,21 @@
           <p>Garden design, mulching, and maintenance for {{ city_name }} properties. Boost your curb appeal.</p>
         </div>
         <div class="city-service-card">
+          <div class="city-service-icon">💧</div>
+          <h3>Pressure Washing</h3>
+          <p>Driveways, patios, siding, and fences — bring your {{ city_name }} property's exterior back to life.</p>
+        </div>
+        <div class="city-service-card">
+          <div class="city-service-icon">🪟</div>
+          <h3>Window Cleaning</h3>
+          <p>Crystal-clear windows inside and out. Screens, tracks, and frames included.</p>
+        </div>
+        <div class="city-service-card">
+          <div class="city-service-icon">🚛</div>
+          <h3>Junk Removal</h3>
+          <p>Garage cleanouts, old furniture, appliances — we haul it all away responsibly.</p>
+        </div>
+        <div class="city-service-card">
           <div class="city-service-icon">⭐</div>
           <h3>Bundle & Save 10%</h3>
           <p>Combine cleaning + landscaping for your {{ city_name }} property and save 10% on both.</p>
@@ -113,6 +133,14 @@
   <section class="city-quote" id="city-quote">
     <div class="city-container">
       <div class="city-quote-card">
+        {% if form_success %}
+        <div style="text-align:center;padding:40px 0;">
+          <div style="font-size:48px;margin-bottom:12px;">&#10003;</div>
+          <h2>We Got Your Request!</h2>
+          <p style="color:#555;margin-top:8px;">We'll call or text you within 24 hours with your personalized estimate.</p>
+          <p style="margin-top:16px;"><a href="tel:4343510335" style="color:#2d6a4f;font-weight:600;">Need it sooner? Call 434-351-0335</a></p>
+        </div>
+        {% else %}
         <h2>Get Your Free {{ city_name }} Estimate</h2>
         <p>Tell us about your property and we'll send a personalized quote within 24 hours.</p>
 
@@ -136,7 +164,11 @@
               <option value="Move-In/Move-Out">Move-In / Move-Out</option>
               <option value="Lawn Mowing">Lawn Mowing</option>
               <option value="Landscaping">Landscaping</option>
-              <option value="Bundle">Cleaning + Landscaping Bundle</option>
+              <option value="Pressure Washing">Pressure Washing</option>
+              <option value="Window Cleaning">Window Cleaning</option>
+              <option value="Holiday Lights">Holiday Light Installation</option>
+              <option value="Junk Removal">Junk Removal</option>
+              <option value="Bundle">Cleaning + Landscaping Bundle (Save 10%)</option>
             </select>
           </div>
           <div class="city-form-row">
@@ -145,6 +177,7 @@
           <textarea name="contact[body]" placeholder="Anything else we should know? (optional)" rows="3"></textarea>
           <button type="submit" class="city-form-submit">Get My Free Estimate</button>
         </form>
+        {% endif %}
       </div>
     </div>
   </section>
@@ -243,7 +276,7 @@
 .city-form-submit:hover { background: #245a42; }
 @media (max-width: 768px) {
   .city-hero-title { font-size: 28px; }
-  .city-services-grid { grid-template-columns: 1fr 1fr; }
+  .city-services-grid { grid-template-columns: repeat(2, 1fr); }
   .city-why-grid { grid-template-columns: 1fr; }
   .city-form-row { flex-direction: column; }
   .city-hero { padding: 48px 20px; }
