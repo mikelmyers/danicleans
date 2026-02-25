@@ -1,0 +1,123 @@
+{% comment %}
+  Analytics & Conversion Tracking
+  GA4 + Facebook Pixel + Google Ads placeholders.
+  Replace the placeholder IDs with your real ones.
+  Rendered globally via theme.liquid <head>.
+{% endcomment %}
+
+<!-- Google Analytics 4 -->
+<!-- SETUP: Replace G-XXXXXXXXXX with your GA4 Measurement ID -->
+<!-- Get yours at: https://analytics.google.com → Admin → Data Streams -->
+{% if false %}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+{% endif %}
+
+<!-- Google Ads Conversion Tracking -->
+<!-- SETUP: Replace AW-XXXXXXXXX with your Google Ads Conversion ID -->
+<!-- Get yours at: Google Ads → Tools → Conversions -->
+{% if false %}
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-XXXXXXXXX');
+</script>
+{% endif %}
+
+<!-- Facebook / Meta Pixel -->
+<!-- SETUP: Replace XXXXXXXXXXXXXXX with your Facebook Pixel ID -->
+<!-- Get yours at: Meta Business Suite → Events Manager → Data Sources -->
+{% if false %}
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'XXXXXXXXXXXXXXX');
+  fbq('track', 'PageView');
+</script>
+{% endif %}
+
+<!-- Universal Form Conversion Tracking -->
+<!-- This fires automatically when any contact form is submitted -->
+<script>
+(function() {
+  // Track all form submissions as conversion events
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    if (form.action && form.action.indexOf('/contact') !== -1) {
+      // GA4 event
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'Lead',
+          event_label: form.querySelector('[name="contact[Source]"]') ?
+            form.querySelector('[name="contact[Source]"]').value : 'Contact Form',
+          value: 250 // estimated value per lead
+        });
+
+        // Google Ads conversion (uncomment when you have your conversion ID)
+        // gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/XXXXX', 'value': 250, 'currency': 'USD' });
+      }
+
+      // Facebook Pixel event
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: form.querySelector('[name="contact[Source]"]') ?
+            form.querySelector('[name="contact[Source]"]').value : 'Contact Form',
+          value: 250,
+          currency: 'USD'
+        });
+      }
+    }
+  });
+
+  // Track phone clicks as conversions
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href^="tel:"]');
+    if (link) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_to_call', { event_category: 'Lead', event_label: link.href });
+      }
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact', { content_name: 'Phone Call' });
+      }
+    }
+  });
+
+  // Track SMS button clicks
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href^="sms:"]');
+    if (link) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_to_text', { event_category: 'Lead', event_label: 'SMS Button' });
+      }
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact', { content_name: 'SMS' });
+      }
+    }
+  });
+
+  // Track calculator completion
+  var calcForm = document.getElementById('CalcLeadForm');
+  if (calcForm) {
+    calcForm.addEventListener('submit', function() {
+      if (typeof gtag === 'function') {
+        var estimate = document.getElementById('calc-hidden-estimate');
+        gtag('event', 'calculator_lead', {
+          event_category: 'Lead',
+          event_label: 'Quote Calculator',
+          value: estimate ? parseInt(estimate.value.replace(/[^0-9]/g, '')) || 250 : 250
+        });
+      }
+    });
+  }
+})();
+</script>

@@ -1,0 +1,111 @@
+{% comment %}
+  First-Time Visitor Offer Popup
+  Shows after 8 seconds on first visit only.
+  Offers 10% off first service for email capture.
+  Builds email list for remarketing.
+  Different from exit-intent — this is positive, not desperate.
+{% endcomment %}
+
+<div class="fv-overlay" id="firstVisitOverlay" style="display:none;">
+  <div class="fv-popup">
+    <button class="fv-close" onclick="document.getElementById('firstVisitOverlay').style.display='none';try{sessionStorage.setItem('dc_fv_seen','1')}catch(e){}" aria-label="Close">&times;</button>
+
+    <div class="fv-content">
+      <div class="fv-badge">NEW CUSTOMER OFFER</div>
+      <h2>Get 15% Off Your First Service</h2>
+      <p>Welcome! We'd love to show you why Charlottesville families trust Dani Cleans. Enter your info below and we'll send your discount code.</p>
+
+      <form method="post" action="/contact" accept-charset="UTF-8" class="fv-form" id="firstVisitForm">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[Source]" value="First Visit 15% Popup">
+        <input type="hidden" name="return_to" value="/?form_type=contact&fv_success=true">
+
+        <input type="text" name="contact[name]" placeholder="First Name" required>
+        <input type="email" name="contact[email]" placeholder="Email Address" required>
+        <input type="tel" name="contact[Phone Number]" placeholder="Phone (optional)">
+        <button type="submit">Send My 15% Discount</button>
+      </form>
+
+      <p class="fv-note">No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.fv-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  animation: fvFade 0.3s ease;
+}
+@keyframes fvFade { from { opacity: 0; } to { opacity: 1; } }
+.fv-popup {
+  background: #fff; border-radius: 16px; padding: 40px 32px; max-width: 420px;
+  width: 100%; position: relative; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: fvSlide 0.3s ease;
+}
+@keyframes fvSlide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.fv-close {
+  position: absolute; top: 12px; right: 16px; background: none; border: none;
+  font-size: 28px; cursor: pointer; color: #999; transition: color 0.2s;
+}
+.fv-close:hover { color: #333; }
+.fv-badge {
+  display: inline-block; background: #2d6a4f; color: #fff;
+  padding: 4px 14px; border-radius: 12px; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.5px; margin-bottom: 12px;
+}
+.fv-content h2 { font-size: 26px; color: #1a3a2a; margin-bottom: 8px; line-height: 1.2; }
+.fv-content > p { color: #555; font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+.fv-form input {
+  width: 100%; padding: 13px; border: 2px solid #e0e8e0; border-radius: 8px;
+  font-size: 15px; font-family: inherit; margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+.fv-form input:focus { outline: none; border-color: #2d6a4f; }
+.fv-form button {
+  width: 100%; padding: 14px; background: #2d6a4f; color: #fff; border: none;
+  border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: background 0.2s;
+}
+.fv-form button:hover { background: #245a42; }
+.fv-note { font-size: 12px; color: #999; margin-top: 12px; }
+@media (max-width: 480px) {
+  .fv-popup { padding: 28px 20px; }
+  .fv-content h2 { font-size: 22px; }
+}
+</style>
+
+<script>
+(function() {
+  try {
+    // Only show on first visit, not on success pages, and not if already seen
+    if (sessionStorage.getItem('dc_fv_seen')) return;
+    if (window.location.search.indexOf('success') !== -1) return;
+    if (window.location.pathname.indexOf('google-ads') !== -1) return;
+
+    // Show after 8 seconds
+    setTimeout(function() {
+      var overlay = document.getElementById('firstVisitOverlay');
+      if (overlay) {
+        overlay.style.display = 'flex';
+        sessionStorage.setItem('dc_fv_seen', '1');
+      }
+    }, 8000);
+
+    // Close on overlay click
+    var overlay = document.getElementById('firstVisitOverlay');
+    if (overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.style.display = 'none';
+      });
+    }
+
+    // Success state
+    if (window.location.search.indexOf('fv_success=true') !== -1) {
+      sessionStorage.setItem('dc_fv_seen', '1');
+    }
+  } catch(e) {}
+})();
+</script>

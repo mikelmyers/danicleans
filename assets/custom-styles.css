@@ -1,0 +1,11 @@
+/* === Landing Page Supplemental Styles === */
+/* Main styles are in custom.css — this file provides landing-page-specific overrides */
+
+/* Ensure form container has center-aligned header on landing page */
+.form-container h2 {
+    text-align: center;
+}
+
+.form-container > p {
+    text-align: center;
+}

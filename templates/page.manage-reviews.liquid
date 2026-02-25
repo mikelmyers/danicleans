@@ -1,82 +1,110 @@
-{% if customer.admin? %}
+{% comment %}
+  Manage Customer Reviews
+  This page shows the current reviews from reviews.json and provides
+  instructions for editing them. Uses customer tag-based access control
+  since Shopify Liquid does not have a customer.admin? property.
+
+  To grant access: add the tag "admin" to a customer account in Shopify admin.
+{% endcomment %}
+
+{% if customer and customer.tags contains 'admin' %}
   <div class="admin-reviews-manager">
     <h1>Manage Customer Reviews</h1>
-    
+
     <div class="info-box">
-      <p>This page allows you to manage customer reviews. Any changes you make here will update the reviews.json asset file.</p>
-      <p>To add or modify reviews, edit the page's settings in your Shopify admin.</p>
-      <p><strong>Note:</strong> You need to be logged in as an admin to see and use this page.</p>
+      <p>This page allows you to manage customer reviews. Reviews are stored in the <code>reviews.json</code> asset file.</p>
+      <p>To add or modify reviews, follow the instructions below.</p>
     </div>
-    
+
     <h2>Current Reviews</h2>
-    
-    {% assign reviews = 'reviews.json' | asset_url | file_url | read_json %}
-    
-    <div class="reviews-list">
-      {% for review in reviews %}
-        <div class="review-item">
-          <div class="review-content">
-            <p class="review-author"><strong>{{ review.name }}</strong></p>
-            <div class="review-stars">
-              {% assign rating = review.rating | default: 5 %}
-              {% for i in (1..5) %}
-                {% if i <= rating %}
-                  <span class="star star-filled">★</span>
-                {% else %}
-                  <span class="star">★</span>
-                {% endif %}
-              {% endfor %}
-            </div>
-            <p class="review-text">"{{ review.review }}"</p>
-          </div>
-        </div>
-      {% endfor %}
+
+    <div class="reviews-list" id="reviewsList">
+      <p class="loading-msg">Loading reviews...</p>
     </div>
-    
+
     <div class="instructions">
       <h3>How to Edit Reviews</h3>
       <ol>
-        <li>Go to Online Store → Themes → Current theme → Actions → Edit code</li>
-        <li>Navigate to Assets folder and find reviews.json</li>
+        <li>Go to Online Store &rarr; Themes &rarr; Current theme &rarr; Actions &rarr; Edit code</li>
+        <li>Navigate to Assets folder and find <code>reviews.json</code></li>
         <li>Edit the file to add, modify, or remove reviews</li>
         <li>Save changes</li>
       </ol>
-      
+
       <h4>Example Format:</h4>
       <pre>[
   {
-    "name": "Customer Name",
+    "name": "Customer Name, Location",
     "review": "Customer review text goes here.",
     "rating": 5
   },
   {
-    "name": "Another Customer",
+    "name": "Another Customer, Location",
     "review": "Another review text.",
     "rating": 4
   }
 ]</pre>
     </div>
   </div>
-  
+
+  <script>
+  (function() {
+    fetch('{{ 'reviews.json' | asset_url }}')
+      .then(function(r) { return r.json(); })
+      .then(function(reviews) {
+        var container = document.getElementById('reviewsList');
+        if (!reviews || reviews.length === 0) {
+          container.innerHTML = '<p>No reviews found in reviews.json.</p>';
+          return;
+        }
+        var html = '';
+        reviews.forEach(function(review, i) {
+          var rating = review.rating || 5;
+          var stars = '';
+          for (var s = 1; s <= 5; s++) {
+            stars += '<span class="star ' + (s <= rating ? 'star-filled' : '') + '">&#9733;</span>';
+          }
+          html += '<div class="review-item">' +
+            '<div class="review-content">' +
+            '<p class="review-author"><strong>' + (review.name || 'Anonymous') + '</strong></p>' +
+            '<div class="review-stars">' + stars + '</div>' +
+            '<p class="review-text">"' + (review.review || '') + '"</p>' +
+            '</div></div>';
+        });
+        container.innerHTML = html;
+      })
+      .catch(function() {
+        document.getElementById('reviewsList').innerHTML = '<p>Could not load reviews.json. Make sure the file exists in your assets folder.</p>';
+      });
+  })();
+  </script>
+
   <style>
     .admin-reviews-manager {
       max-width: 800px;
       margin: 0 auto;
       padding: 2rem 0;
     }
-    
+
     .info-box {
       background: #f5f5f5;
       padding: 1rem;
       border-radius: 5px;
       margin-bottom: 2rem;
-      border-left: 5px solid #ccc;
+      border-left: 5px solid #2d6a4f;
     }
-    
+
+    .info-box code {
+      background: #e0e8e0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
     .reviews-list {
       margin: 2rem 0;
     }
-    
+
     .review-item {
       background: white;
       padding: 1rem;
@@ -84,52 +112,61 @@
       border: 1px solid #ddd;
       margin-bottom: 1rem;
     }
-    
+
     .review-author {
       margin-bottom: 0.5rem;
     }
-    
+
     .review-stars {
       margin-bottom: 1rem;
       font-size: 1.2rem;
     }
-    
+
     .star {
       color: #ddd;
     }
-    
+
     .star-filled {
       color: #FFD700;
     }
-    
+
     .review-text {
       font-style: italic;
     }
-    
+
     .instructions {
       background: #f9f9f9;
       padding: 1.5rem;
       border-radius: 5px;
       margin-top: 2rem;
     }
-    
+
     pre {
       background: #f5f5f5;
       padding: 1rem;
       border-radius: 3px;
       overflow-x: auto;
     }
+
+    .loading-msg {
+      color: #888;
+      font-style: italic;
+    }
   </style>
 {% else %}
   <div class="admin-only-message">
     <h1>Admin Access Required</h1>
-    <p>This page is only accessible to store administrators.</p>
+    <p>This page is only accessible to store administrators. Please <a href="/account/login">log in</a> with an admin-tagged account.</p>
   </div>
-  
+
   <style>
     .admin-only-message {
       text-align: center;
       padding: 3rem 1rem;
+    }
+    .admin-only-message a {
+      color: #2d6a4f;
+      font-weight: 600;
     }
   </style>
 {% endif %}

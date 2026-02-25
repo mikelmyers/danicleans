@@ -1,0 +1,111 @@
+{% comment %}
+  Seasonal / Promotional Announcement Banner
+  Sticks to top of page. Drives urgency with limited-time offers.
+  Easily changeable from Shopify theme editor.
+{% endcomment %}
+
+{% if section.settings.show_banner %}
+<div class="promo-banner" id="promoBanner" style="background: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="promo-banner-inner">
+    <span class="promo-banner-text">
+      {% if section.settings.icon != blank %}
+        <span class="promo-icon">{{ section.settings.icon }}</span>
+      {% endif %}
+      {{ section.settings.text }}
+      {% if section.settings.link_text != blank %}
+        <a href="{{ section.settings.link_url }}" style="color: {{ section.settings.text_color }}; text-decoration: underline; font-weight: 700; margin-left: 6px;">{{ section.settings.link_text }}</a>
+      {% endif %}
+    </span>
+    {% if section.settings.dismissable %}
+      <button class="promo-banner-close" onclick="this.closest('#promoBanner').remove();try{sessionStorage.setItem('dc_promo_dismissed','1')}catch(e){}" aria-label="Close">&times;</button>
+    {% endif %}
+  </div>
+</div>
+
+{% if section.settings.dismissable %}
+<script>
+  try { if (sessionStorage.getItem('dc_promo_dismissed')) document.getElementById('promoBanner').remove(); } catch(e) {}
+</script>
+{% endif %}
+{% endif %}
+
+<style>
+.promo-banner {
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  z-index: 100;
+}
+.promo-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.promo-banner-text { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.promo-icon { font-size: 16px; }
+.promo-banner-close {
+  background: none; border: none; font-size: 20px; cursor: pointer;
+  opacity: 0.7; transition: opacity 0.2s; color: inherit; padding: 0 4px;
+}
+.promo-banner-close:hover { opacity: 1; }
+</style>
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "Show banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "Icon (emoji)",
+      "default": "🌟"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Banner text",
+      "default": "Spring Special: 15% off your first cleaning! Limited spots available."
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Claim Offer →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#2d6a4f"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "dismissable",
+      "label": "Allow dismissal",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

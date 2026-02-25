@@ -1,0 +1,176 @@
+{% comment %}
+  Service-Specific SEO Landing Page Template
+  Create pages for individual services:
+  - "Deep Cleaning in Charlottesville"
+  - "Lawn Care Services Charlottesville VA"
+  - "Move-Out Cleaning Charlottesville"
+  Targets long-tail keywords that convert.
+{% endcomment %}
+
+<div class="svc-landing">
+  <!-- Hero -->
+  <section class="svc-hero">
+    <div class="svc-hero-inner">
+      <h1>{{ page.title }}</h1>
+      <div class="svc-hero-content">
+        {{ page.content }}
+      </div>
+      <div class="svc-hero-ctas">
+        <a href="#svc-quote" class="svc-btn-primary">Get a FREE Estimate</a>
+        <a href="tel:4343510335" class="svc-btn-secondary">Call 434-351-0335</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="svc-included">
+    <div class="svc-container">
+      <h2>What's Included</h2>
+      <div class="svc-checklist">
+        <div class="svc-check">&#10003; Professionally trained, background-checked team</div>
+        <div class="svc-check">&#10003; All cleaning supplies and equipment provided</div>
+        <div class="svc-check">&#10003; Eco-friendly products available on request</div>
+        <div class="svc-check">&#10003; Fully insured and bonded</div>
+        <div class="svc-check">&#10003; 100% satisfaction guarantee</div>
+        <div class="svc-check">&#10003; Flexible scheduling — no long-term contracts</div>
+        <div class="svc-check">&#10003; Same-day quotes, service within 48 hours</div>
+        <div class="svc-check">&#10003; Consistent team on every visit</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="svc-how">
+    <div class="svc-container">
+      <h2>How It Works</h2>
+      <div class="svc-steps">
+        <div class="svc-step">
+          <div class="svc-step-num">1</div>
+          <h3>Request a Quote</h3>
+          <p>Fill out our quick form or call us. We'll ask a few questions about your property.</p>
+        </div>
+        <div class="svc-step">
+          <div class="svc-step-num">2</div>
+          <h3>Get Your Price</h3>
+          <p>We'll send a personalized quote within 24 hours. No hidden fees, no surprises.</p>
+        </div>
+        <div class="svc-step">
+          <div class="svc-step-num">3</div>
+          <h3>We Do the Work</h3>
+          <p>Our team arrives on time and gets the job done right. You relax.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Form -->
+  <section class="svc-quote" id="svc-quote">
+    <div class="svc-container">
+      <div class="svc-quote-card">
+        <h2>Get Your Free Estimate</h2>
+        <p>Most quotes returned within 24 hours. No spam, no obligation.</p>
+
+        <form method="post" action="/contact" accept-charset="UTF-8" class="svc-form">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[Source]" value="Service Landing - {{ page.title }}">
+          <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
+
+          <div class="svc-form-row">
+            <input type="text" name="contact[name]" placeholder="Full Name" required>
+            <input type="tel" name="contact[Phone Number]" placeholder="Phone" required>
+          </div>
+          <div class="svc-form-row">
+            <input type="email" name="contact[email]" placeholder="Email" required>
+            <input type="text" name="contact[Property Address]" placeholder="Property Address" required>
+          </div>
+          <textarea name="contact[body]" rows="3" placeholder="Tell us about your property (optional)"></textarea>
+          <button type="submit">Get My Free Estimate</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": {{ page.title | json }},
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Dani Cleans",
+      "telephone": "+1-434-351-0335"
+    },
+    "areaServed": {
+      "@type": "State",
+      "name": "Virginia"
+    },
+    "url": "{{ shop.url }}{{ page.url }}"
+  }
+  </script>
+</div>
+
+<style>
+.svc-landing { color: #1a3a2a; }
+.svc-container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.svc-hero {
+  background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
+  color: #fff; padding: 72px 20px; text-align: center;
+}
+.svc-hero-inner { max-width: 700px; margin: 0 auto; }
+.svc-hero h1 { font-size: 38px; margin-bottom: 16px; }
+.svc-hero-content { font-size: 17px; opacity: 0.9; line-height: 1.6; margin-bottom: 28px; }
+.svc-hero-content p { margin-bottom: 12px; }
+.svc-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.svc-btn-primary {
+  padding: 14px 32px; background: #fff; color: #2d6a4f; border-radius: 8px;
+  font-weight: 700; font-size: 16px; text-decoration: none;
+}
+.svc-btn-secondary {
+  padding: 14px 32px; border: 2px solid rgba(255,255,255,0.5); color: #fff;
+  border-radius: 8px; font-weight: 600; font-size: 16px; text-decoration: none;
+}
+.svc-included { padding: 60px 20px; background: #f7faf7; }
+.svc-included h2 { text-align: center; font-size: 28px; margin-bottom: 28px; }
+.svc-checklist {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  max-width: 700px; margin: 0 auto;
+}
+.svc-check {
+  padding: 12px 16px; background: #fff; border-radius: 8px;
+  border: 1px solid #e0e8e0; font-size: 15px; color: #333;
+}
+.svc-how { padding: 60px 20px; }
+.svc-how h2 { text-align: center; font-size: 28px; margin-bottom: 36px; }
+.svc-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.svc-step { text-align: center; }
+.svc-step-num {
+  width: 48px; height: 48px; background: #2d6a4f; color: #fff;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800; margin-bottom: 12px;
+}
+.svc-step h3 { font-size: 18px; margin-bottom: 8px; }
+.svc-step p { font-size: 14px; color: #555; line-height: 1.5; }
+.svc-quote { padding: 60px 20px; background: #1a3a2a; }
+.svc-quote-card {
+  max-width: 560px; margin: 0 auto; background: #fff;
+  border-radius: 12px; padding: 36px; text-align: center;
+}
+.svc-quote-card h2 { font-size: 24px; margin-bottom: 8px; color: #1a3a2a; }
+.svc-quote-card > p { color: #555; margin-bottom: 20px; }
+.svc-form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.svc-form-row input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; font-family: inherit; }
+.svc-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; font-family: inherit; margin-bottom: 14px; resize: vertical; }
+.svc-form button {
+  width: 100%; padding: 16px; background: #2d6a4f; color: #fff; border: none;
+  border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;
+}
+.svc-form button:hover { background: #245a42; }
+@media (max-width: 768px) {
+  .svc-hero h1 { font-size: 28px; }
+  .svc-checklist { grid-template-columns: 1fr; }
+  .svc-steps { grid-template-columns: 1fr; gap: 32px; }
+  .svc-form-row { flex-direction: column; }
+}
+</style>

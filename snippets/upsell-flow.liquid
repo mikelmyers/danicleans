@@ -1,0 +1,61 @@
+{% comment %}
+  Post-Submission Upsell / Cross-Sell
+  After someone submits a form for cleaning → suggest landscaping, and vice versa.
+  Appears on the success/thank-you state to capture more revenue per lead.
+{% endcomment %}
+
+<script>
+(function() {
+  // Only run on form success
+  if (window.location.search.indexOf('success=true') === -1 &&
+      window.location.search.indexOf('customer_posted=true') === -1) return;
+
+  var params = new URLSearchParams(window.location.search);
+  var plan = params.get('plan') || '';
+  var isCleaning = plan.indexOf('cleaning') !== -1 || window.location.pathname.indexOf('clean') !== -1;
+  var isLandscaping = plan.indexOf('lawn') !== -1 || plan.indexOf('landscape') !== -1;
+
+  // Determine what to upsell
+  var upsellService, upsellTitle, upsellDesc, upsellLink;
+  if (isCleaning) {
+    upsellService = 'landscaping';
+    upsellTitle = 'Add Lawn Care & Save 10%';
+    upsellDesc = 'Customers who bundle cleaning + landscaping save an extra 10%. Want us to include a lawn care quote?';
+    upsellLink = '/pages/request-a-quote?plan=bundle&upsell=from-cleaning';
+  } else if (isLandscaping) {
+    upsellService = 'cleaning';
+    upsellTitle = 'Add Home Cleaning & Save 10%';
+    upsellDesc = 'Bundle your lawn care with indoor cleaning and save 10% on both. One company handles everything.';
+    upsellLink = '/pages/request-a-quote?plan=bundle&upsell=from-lawn';
+  } else {
+    // Generic upsell for unknown services
+    upsellTitle = 'Did You Know We Also Offer Bundles?';
+    upsellDesc = 'Combine cleaning + landscaping and save 10% on both services. One company, one bill.';
+    upsellLink = '/pages/pricing?tab=bundle';
+  }
+
+  // Show upsell after a short delay
+  setTimeout(function() {
+    var el = document.createElement('div');
+    el.id = 'upsellBanner';
+    el.innerHTML = '<div style="position:fixed;bottom:0;left:0;right:0;z-index:999;background:#fff;border-top:2px solid #2d6a4f;padding:20px;box-shadow:0 -4px 20px rgba(0,0,0,0.1);animation:upsellSlide 0.4s ease;">' +
+      '<div style="max-width:600px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
+      '<div style="flex:1;min-width:200px;">' +
+      '<strong style="font-size:16px;color:#1a3a2a;display:block;margin-bottom:4px;">' + upsellTitle + '</strong>' +
+      '<p style="font-size:14px;color:#555;margin:0;">' + upsellDesc + '</p>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;flex-shrink:0;">' +
+      '<a href="' + upsellLink + '" style="padding:12px 24px;background:#2d6a4f;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap;">Yes, Add It</a>' +
+      '<button onclick="document.getElementById(\'upsellBanner\').remove()" style="padding:12px 16px;background:transparent;border:1px solid #ccc;border-radius:8px;cursor:pointer;font-size:14px;">No Thanks</button>' +
+      '</div></div></div>';
+    document.body.appendChild(el);
+  }, 3000);
+})();
+</script>
+
+<style>
+@keyframes upsellSlide {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+</style>

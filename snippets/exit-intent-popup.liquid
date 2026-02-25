@@ -1,0 +1,138 @@
+{% comment %}
+  Exit-Intent Popup
+  Detects when a visitor is about to leave and shows a last-chance offer.
+  Only shows once per session. Captures leads who would otherwise bounce.
+{% endcomment %}
+
+<div class="exit-popup-overlay" id="exitPopupOverlay" style="display:none;">
+  <div class="exit-popup">
+    <button class="exit-popup-close" id="exitPopupClose" aria-label="Close">&times;</button>
+    <div class="exit-popup-content">
+      <div class="exit-popup-badge">WAIT — SPECIAL OFFER</div>
+      <h2>Get 15% Off Your First Service</h2>
+      <p>Before you go — claim your exclusive discount. Just enter your info and we'll send you the code.</p>
+
+      <form method="post" action="/contact" accept-charset="UTF-8" class="exit-popup-form">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[Source]" value="Exit Intent Popup - 15% Off">
+        <input type="hidden" name="return_to" value="/?form_type=contact&success=true">
+
+        <input type="text" name="contact[name]" placeholder="Your Name" required>
+        <input type="tel" name="contact[Phone Number]" placeholder="Phone Number" required>
+        <input type="email" name="contact[email]" placeholder="Email" required>
+        <button type="submit">Claim My 15% Discount</button>
+      </form>
+
+      <p class="exit-popup-fine">No spam. Discount applied to your first booked service.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.exit-popup-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: exitFadeIn 0.3s ease;
+}
+@keyframes exitFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.exit-popup {
+  background: #fff; border-radius: 16px; max-width: 440px; width: 100%;
+  position: relative; overflow: hidden;
+  animation: exitSlideUp 0.3s ease;
+}
+@keyframes exitSlideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.exit-popup-close {
+  position: absolute; top: 12px; right: 16px; background: none; border: none;
+  font-size: 28px; cursor: pointer; color: #999; z-index: 1;
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+}
+.exit-popup-close:hover { color: #333; }
+.exit-popup-content { padding: 40px 32px 32px; text-align: center; }
+.exit-popup-badge {
+  display: inline-block; background: #2d6a4f; color: #fff;
+  padding: 6px 16px; border-radius: 20px; font-size: 12px;
+  font-weight: 700; letter-spacing: 1px; margin-bottom: 16px;
+}
+.exit-popup-content h2 { font-size: 26px; color: #1a3a2a; margin-bottom: 8px; }
+.exit-popup-content > p { color: #555; font-size: 15px; margin-bottom: 20px; line-height: 1.5; }
+.exit-popup-form { display: flex; flex-direction: column; gap: 10px; }
+.exit-popup-form input {
+  padding: 12px; border: 1px solid #ccc; border-radius: 8px;
+  font-size: 15px; font-family: inherit;
+}
+.exit-popup-form input:focus { outline: none; border-color: #2d6a4f; box-shadow: 0 0 0 2px rgba(45,106,79,0.15); }
+.exit-popup-form button {
+  padding: 14px; background: #2d6a4f; color: #fff; border: none;
+  border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: background 0.2s;
+}
+.exit-popup-form button:hover { background: #245a42; }
+.exit-popup-fine { font-size: 12px; color: #999; margin-top: 12px; }
+</style>
+
+<script>
+(function() {
+  var shown = false;
+  var STORAGE_KEY = 'dc_exit_popup_shown';
+
+  // Don't show if already shown this session, if another popup is visible, or if user already converted
+  try {
+    if (sessionStorage.getItem(STORAGE_KEY)) return;
+    var conversions = JSON.parse(localStorage.getItem('dc_conversions') || '[]');
+    if (conversions.length > 0) return;
+  } catch(e) {}
+
+  // Don't show on success pages
+  if (window.location.search.indexOf('success=true') !== -1) return;
+
+  function showPopup() {
+    if (shown) return;
+    // Don't show if first-visit popup is currently visible
+    var fvOverlay = document.getElementById('firstVisitOverlay');
+    if (fvOverlay && fvOverlay.style.display !== 'none') return;
+    shown = true;
+    try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+    document.getElementById('exitPopupOverlay').style.display = 'flex';
+  }
+
+  function hidePopup() {
+    document.getElementById('exitPopupOverlay').style.display = 'none';
+  }
+
+  // Desktop: detect mouse leaving viewport (moving to close tab/back)
+  document.addEventListener('mouseout', function(e) {
+    if (e.clientY < 5 && e.relatedTarget == null) {
+      showPopup();
+    }
+  });
+
+  // Mobile: detect scroll-up-fast pattern (user pulling up to leave)
+  var lastScroll = 0;
+  var scrollUpCount = 0;
+  window.addEventListener('scroll', function() {
+    var st = window.pageYOffset;
+    if (st < lastScroll && lastScroll - st > 100) {
+      scrollUpCount++;
+      if (scrollUpCount >= 3 && st < 200) showPopup();
+    } else {
+      scrollUpCount = 0;
+    }
+    lastScroll = st;
+  });
+
+  // Close handlers
+  document.getElementById('exitPopupClose').addEventListener('click', hidePopup);
+  document.getElementById('exitPopupOverlay').addEventListener('click', function(e) {
+    if (e.target === this) hidePopup();
+  });
+
+  // Delay activation by 15 seconds so it doesn't fire on quick bounces
+  var activated = false;
+  setTimeout(function() { activated = true; }, 15000);
+  var origShow = showPopup;
+  showPopup = function() { if (activated) origShow(); };
+})();
+</script>

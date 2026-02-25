@@ -1,0 +1,254 @@
+{% comment %}
+  City-Specific SEO Landing Page Template
+  Usage: Create a page in Shopify admin for each city (e.g. "Cleaning Services in Crozet")
+  and assign this template. Use metafields or the page title/content to customize per city.
+
+  This template targets searches like:
+  - "house cleaning [city name]"
+  - "lawn care near me [city]"
+  - "cleaning services [city] VA"
+{% endcomment %}
+
+{% assign city_name = page.title | remove: "Cleaning Services in " | remove: "House Cleaning in " | remove: "Lawn Care in " | remove: "Cleaning & Landscaping in " %}
+{% if city_name == page.title %}
+  {% assign city_name = page.title | split: " in " | last | strip %}
+{% endif %}
+{% if city_name == blank or city_name == page.title %}
+  {% assign city_name = "Charlottesville" %}
+{% endif %}
+
+<div class="city-landing">
+  <!-- Hero -->
+  <section class="city-hero">
+    <div class="city-hero-inner">
+      <h1 class="city-hero-title">{{ page.title }}</h1>
+      <p class="city-hero-sub">Professional home cleaning and landscaping trusted by {{ city_name }} families. Locally owned, insured, and 100% satisfaction guaranteed.</p>
+      <div class="city-hero-ctas">
+        <a href="#city-quote" class="city-btn-primary">Get a FREE Estimate</a>
+        <a href="tel:4343510335" class="city-btn-secondary">Call 434-351-0335</a>
+      </div>
+      <div class="city-trust-row">
+        <span>&#10003; Insured & Bonded</span>
+        <span>&#10003; Locally Owned</span>
+        <span>&#10003; 5-Star Rated</span>
+        <span>&#10003; Eco-Friendly Options</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="city-services">
+    <div class="city-container">
+      <h2>Our Services in {{ city_name }}</h2>
+      <div class="city-services-grid">
+        <div class="city-service-card">
+          <div class="city-service-icon">🏠</div>
+          <h3>Recurring Cleaning</h3>
+          <p>Weekly, bi-weekly, or monthly plans tailored to your {{ city_name }} home. Consistent quality every visit.</p>
+        </div>
+        <div class="city-service-card">
+          <div class="city-service-icon">✨</div>
+          <h3>Deep Cleaning</h3>
+          <p>Top-to-bottom detailed cleaning for {{ city_name }} homes. Every surface, fixture, and corner — spotless.</p>
+        </div>
+        <div class="city-service-card">
+          <div class="city-service-icon">📦</div>
+          <h3>Move-In / Move-Out</h3>
+          <p>Moving in or out of {{ city_name }}? We'll make sure you get your full deposit back.</p>
+        </div>
+        <div class="city-service-card">
+          <div class="city-service-icon">🌿</div>
+          <h3>Lawn Mowing</h3>
+          <p>Keep your {{ city_name }} lawn sharp all season. Regular mowing, edging, and trimming.</p>
+        </div>
+        <div class="city-service-card">
+          <div class="city-service-icon">🌺</div>
+          <h3>Landscaping</h3>
+          <p>Garden design, mulching, and maintenance for {{ city_name }} properties. Boost your curb appeal.</p>
+        </div>
+        <div class="city-service-card">
+          <div class="city-service-icon">⭐</div>
+          <h3>Bundle & Save 10%</h3>
+          <p>Combine cleaning + landscaping for your {{ city_name }} property and save 10% on both.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us for this City -->
+  <section class="city-why">
+    <div class="city-container">
+      <h2>Why {{ city_name }} Homeowners Choose Dani Cleans</h2>
+      <div class="city-why-grid">
+        <div class="city-why-item">
+          <strong>Local Knowledge</strong>
+          <p>We know {{ city_name }} properties. From older homes to new builds, we tailor our approach to your home's specific needs.</p>
+        </div>
+        <div class="city-why-item">
+          <strong>Consistent Teams</strong>
+          <p>You'll see the same familiar, background-checked team members every visit. No strangers, no surprises.</p>
+        </div>
+        <div class="city-why-item">
+          <strong>Flexible Scheduling</strong>
+          <p>Morning, afternoon, or specific day preferences — we work around your schedule, not the other way around.</p>
+        </div>
+        <div class="city-why-item">
+          <strong>Satisfaction Guaranteed</strong>
+          <p>Not happy with any aspect? We'll come back and make it right at no extra charge. That's our promise to every {{ city_name }} customer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Content (from Shopify editor — SEO-rich content goes here) -->
+  {% if page.content != blank %}
+  <section class="city-content">
+    <div class="city-container">
+      {{ page.content }}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Lead Capture Form -->
+  <section class="city-quote" id="city-quote">
+    <div class="city-container">
+      <div class="city-quote-card">
+        <h2>Get Your Free {{ city_name }} Estimate</h2>
+        <p>Tell us about your property and we'll send a personalized quote within 24 hours.</p>
+
+        <form method="post" action="/contact" accept-charset="UTF-8" class="city-form">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[Source]" value="City Landing Page - {{ city_name }}">
+          <input type="hidden" name="contact[City]" value="{{ city_name }}">
+          <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
+
+          <div class="city-form-row">
+            <input type="text" name="contact[name]" placeholder="Full Name" required>
+            <input type="tel" name="contact[Phone Number]" placeholder="Phone Number" required>
+          </div>
+          <div class="city-form-row">
+            <input type="email" name="contact[email]" placeholder="Email Address" required>
+            <select name="contact[Service Category]">
+              <option value="">Select a Service</option>
+              <option value="Recurring Cleaning">Recurring Cleaning</option>
+              <option value="Deep Cleaning">Deep Cleaning</option>
+              <option value="Move-In/Move-Out">Move-In / Move-Out</option>
+              <option value="Lawn Mowing">Lawn Mowing</option>
+              <option value="Landscaping">Landscaping</option>
+              <option value="Bundle">Cleaning + Landscaping Bundle</option>
+            </select>
+          </div>
+          <div class="city-form-row">
+            <input type="text" name="contact[Property Address]" placeholder="Property Address in {{ city_name }}" required class="full-width">
+          </div>
+          <textarea name="contact[body]" placeholder="Anything else we should know? (optional)" rows="3"></textarea>
+          <button type="submit" class="city-form-submit">Get My Free Estimate</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- City-Specific Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Dani Cleans - {{ city_name }}",
+    "description": "Professional cleaning and landscaping services in {{ city_name }}, Virginia.",
+    "url": "{{ shop.url }}{{ page.url }}",
+    "telephone": "+1-434-351-0335",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": {{ city_name | json }},
+      "addressRegion": "VA",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": {{ city_name | json }}
+    },
+    "priceRange": "$$"
+  }
+  </script>
+</div>
+
+<style>
+.city-landing { color: #1a3a2a; }
+.city-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.city-hero {
+  background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 100%);
+  color: #fff; padding: 80px 20px; text-align: center;
+}
+.city-hero-inner { max-width: 800px; margin: 0 auto; }
+.city-hero-title { font-size: 40px; margin-bottom: 16px; line-height: 1.2; }
+.city-hero-sub { font-size: 18px; opacity: 0.9; margin-bottom: 28px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.city-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+.city-btn-primary {
+  padding: 14px 32px; background: #fff; color: #2d6a4f; border-radius: 8px;
+  font-weight: 700; font-size: 16px; text-decoration: none; transition: transform 0.2s;
+}
+.city-btn-primary:hover { transform: translateY(-2px); }
+.city-btn-secondary {
+  padding: 14px 32px; background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 8px; font-weight: 600; font-size: 16px; text-decoration: none;
+}
+.city-trust-row {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  font-size: 14px; opacity: 0.85;
+}
+.city-services { padding: 64px 20px; }
+.city-services h2 { text-align: center; font-size: 28px; margin-bottom: 32px; }
+.city-services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.city-service-card {
+  background: #f7faf7; padding: 28px 20px; border-radius: 12px;
+  text-align: center; border: 1px solid #e0e8e0;
+}
+.city-service-icon { font-size: 32px; margin-bottom: 12px; }
+.city-service-card h3 { font-size: 18px; margin-bottom: 8px; color: #1a3a2a; }
+.city-service-card p { font-size: 14px; color: #555; line-height: 1.5; }
+.city-why { padding: 64px 20px; background: #f7faf7; }
+.city-why h2 { text-align: center; font-size: 28px; margin-bottom: 32px; }
+.city-why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.city-why-item { background: #fff; padding: 24px; border-radius: 10px; border: 1px solid #e0e8e0; }
+.city-why-item strong { font-size: 16px; color: #1a3a2a; display: block; margin-bottom: 8px; }
+.city-why-item p { font-size: 14px; color: #555; line-height: 1.5; margin: 0; }
+.city-content { padding: 48px 20px; }
+.city-content h2, .city-content h3 { color: #1a3a2a; }
+.city-content p { color: #555; line-height: 1.7; font-size: 16px; }
+.city-quote { padding: 64px 20px; background: #1a3a2a; }
+.city-quote-card {
+  max-width: 600px; margin: 0 auto; background: #fff;
+  border-radius: 12px; padding: 40px; text-align: center;
+}
+.city-quote-card h2 { font-size: 24px; margin-bottom: 8px; color: #1a3a2a; }
+.city-quote-card > p { color: #555; margin-bottom: 24px; font-size: 15px; }
+.city-form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.city-form-row input, .city-form-row select {
+  flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px;
+  font-size: 15px; font-family: inherit;
+}
+.city-form-row input.full-width { flex: 1 1 100%; }
+.city-form textarea {
+  width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;
+  font-size: 15px; font-family: inherit; margin-bottom: 16px; resize: vertical;
+}
+.city-form-submit {
+  width: 100%; padding: 16px; background: #2d6a4f; color: #fff; border: none;
+  border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: background 0.2s;
+}
+.city-form-submit:hover { background: #245a42; }
+@media (max-width: 768px) {
+  .city-hero-title { font-size: 28px; }
+  .city-services-grid { grid-template-columns: 1fr 1fr; }
+  .city-why-grid { grid-template-columns: 1fr; }
+  .city-form-row { flex-direction: column; }
+  .city-hero { padding: 48px 20px; }
+}
+@media (max-width: 480px) {
+  .city-services-grid { grid-template-columns: 1fr; }
+}
+</style>

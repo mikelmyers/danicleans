@@ -1,0 +1,45 @@
+{% comment %}
+  Floating SMS/Text button
+  Lets visitors text you directly — way higher response rate than email.
+  Rendered globally via theme.liquid.
+{% endcomment %}
+
+<a href="sms:4343510335?body=Hi%20Dani%20Cleans!%20I%27d%20like%20a%20free%20estimate."
+   class="sms-float-btn"
+   aria-label="Text us"
+   title="Text us for a quick quote">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12zM7 9h2v2H7V9zm4 0h2v2h-2V9zm4 0h2v2h-2V9z"/>
+  </svg>
+</a>
+
+<style>
+.sms-float-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 999;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.2s;
+  text-decoration: none;
+}
+.sms-float-btn:hover {
+  transform: scale(1.08);
+  background: #1da851;
+}
+@media (max-width: 749px) {
+  .sms-float-btn {
+    bottom: 82px;
+    width: 44px;
+    height: 44px;
+  }
+}
+</style>

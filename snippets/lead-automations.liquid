@@ -1,0 +1,142 @@
+{% comment %}
+  Lead Automation Scripts
+  1. Auto-tracks form submissions with UTM data
+  2. Shows smart confirmation with next steps
+  3. Stores lead data in localStorage for retargeting
+  4. Fires conversion events for analytics
+  Rendered globally via theme.liquid.
+{% endcomment %}
+
+<script>
+(function() {
+  // === LEAD TRACKING ===
+  // Capture UTM parameters on arrival and persist for form attribution
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
+  var params = new URLSearchParams(window.location.search);
+  UTM_KEYS.forEach(function(key) {
+    var val = params.get(key);
+    if (val) {
+      try { sessionStorage.setItem('dc_' + key, val); } catch(e) {}
+    }
+  });
+
+  // Track landing page for attribution
+  if (!sessionStorage.getItem('dc_landing_page')) {
+    try { sessionStorage.setItem('dc_landing_page', window.location.pathname); } catch(e) {}
+  }
+
+  // === INJECT UTM DATA INTO ALL CONTACT FORMS ===
+  function injectUTMFields() {
+    document.querySelectorAll('form[action="/contact"]').forEach(function(form) {
+      if (form.dataset.utmInjected) return;
+      form.dataset.utmInjected = 'true';
+
+      UTM_KEYS.forEach(function(key) {
+        var val;
+        try { val = sessionStorage.getItem('dc_' + key); } catch(e) {}
+        if (val) {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'contact[' + key + ']';
+          input.value = val;
+          form.appendChild(input);
+        }
+      });
+
+      // Add landing page
+      var lp;
+      try { lp = sessionStorage.getItem('dc_landing_page'); } catch(e) {}
+      if (lp) {
+        var lpInput = document.createElement('input');
+        lpInput.type = 'hidden';
+        lpInput.name = 'contact[Landing Page]';
+        lpInput.value = lp;
+        form.appendChild(lpInput);
+      }
+
+      // Add timestamp
+      var tsInput = document.createElement('input');
+      tsInput.type = 'hidden';
+      tsInput.name = 'contact[Submitted At]';
+      tsInput.value = new Date().toISOString();
+      form.appendChild(tsInput);
+
+      // Add page source
+      var srcInput = document.createElement('input');
+      srcInput.type = 'hidden';
+      srcInput.name = 'contact[Page Source]';
+      srcInput.value = window.location.pathname;
+      form.appendChild(srcInput);
+    });
+  }
+
+  // Run on load and also after any DOM changes (for dynamically loaded forms)
+  injectUTMFields();
+  if (window.MutationObserver) {
+    var observer = new MutationObserver(function() { injectUTMFields(); });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  // === FORM SUCCESS HANDLING ===
+  // Detect successful form submission via URL params
+  if (window.location.search.indexOf('success=true') !== -1 ||
+      window.location.search.indexOf('form_type=contact') !== -1 ||
+      window.location.search.indexOf('customer_posted=true') !== -1) {
+
+    // Store conversion
+    try {
+      var conversions = JSON.parse(localStorage.getItem('dc_conversions') || '[]');
+      conversions.push({
+        date: new Date().toISOString(),
+        page: window.location.pathname,
+        source: sessionStorage.getItem('dc_utm_source') || 'direct'
+      });
+      localStorage.setItem('dc_conversions', JSON.stringify(conversions));
+    } catch(e) {}
+
+    // Show success toast
+    showSuccessToast();
+  }
+
+  function showSuccessToast() {
+    var toast = document.createElement('div');
+    toast.innerHTML = '<div style="position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;background:#2d6a4f;color:#fff;padding:16px 24px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);font-size:15px;font-weight:600;display:flex;align-items:center;gap:10px;animation:toastSlide 0.4s ease;max-width:90vw;"><span style="font-size:20px;">&#10003;</span> Your request was sent! We\'ll be in touch within 24 hours.</div>';
+    document.body.appendChild(toast);
+    setTimeout(function() { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.5s'; }, 5000);
+    setTimeout(function() { toast.remove(); }, 5500);
+  }
+
+  // === RETURNING VISITOR DETECTION ===
+  // If someone comes back, show them a personalized nudge
+  try {
+    var visits = parseInt(localStorage.getItem('dc_visits') || '0') + 1;
+    localStorage.setItem('dc_visits', visits.toString());
+    localStorage.setItem('dc_last_visit', new Date().toISOString());
+
+    var conversions = JSON.parse(localStorage.getItem('dc_conversions') || '[]');
+    var hasConverted = conversions.length > 0;
+
+    // If returning visitor (2+ visits) who hasn't submitted a form, show a nudge after 10s
+    if (visits >= 2 && !hasConverted) {
+      setTimeout(function() {
+        var nudge = document.createElement('div');
+        nudge.id = 'returnNudge';
+        nudge.innerHTML = '<div style="position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:998;background:#fff;border:2px solid #2d6a4f;border-radius:12px;padding:16px 20px;box-shadow:0 4px 20px rgba(0,0,0,0.15);max-width:380px;width:90vw;text-align:center;animation:toastSlide 0.4s ease;">' +
+          '<p style="margin:0 0 10px;font-size:15px;color:#1a3a2a;font-weight:600;">Welcome back! Ready for that free estimate?</p>' +
+          '<div style="display:flex;gap:8px;justify-content:center;">' +
+          '<a href="/pages/request-a-quote" style="padding:10px 20px;background:#2d6a4f;color:#fff;text-decoration:none;border-radius:8px;font-size:14px;font-weight:600;">Get My Estimate</a>' +
+          '<button onclick="this.closest(\'#returnNudge\').remove()" style="padding:10px 16px;background:transparent;border:1px solid #ccc;border-radius:8px;cursor:pointer;font-size:14px;">Not Now</button>' +
+          '</div></div>';
+        document.body.appendChild(nudge);
+      }, 10000);
+    }
+  } catch(e) {}
+})();
+</script>
+
+<style>
+@keyframes toastSlide {
+  from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+</style>
