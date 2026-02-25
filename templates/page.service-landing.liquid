@@ -28,13 +28,15 @@
       <h2>What's Included</h2>
       <div class="svc-checklist">
         <div class="svc-check">&#10003; Professionally trained, background-checked team</div>
-        <div class="svc-check">&#10003; All cleaning supplies and equipment provided</div>
+        <div class="svc-check">&#10003; All supplies and equipment provided</div>
         <div class="svc-check">&#10003; Eco-friendly products available on request</div>
         <div class="svc-check">&#10003; Fully insured and bonded</div>
         <div class="svc-check">&#10003; 100% satisfaction guarantee</div>
         <div class="svc-check">&#10003; Flexible scheduling — no long-term contracts</div>
         <div class="svc-check">&#10003; Same-day quotes, service within 48 hours</div>
         <div class="svc-check">&#10003; Consistent team on every visit</div>
+        <div class="svc-check">&#10003; Cleaning + landscaping bundles available</div>
+        <div class="svc-check">&#10003; Pressure washing, window cleaning & more</div>
       </div>
     </div>
   </section>
@@ -82,6 +84,21 @@
           </div>
           <div class="svc-form-row">
             <input type="email" name="contact[email]" placeholder="Email" required>
+            <select name="contact[Service Category]">
+              <option value="">Select a Service</option>
+              <option value="Recurring Cleaning">Recurring Cleaning</option>
+              <option value="Deep Cleaning">Deep Cleaning</option>
+              <option value="Move-In/Move-Out">Move-In / Move-Out</option>
+              <option value="Lawn Mowing">Lawn Mowing</option>
+              <option value="Landscaping">Landscaping</option>
+              <option value="Pressure Washing">Pressure Washing</option>
+              <option value="Window Cleaning">Window Cleaning</option>
+              <option value="Holiday Lights">Holiday Light Installation</option>
+              <option value="Junk Removal">Junk Removal</option>
+              <option value="Bundle">Cleaning + Landscaping Bundle</option>
+            </select>
+          </div>
+          <div class="svc-form-row">
             <input type="text" name="contact[Property Address]" placeholder="Property Address" required>
           </div>
           <textarea name="contact[body]" rows="3" placeholder="Tell us about your property (optional)"></textarea>
@@ -160,7 +177,7 @@
 .svc-quote-card h2 { font-size: 24px; margin-bottom: 8px; color: #1a3a2a; }
 .svc-quote-card > p { color: #555; margin-bottom: 20px; }
 .svc-form-row { display: flex; gap: 12px; margin-bottom: 12px; }
-.svc-form-row input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; font-family: inherit; }
+.svc-form-row input, .svc-form-row select { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; font-family: inherit; }
 .svc-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; font-family: inherit; margin-bottom: 14px; resize: vertical; }
 .svc-form button {
   width: 100%; padding: 16px; background: #2d6a4f; color: #fff; border: none;

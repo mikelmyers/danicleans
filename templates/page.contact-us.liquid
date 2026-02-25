@@ -1,0 +1,292 @@
+{% comment %}
+  Contact Us Page — Dani Cleans
+  Full branded contact page with form, map area, phone, and hours.
+{% endcomment %}
+
+{% assign form_success = false %}
+{% if request.query.success == 'true' and request.query.form_type == 'contact' %}
+  {% assign form_success = true %}
+{% endif %}
+
+<div class="contact-page">
+  <!-- Hero -->
+  <section class="contact-hero">
+    <div class="contact-container">
+      <h1>Get in Touch</h1>
+      <p>Have a question, need a quote, or just want to say hi? We'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- Contact Cards + Form -->
+  <section class="contact-main">
+    <div class="contact-container">
+      <div class="contact-grid">
+        <!-- Left: Contact Info -->
+        <div class="contact-info">
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <h3>Call or Text</h3>
+              <a href="tel:4343510335">434-351-0335</a>
+              <p>Mon-Sat, 8am - 6pm</p>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <div>
+              <h3>Email Us</h3>
+              <a href="mailto:info@danicleans.com">info@danicleans.com</a>
+              <p>We respond within 24 hours</p>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <h3>Service Area</h3>
+              <p>Charlottesville, Albemarle County, Crozet, Waynesboro, Staunton & surrounds</p>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d6a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h3>Business Hours</h3>
+              <div class="contact-hours">
+                <div><span>Monday - Friday</span><span>8:00 AM - 6:00 PM</span></div>
+                <div><span>Saturday</span><span>8:00 AM - 4:00 PM</span></div>
+                <div><span>Sunday</span><span>Closed</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-quick-links">
+            <h4>Quick Links</h4>
+            <a href="/pages/request-a-quote">Get a Free Estimate</a>
+            <a href="/pages/pricing">View Pricing</a>
+            <a href="/pages/services">Our Services</a>
+          </div>
+        </div>
+
+        <!-- Right: Contact Form -->
+        <div class="contact-form-wrap">
+          {% if form_success %}
+            <div class="contact-success">
+              <div class="contact-success-icon">&#10003;</div>
+              <h2>Message Sent!</h2>
+              <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+              <p>Need a faster response? Call us at <a href="tel:4343510335">434-351-0335</a>.</p>
+            </div>
+          {% else %}
+            <h2>Send Us a Message</h2>
+            <p class="contact-form-sub">We'll get back to you within 24 hours.</p>
+
+            <form method="post" action="/contact" accept-charset="UTF-8" class="contact-form">
+              <input type="hidden" name="form_type" value="contact">
+              <input type="hidden" name="utf8" value="✓">
+              <input type="hidden" name="contact[Source]" value="Contact Us Page">
+              <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
+
+              <div class="contact-form-row">
+                <div class="contact-field">
+                  <label for="ContactName">Full Name *</label>
+                  <input type="text" id="ContactName" name="contact[name]" required placeholder="Your name">
+                </div>
+                <div class="contact-field">
+                  <label for="ContactEmail">Email *</label>
+                  <input type="email" id="ContactEmail" name="contact[email]" required placeholder="your@email.com">
+                </div>
+              </div>
+
+              <div class="contact-form-row">
+                <div class="contact-field">
+                  <label for="ContactPhone">Phone</label>
+                  <input type="tel" id="ContactPhone" name="contact[Phone Number]" placeholder="(434) 555-1234">
+                </div>
+                <div class="contact-field">
+                  <label for="ContactSubject">Subject</label>
+                  <select id="ContactSubject" name="contact[Subject]">
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Quote Request">Request a Quote</option>
+                    <option value="Scheduling">Scheduling Question</option>
+                    <option value="Service Issue">Service Concern</option>
+                    <option value="Partnership">Partnership Opportunity</option>
+                    <option value="Employment">Employment Inquiry</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="contact-field">
+                <label for="ContactMessage">Message *</label>
+                <textarea id="ContactMessage" name="contact[body]" rows="6" required placeholder="How can we help you?"></textarea>
+              </div>
+
+              <button type="submit" class="contact-submit">Send Message</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="contact-faq">
+    <div class="contact-container">
+      <h2>Common Questions</h2>
+      <div class="contact-faq-grid">
+        <div class="contact-faq-item">
+          <h4>How quickly do you respond?</h4>
+          <p>We respond to all inquiries within 24 hours, usually much sooner. For urgent needs, call us directly at 434-351-0335.</p>
+        </div>
+        <div class="contact-faq-item">
+          <h4>Do you offer free estimates?</h4>
+          <p>Yes! All estimates are completely free with no obligation. We'll provide a transparent price before any work begins.</p>
+        </div>
+        <div class="contact-faq-item">
+          <h4>What areas do you serve?</h4>
+          <p>We serve Charlottesville, Albemarle County, Crozet, Waynesboro, Staunton, and surrounding communities in Central Virginia.</p>
+        </div>
+        <div class="contact-faq-item">
+          <h4>Can I book online?</h4>
+          <p>You can request a quote online and we'll follow up to schedule. Or call us to book directly over the phone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact-cta">
+    <div class="contact-container">
+      <h2>Prefer to Talk?</h2>
+      <p>We're real people, not a call center. Give us a ring.</p>
+      <a href="tel:4343510335" class="contact-cta-phone">434-351-0335</a>
+    </div>
+  </section>
+</div>
+
+<style>
+.contact-page { color: #1a3a2a; }
+.contact-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.contact-hero {
+  background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 100%);
+  color: #fff; padding: 72px 20px; text-align: center;
+}
+.contact-hero h1 { font-size: 40px; margin-bottom: 12px; }
+.contact-hero p { font-size: 18px; opacity: 0.9; max-width: 500px; margin: 0 auto; }
+
+/* Main Grid */
+.contact-main { padding: 56px 20px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
+
+/* Info Cards */
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px; background: #f7faf7; border-radius: 12px;
+}
+.contact-card-icon {
+  width: 48px; height: 48px; min-width: 48px;
+  background: #e8f0e8; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-card h3 { font-size: 16px; margin-bottom: 4px; color: #1a3a2a; }
+.contact-card a { color: #2d6a4f; font-weight: 600; text-decoration: none; font-size: 16px; }
+.contact-card a:hover { text-decoration: underline; }
+.contact-card p { font-size: 13px; color: #666; margin: 4px 0 0; }
+.contact-hours { margin-top: 4px; }
+.contact-hours div {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-size: 14px; padding: 3px 0;
+}
+.contact-hours span:first-child { color: #555; }
+.contact-hours span:last-child { font-weight: 600; color: #1a3a2a; }
+.contact-quick-links { padding-top: 8px; }
+.contact-quick-links h4 { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.contact-quick-links a {
+  display: block; padding: 8px 0; color: #2d6a4f; text-decoration: none;
+  font-weight: 600; font-size: 14px; border-bottom: 1px solid #e0e8e0;
+}
+.contact-quick-links a:hover { color: #1a3a2a; }
+
+/* Form */
+.contact-form-wrap {
+  background: #fff; border: 2px solid #e0e8e0; border-radius: 16px; padding: 36px;
+}
+.contact-form-wrap h2 { font-size: 24px; margin-bottom: 4px; }
+.contact-form-sub { color: #666; margin-bottom: 24px; font-size: 15px; }
+.contact-form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+.contact-field { flex: 1; }
+.contact-field label {
+  display: block; font-size: 14px; font-weight: 600;
+  color: #1a3a2a; margin-bottom: 6px;
+}
+.contact-field input, .contact-field select, .contact-field textarea {
+  width: 100%; padding: 12px 14px; border: 2px solid #e0e8e0;
+  border-radius: 8px; font-size: 15px; font-family: inherit;
+  transition: border-color 0.2s;
+}
+.contact-field input:focus, .contact-field select:focus, .contact-field textarea:focus {
+  outline: none; border-color: #2d6a4f;
+}
+.contact-field textarea { resize: vertical; }
+.contact-field:last-child { margin-bottom: 20px; }
+.contact-submit {
+  width: 100%; padding: 16px; background: #2d6a4f; color: #fff;
+  border: none; border-radius: 8px; font-size: 16px; font-weight: 700;
+  cursor: pointer; font-family: inherit; transition: background 0.2s;
+}
+.contact-submit:hover { background: #245a42; }
+
+/* Success */
+.contact-success { text-align: center; padding: 40px 20px; }
+.contact-success-icon {
+  width: 64px; height: 64px; background: #e8f5e8; color: #2d6a4f;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 800; margin-bottom: 16px;
+}
+.contact-success h2 { margin-bottom: 8px; }
+.contact-success p { color: #555; margin-bottom: 8px; }
+.contact-success a { color: #2d6a4f; font-weight: 600; }
+
+/* FAQ */
+.contact-faq { padding: 56px 20px; background: #f7faf7; }
+.contact-faq h2 { text-align: center; font-size: 28px; margin-bottom: 32px; }
+.contact-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.contact-faq-item {
+  background: #fff; padding: 24px; border-radius: 12px; border: 1px solid #e0e8e0;
+}
+.contact-faq-item h4 { font-size: 16px; margin-bottom: 8px; color: #1a3a2a; }
+.contact-faq-item p { font-size: 14px; color: #555; line-height: 1.5; margin: 0; }
+
+/* CTA */
+.contact-cta {
+  padding: 56px 20px; background: #1a3a2a; color: #fff; text-align: center;
+}
+.contact-cta h2 { font-size: 28px; margin-bottom: 8px; }
+.contact-cta p { opacity: 0.9; margin-bottom: 20px; }
+.contact-cta-phone {
+  display: inline-block; padding: 16px 40px; background: #fff; color: #2d6a4f;
+  border-radius: 8px; font-size: 24px; font-weight: 800; text-decoration: none;
+  transition: transform 0.2s;
+}
+.contact-cta-phone:hover { transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+  .contact-hero h1 { font-size: 28px; }
+  .contact-hero { padding: 48px 20px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-form-row { flex-direction: column; gap: 12px; }
+  .contact-faq-grid { grid-template-columns: 1fr; }
+  .contact-form-wrap { padding: 24px; }
+}
+</style>
