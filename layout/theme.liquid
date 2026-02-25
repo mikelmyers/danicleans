@@ -323,8 +323,8 @@
     </script>
 
     <!-- Existing head content -->
-    {% if page_css %}
-        {{ page_css | asset_url | stylesheet_tag }}
+    {% if template.name == 'page' and template.suffix == 'landing-page' %}
+        {{ 'custom-styles.css' | asset_url | stylesheet_tag }}
     {% endif %}
     {% if template == 'page.services' %}
     {{ 'services.css' | asset_url | stylesheet_tag }}
