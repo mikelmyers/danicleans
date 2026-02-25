@@ -1,335 +1,49 @@
-/* === Services Page Styles === */
+/* === Dani Cleans - Global Custom Styles === */
+/* Cleaning & Landscaping — Charlottesville, VA */
 
-/* Reset and Typography */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ========================================
+   FORM STYLES (Quote/Landing Pages)
+   ======================================== */
 
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* Container */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Hero Section */
-.hero-services {
-    background-image: url('{{ "services-hero.jpg" | asset_url }}');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    padding: 150px 0;
-    text-align: center;
-}
-
-.hero-services .container {
-    max-width: 800px; /* Optional: Narrower container for the hero section */
-}
-
-.hero-services h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.hero-services p {
-    font-size: 24px;
-}
-
-/* Introduction Section */
-.intro {
-    padding: 60px 0;
-    text-align: center;
-}
-
-.intro p {
-    font-size: 18px;
-    color: #666;
-}
-
-/* Services Section */
-.services {
-    padding: 60px 0;
-}
-
-.services h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 36px;
-}
-
-.service-item {
-    margin-bottom: 40px;
-}
-
-.service-item h3 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.service-item p {
-    font-size: 16px;
-    color: #666;
-}
-
-.service-item ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.service-item ul li {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #333;
-    display: flex;
-    align-items: flex-start;
-}
-
-.service-item ul li::before {
-    content: '✔';
-    color: #333;
-    margin-right: 10px;
-    font-size: 18px;
-    margin-top: 2px; /* Aligns the checkmark with the text */
-}
-
-/* Why Choose Us Section */
-.why-choose-us {
-    padding: 60px 0;
-    background-color: #f9f9f9;
-}
-
-.why-choose-us h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 36px;
-}
-
-.benefits-list {
-    list-style: none;
-    padding-left: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.benefits-list li {
-    width: 45%;
-    margin: 10px;
-    font-size: 16px;
-    display: flex;
-    align-items: flex-start;
-}
-
-.benefits-list li::before {
-    content: '✔';
-    color: #333;
-    margin-right: 10px;
-    font-size: 18px;
-    margin-top: 2px;
-}
-
-.benefits-list strong {
-    font-weight: 600;
-}
-
-
-/* Testimonials Section */
-.testimonials {
-    padding: 60px 0;
-}
-
-.testimonials h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 36px;
-}
-
-.testimonial-item {
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.testimonial-item p {
-    font-size: 16px;
-    color: #666;
-}
-
-.testimonial-item strong {
-    display: block;
-    margin-top: 10px;
-    color: #333;
-}
-
-/* Call to Action Section */
-.call-to-action {
-    padding: 80px 0;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-}
-
-.call-to-action .container {
-    max-width: 800px; /* Optional: Narrower container for the CTA */
-}
-
-.call-to-action h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.call-to-action p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.call-to-action .btn {
-    background-color: #fff;
-    color: #333;
-    padding: 15px 30px;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.call-to-action .btn:hover {
-    background-color: #eaeaea;
-}
-
-/* Footer */
-.footer {
-    background-color: #fff;
-    padding: 20px 0;
-    border-top: 1px solid #eaeaea;
-    text-align: center;
-}
-
-.footer p {
-    font-size: 14px;
-    color: #999;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-services h2 {
-        font-size: 36px;
-    }
-    .hero-services p {
-        font-size: 20px;
-    }
-    .benefits-list li {
-        width: 100%;
-    }
-}
-
-/* Quote Form Styles */
-.quote-form {
-    padding: 80px 0;
-    background-color: #f9f9f9;
-}
-
-.quote-form h2 {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 32px;
-    color: #333;
-}
-
-.quote-form p {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 16px;
-    color: #666;
-}
-
-/* Flex Container for Form and Benefits */
-.form-and-benefits {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 auto;
-    max-width: 1200px;
-}
-
-/* Form Container */
 .form-container {
     background-color: #fff;
     padding: 40px;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    flex: 1 1 55%; /* Adjusts width of the form container */
-    margin-right: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e8e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Benefits Container */
-.benefits-container {
-    flex: 1 1 40%; /* Adjusts width of the benefits container */
-    padding: 40px;
-    border-left: 1px solid #eaeaea; /* Separating border */
+.form-container h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #1a3a2a;
 }
 
-.benefits-container h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.benefits-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-.benefits-list li {
-    margin-bottom: 20px;
+.form-container p {
     font-size: 16px;
-    color: #333;
-    display: flex;
-    align-items: center;
+    margin-bottom: 24px;
+    color: #555;
 }
 
-.benefits-list li::before {
-    content: '✔'; /* Adds a checkmark before each benefit */
-    color: #333;
-    margin-right: 10px;
-    font-size: 18px;
-}
-
-.benefits-list strong {
-    font-weight: 600;
-}
-
-/* Form Styles */
 .form-row {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-bottom: 4px;
 }
 
 .form-group {
     flex: 1;
-    min-width: 250px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-}
-
-.form-group:last-child {
-    margin-right: 0;
+    min-width: 240px;
+    margin-bottom: 16px;
 }
 
 .form-group label {
     display: block;
-    font-weight: 500;
-    margin-bottom: 5px;
-    color: #333;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1a3a2a;
+    font-size: 14px;
 }
 
 .form-group input,
@@ -338,58 +52,247 @@ body {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.2s;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #999;
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.15);
 }
 
-button[type="submit"] {
+.form-group select optgroup {
+    font-weight: 600;
+    color: #1a3a2a;
+}
+
+button[type="submit"],
+.btn {
     display: block;
     width: 100%;
-    padding: 15px;
-    background-color: #333;
+    padding: 16px;
+    background-color: #2d6a4f;
     color: #fff;
     font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 8px;
 }
 
-button[type="submit"]:hover {
-    background-color: #555;
+button[type="submit"]:hover,
+.btn:hover {
+    background-color: #245a42;
+    transform: translateY(-1px);
 }
 
-/* Responsive Adjustments */
+/* Success Message */
+.success-message {
+    background-color: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    padding: 24px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.success-message p {
+    font-size: 16px;
+    color: #1a3a2a;
+    margin-bottom: 0;
+}
+
+.success-message a {
+    color: #2d6a4f;
+    font-weight: 600;
+}
+
+/* ========================================
+   LANDING PAGE LAYOUT
+   ======================================== */
+
+.two-column-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 40px 20px;
+}
+
+.left-column {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.right-column {
+    width: 100%;
+    padding: 0 10px;
+}
+
+@media (min-width: 768px) {
+    .left-column {
+        width: 58%;
+    }
+    .right-column {
+        width: 42%;
+    }
+}
+
+/* Bullet Points / Benefits Sidebar */
+.bullet-points {
+    background-color: #f0f5f0;
+    padding: 36px;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.bullet-points h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #1a3a2a;
+}
+
+.bullet-points ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.bullet-points ul li {
+    margin-bottom: 14px;
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.5;
+}
+
+.bullet-points ul li::before {
+    content: '\2713';
+    color: #2d6a4f;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Phone CTA in sidebar */
+.quote-cta-phone {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #d4e0d4;
+    text-align: center;
+}
+
+.quote-cta-phone p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.phone-link {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 700;
+    color: #2d6a4f;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.phone-link:hover {
+    color: #1a3a2a;
+}
+
+/* ========================================
+   STICKY MOBILE CTA BAR
+   ======================================== */
+
+.mobile-cta-bar {
+    display: none;
+}
+
+@media (max-width: 749px) {
+    .mobile-cta-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: #1a3a2a;
+        padding: 10px 12px;
+        gap: 8px;
+        box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .mobile-cta-bar a {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 8px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .mobile-cta-call {
+        background: #fff;
+        color: #1a3a2a;
+    }
+
+    .mobile-cta-estimate {
+        background: #2d6a4f;
+        color: #fff;
+    }
+
+    /* Add bottom padding to body so content isn't hidden behind the bar */
+    body {
+        padding-bottom: 72px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE FORM ADJUSTMENTS
+   ======================================== */
+
 @media (max-width: 992px) {
     .form-and-benefits {
         flex-direction: column;
     }
-    .form-container,
-    .benefits-container {
-        flex: 1 1 100%;
+    .form-container {
         margin-right: 0;
-        margin-bottom: 40px;
-    }
-    .benefits-container {
-        border-left: none;
-        border-top: 1px solid #eaeaea;
-        padding-top: 20px;
+        margin-bottom: 24px;
     }
 }
 
 @media (max-width: 768px) {
     .form-row {
         flex-direction: column;
+        gap: 0;
     }
     .form-group {
-        margin-right: 0;
+        min-width: 100%;
+    }
+    .form-container {
+        padding: 24px;
+    }
+    .bullet-points {
+        padding: 24px;
+        margin-top: 20px;
+    }
+    .two-column-container {
+        padding: 20px 12px;
     }
 }

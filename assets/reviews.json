@@ -1,12 +1,42 @@
 [
   {
-    "name": "Anna",
-    "review": "Absolutely amazing service — prompt, friendly, and professional!",
+    "name": "Sarah L., Charlottesville",
+    "review": "Dani Cleans handles both our house cleaning and yard work. It's so convenient having one company for everything. They're always on time and the results speak for themselves.",
     "rating": 5
   },
   {
-    "name": "James",
-    "review": "Highly recommend. They took care of everything quickly.",
+    "name": "Marcus T., Albemarle County",
+    "review": "We hired them for a move-out clean and they left the place spotless. Our landlord returned the full deposit. Highly recommend to anyone moving in the Charlottesville area!",
+    "rating": 5
+  },
+  {
+    "name": "Jennifer K., Crozet",
+    "review": "Our lawn has never looked better. They're consistent, thorough, and the price is fair. We've been using them for 6 months now and couldn't be happier.",
+    "rating": 5
+  },
+  {
+    "name": "David & Lisa R., Belmont",
+    "review": "We switched from a national franchise and the difference is night and day. Dani Cleans actually listens to what we need. Our bi-weekly cleaning is the highlight of the week.",
+    "rating": 5
+  },
+  {
+    "name": "Amanda P., Keswick",
+    "review": "They did a full spring cleanup on our 2-acre property — leaf removal, mulching, bed edging, the works. Looked like a completely different yard. Already booked for fall cleanup.",
+    "rating": 5
+  },
+  {
+    "name": "Tom W., Downtown Charlottesville",
+    "review": "Professional, reliable, and they actually show up when they say they will. The deep clean they did on our rental property was impressive. Tenants were thrilled.",
+    "rating": 5
+  },
+  {
+    "name": "Rachel M., Earlysville",
+    "review": "I love that they use eco-friendly products. With two toddlers and a dog, that matters to us. The house smells fresh without any harsh chemicals. Best cleaning service we've tried.",
+    "rating": 5
+  },
+  {
+    "name": "Carlos G., Barracks Road",
+    "review": "Great communication from start to finish. They gave us a fair quote, showed up on time, and did excellent work on both the inside cleaning and lawn maintenance. Five stars all around.",
     "rating": 5
   }
 ]
