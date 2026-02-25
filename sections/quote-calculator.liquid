@@ -50,6 +50,26 @@
           <span class="calc-card-title">Seasonal Cleanup</span>
           <span class="calc-card-desc">Spring prep or fall cleanup</span>
         </button>
+        <button class="calc-service-card" data-service="pressure-washing" data-category="additional">
+          <span class="calc-card-icon">💧</span>
+          <span class="calc-card-title">Pressure Washing</span>
+          <span class="calc-card-desc">Driveways, patios, siding</span>
+        </button>
+        <button class="calc-service-card" data-service="window-cleaning" data-category="additional">
+          <span class="calc-card-icon">🪟</span>
+          <span class="calc-card-title">Window Cleaning</span>
+          <span class="calc-card-desc">Interior & exterior</span>
+        </button>
+        <button class="calc-service-card" data-service="holiday-lights" data-category="additional">
+          <span class="calc-card-icon">💡</span>
+          <span class="calc-card-title">Holiday Lights</span>
+          <span class="calc-card-desc">Install, maintain & takedown</span>
+        </button>
+        <button class="calc-service-card" data-service="junk-removal" data-category="additional">
+          <span class="calc-card-icon">🚛</span>
+          <span class="calc-card-title">Junk Removal</span>
+          <span class="calc-card-desc">Cleanouts & hauling</span>
+        </button>
         <button class="calc-service-card" data-service="bundle" data-category="bundle">
           <span class="calc-card-icon">⭐</span>
           <span class="calc-card-title">Cleaning + Landscaping</span>
@@ -140,6 +160,61 @@
         </div>
       </div>
 
+      <!-- Additional Services Details -->
+      <div class="calc-details-group" id="additional-details" style="display:none;">
+        <div class="calc-field" id="pw-scope-field" style="display:none;">
+          <label>What Needs Washing?</label>
+          <div class="calc-addon-row">
+            <button class="calc-addon" data-addon="pw-driveway" data-price="150">Driveway ($150)</button>
+            <button class="calc-addon" data-addon="pw-patio" data-price="120">Patio/Deck ($120)</button>
+            <button class="calc-addon" data-addon="pw-siding" data-price="250">House Siding ($250)</button>
+            <button class="calc-addon" data-addon="pw-fence" data-price="175">Fence ($175)</button>
+            <button class="calc-addon" data-addon="pw-walkways" data-price="75">Walkways ($75)</button>
+          </div>
+        </div>
+        <div class="calc-field" id="wc-scope-field" style="display:none;">
+          <label>Number of Windows</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="window-count" data-value="small" data-label="1-10 windows">1-10 windows</button>
+            <button class="calc-option" data-field="window-count" data-value="medium" data-label="11-20 windows">11-20 windows</button>
+            <button class="calc-option" data-field="window-count" data-value="large" data-label="21-30 windows">21-30 windows</button>
+            <button class="calc-option" data-field="window-count" data-value="xlarge" data-label="30+ windows">30+ windows</button>
+          </div>
+        </div>
+        <div class="calc-field" id="hl-scope-field" style="display:none;">
+          <label>Home Size for Lights</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="light-scope" data-value="small" data-label="Small (roofline only)">Small (roofline)</button>
+            <button class="calc-option" data-field="light-scope" data-value="medium" data-label="Medium (roof + bushes)">Medium (roof + bushes)</button>
+            <button class="calc-option" data-field="light-scope" data-value="large" data-label="Large (full display)">Large (full display)</button>
+            <button class="calc-option" data-field="light-scope" data-value="xlarge" data-label="Custom (trees, yard, full)">Custom (everything)</button>
+          </div>
+        </div>
+        <div class="calc-field" id="jr-scope-field" style="display:none;">
+          <label>How Much Junk?</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="junk-load" data-value="small" data-label="A few items">A few items</button>
+            <button class="calc-option" data-field="junk-load" data-value="medium" data-label="Half truck load">Half truck load</button>
+            <button class="calc-option" data-field="junk-load" data-value="large" data-label="Full truck load">Full truck load</button>
+            <button class="calc-option" data-field="junk-load" data-value="xlarge" data-label="Whole room / garage">Whole room cleanout</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photo Upload (all services) -->
+      <div class="calc-field calc-photo-upload">
+        <label>Upload Photos for a More Accurate Quote (optional)</label>
+        <div class="calc-photo-zone" id="calcPhotoZone">
+          <div class="calc-photo-prompt">
+            <span class="calc-photo-icon">📷</span>
+            <p>Drop photos here or <strong>click to upload</strong></p>
+            <p class="calc-photo-hint">Photos help us give you the most accurate price. Up to 5 photos.</p>
+          </div>
+          <input type="file" id="calcPhotoInput" accept="image/*" multiple style="display:none;">
+          <div class="calc-photo-previews" id="calcPhotoPreviews"></div>
+        </div>
+      </div>
+
       <button class="calc-next-btn" id="calc-to-step-3" disabled>See My Estimate →</button>
     </div>
 
@@ -156,6 +231,22 @@
         <p class="calc-estimate-note">* Final price confirmed after a quick walkthrough. Most estimates are within 10% of this number.</p>
       </div>
 
+      <!-- Smart Upsell Suggestion -->
+      <div class="calc-upsell" id="calc-upsell" style="display:none;">
+        <div class="calc-upsell-card">
+          <div class="calc-upsell-badge">SAVE MORE</div>
+          <p class="calc-upsell-text" id="calc-upsell-text"></p>
+          <button class="calc-upsell-btn" id="calc-upsell-btn">Add & Save</button>
+          <button class="calc-upsell-dismiss" id="calc-upsell-dismiss">No thanks</button>
+        </div>
+      </div>
+
+      <!-- Seasonal Notice -->
+      <div class="calc-seasonal" id="calc-seasonal" style="display:none;">
+        <span class="calc-seasonal-icon" id="calc-seasonal-icon"></span>
+        <span class="calc-seasonal-text" id="calc-seasonal-text"></span>
+      </div>
+
       <div class="calc-lead-capture">
         <h3>Lock In This Price — Get Your Exact Quote</h3>
         <p>We'll confirm your price within 24 hours. No spam, no obligation.</p>
@@ -168,6 +259,8 @@
           <input type="hidden" name="contact[Calculator Estimate]" id="calc-hidden-estimate" value="">
           <input type="hidden" name="contact[Service Requested]" id="calc-hidden-service" value="">
           <input type="hidden" name="contact[Property Details]" id="calc-hidden-details" value="">
+          <input type="hidden" name="contact[Photos Uploaded]" id="calc-hidden-photos" value="0">
+          <input type="hidden" name="contact[Seasonal Pricing]" id="calc-hidden-seasonal" value="">
 
           <div class="calc-form-row">
             <input type="text" name="contact[name]" placeholder="Your Name" required>
@@ -450,12 +543,70 @@
   border-color: #2d6a4f;
   box-shadow: 0 0 0 2px rgba(45,106,79,0.15);
 }
+/* Photo Upload */
+.calc-photo-upload { margin-top: 8px; }
+.calc-photo-zone {
+  border: 2px dashed #c0d0c0; border-radius: 12px; padding: 24px;
+  text-align: center; cursor: pointer; transition: all 0.2s; background: #fff;
+}
+.calc-photo-zone:hover, .calc-photo-zone.dragover {
+  border-color: #2d6a4f; background: #f0f7f0;
+}
+.calc-photo-prompt p { margin: 4px 0; font-size: 14px; color: #555; }
+.calc-photo-hint { font-size: 12px !important; color: #888 !important; }
+.calc-photo-icon { font-size: 32px; display: block; margin-bottom: 8px; }
+.calc-photo-previews {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; justify-content: center;
+}
+.calc-photo-thumb {
+  width: 72px; height: 72px; border-radius: 8px; object-fit: cover;
+  border: 2px solid #e0e8e0;
+}
+.calc-photo-remove {
+  position: absolute; top: -6px; right: -6px; width: 20px; height: 20px;
+  background: #e74c3c; color: #fff; border: none; border-radius: 50%;
+  font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.calc-photo-item { position: relative; display: inline-block; }
+
+/* Smart Upsell */
+.calc-upsell { margin-bottom: 20px; }
+.calc-upsell-card {
+  background: linear-gradient(135deg, #f0f7f0, #e8f5e8); border: 2px solid #2d6a4f;
+  border-radius: 12px; padding: 20px; text-align: center;
+}
+.calc-upsell-badge {
+  display: inline-block; background: #2d6a4f; color: #fff;
+  padding: 3px 12px; border-radius: 10px; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.5px; margin-bottom: 8px;
+}
+.calc-upsell-text { font-size: 15px; color: #1a3a2a; line-height: 1.5; margin-bottom: 12px; }
+.calc-upsell-btn {
+  padding: 10px 24px; background: #2d6a4f; color: #fff; border: none;
+  border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer;
+  font-family: inherit; margin-right: 8px;
+}
+.calc-upsell-btn:hover { background: #245a42; }
+.calc-upsell-dismiss {
+  padding: 10px 16px; background: transparent; border: none;
+  font-size: 13px; color: #888; cursor: pointer; font-family: inherit;
+}
+
+/* Seasonal Notice */
+.calc-seasonal {
+  display: flex; align-items: center; gap: 8px; justify-content: center;
+  padding: 10px 16px; background: #fff8e6; border: 1px solid #f5d060;
+  border-radius: 8px; margin-bottom: 16px; font-size: 14px; color: #8a6d00;
+}
+.calc-seasonal-icon { font-size: 18px; }
+
 @media (max-width: 600px) {
   .calc-service-grid { grid-template-columns: 1fr 1fr; }
   .calc-form-row { flex-direction: column; }
   .calc-option-row { flex-direction: column; }
   .calc-price-amount { font-size: 36px; }
   .calc-estimate-card, .calc-lead-capture { padding: 20px; }
+  .calc-photo-thumb { width: 56px; height: 56px; }
 }
 </style>
 
@@ -490,6 +641,22 @@
       base: { small: 150, medium: 250, large: 375, xlarge: 550 },
       hasFrequency: false, label: 'Seasonal Cleanup'
     },
+    'pressure-washing': {
+      base: { small: 0, medium: 0, large: 0, xlarge: 0 },
+      addonBased: true, hasFrequency: false, label: 'Pressure Washing'
+    },
+    'window-cleaning': {
+      base: { small: 120, medium: 200, large: 300, xlarge: 420 },
+      sizeField: 'window-count', hasFrequency: false, label: 'Window Cleaning'
+    },
+    'holiday-lights': {
+      base: { small: 300, medium: 500, large: 800, xlarge: 1200 },
+      sizeField: 'light-scope', hasFrequency: false, label: 'Holiday Light Installation'
+    },
+    'junk-removal': {
+      base: { small: 100, medium: 200, large: 350, xlarge: 500 },
+      sizeField: 'junk-load', hasFrequency: false, label: 'Junk Removal'
+    },
     'bundle': {
       cleaning: { small: 100, medium: 140, large: 190, xlarge: 260 },
       landscaping: { small: 40, medium: 65, large: 100, xlarge: 160 },
@@ -498,12 +665,36 @@
     }
   };
 
+  // Seasonal pricing multipliers
+  var SEASONAL = (function() {
+    var month = new Date().getMonth(); // 0-11
+    // Spring (Mar-May): peak for cleaning + landscaping
+    if (month >= 2 && month <= 4) return { multiplier: 1.0, label: 'Spring Special', icon: '🌸', msg: 'Spring is our busiest season — book now to lock in your spot!' };
+    // Summer (Jun-Aug): peak for lawn care
+    if (month >= 5 && month <= 7) return { multiplier: 1.0, label: 'Summer', icon: '☀️', msg: 'Summer is prime lawn season — weekly plans fill up fast!' };
+    // Fall (Sep-Nov): seasonal cleanup demand
+    if (month >= 8 && month <= 10) return { multiplier: 1.0, label: 'Fall Savings', icon: '🍂', msg: 'Book fall cleanup now before the leaves pile up!' };
+    // Winter (Dec-Feb): slower season = discount
+    return { multiplier: 0.90, label: 'Winter Savings', icon: '❄️', msg: 'Winter special — save 10% on all cleaning services this month!' };
+  })();
+
+  // Loyalty detection
+  var isReturning = false;
+  try {
+    var prevQuote = localStorage.getItem('danicleans_quote');
+    if (prevQuote) {
+      var parsed = JSON.parse(prevQuote);
+      if (parsed.timestamp && Date.now() - parsed.timestamp < 90 * 24 * 60 * 60 * 1000) isReturning = true;
+    }
+  } catch(e) {}
+
   var state = {
     service: null, category: null,
     homeSize: null, yardSize: null,
     bedrooms: null, bathrooms: null,
     frequency: null, frequencyDiscount: 0,
-    addons: {}, currentStep: 1
+    addons: {}, currentStep: 1,
+    additionalSize: null, photoCount: 0
   };
 
   function $(id) { return document.getElementById(id); }
@@ -519,7 +710,11 @@
       s.classList.toggle('completed', n < step);
     });
     $('calc-back').style.display = step > 1 ? 'block' : 'none';
-    if (step === 3) calculateEstimate();
+    if (step === 3) {
+      calculateEstimate();
+      showSmartUpsell();
+      showSeasonalNotice();
+    }
   }
 
   // Step 1: Service selection
@@ -530,13 +725,25 @@
       state.service = card.getAttribute('data-service');
       state.category = card.getAttribute('data-category');
       state.addons = {};
+      state.additionalSize = null;
       $$('.calc-addon').forEach(function(a) { a.classList.remove('selected'); });
+      $$('#additional-details .calc-option').forEach(function(o) { o.classList.remove('selected'); });
 
       // Show step 2 with appropriate fields
       var isCleaning = state.category === 'cleaning' || state.category === 'bundle';
       var isLandscaping = state.category === 'landscaping' || state.category === 'bundle';
+      var isAdditional = state.category === 'additional';
       $('cleaning-details').style.display = isCleaning ? 'block' : 'none';
       $('landscaping-details').style.display = isLandscaping ? 'block' : 'none';
+      $('additional-details').style.display = isAdditional ? 'block' : 'none';
+
+      // Show/hide specific additional service fields
+      var addlFields = ['pw-scope-field', 'wc-scope-field', 'hl-scope-field', 'jr-scope-field'];
+      addlFields.forEach(function(f) { if ($(f)) $(f).style.display = 'none'; });
+      if (state.service === 'pressure-washing' && $('pw-scope-field')) $('pw-scope-field').style.display = 'block';
+      if (state.service === 'window-cleaning' && $('wc-scope-field')) $('wc-scope-field').style.display = 'block';
+      if (state.service === 'holiday-lights' && $('hl-scope-field')) $('hl-scope-field').style.display = 'block';
+      if (state.service === 'junk-removal' && $('jr-scope-field')) $('jr-scope-field').style.display = 'block';
 
       var p = PRICING[state.service];
       if (p) {
@@ -564,12 +771,15 @@
         state.frequency = val;
         state.frequencyDiscount = parseInt(btn.getAttribute('data-discount')) || 0;
       }
+      else if (field === 'window-count' || field === 'light-scope' || field === 'junk-load') {
+        state.additionalSize = val;
+      }
 
       checkStep2Complete();
     });
   });
 
-  // Add-ons
+  // Add-ons (including pressure washing items)
   $$('.calc-addon').forEach(function(btn) {
     btn.addEventListener('click', function() {
       btn.classList.toggle('selected');
@@ -577,6 +787,7 @@
       var price = parseInt(btn.getAttribute('data-price')) || 0;
       if (btn.classList.contains('selected')) state.addons[addon] = price;
       else delete state.addons[addon];
+      checkStep2Complete();
     });
   });
 
@@ -588,6 +799,12 @@
       ready = !!state.yardSize;
     } else if (state.category === 'bundle') {
       ready = state.homeSize && state.bedrooms && state.bathrooms && state.yardSize;
+    } else if (state.category === 'additional') {
+      if (state.service === 'pressure-washing') {
+        ready = Object.keys(state.addons).some(function(k) { return k.indexOf('pw-') === 0; });
+      } else {
+        ready = !!state.additionalSize;
+      }
     }
     $('calc-to-step-3').disabled = !ready;
   }
@@ -599,6 +816,139 @@
   $('calc-back').addEventListener('click', function() {
     goToStep(state.currentStep - 1);
   });
+
+  // Photo upload
+  var photoZone = $('calcPhotoZone');
+  var photoInput = $('calcPhotoInput');
+  var photoPreviews = $('calcPhotoPreviews');
+  var uploadedPhotos = [];
+
+  if (photoZone && photoInput) {
+    photoZone.addEventListener('click', function() { photoInput.click(); });
+    photoZone.addEventListener('dragover', function(e) { e.preventDefault(); photoZone.classList.add('dragover'); });
+    photoZone.addEventListener('dragleave', function() { photoZone.classList.remove('dragover'); });
+    photoZone.addEventListener('drop', function(e) {
+      e.preventDefault(); photoZone.classList.remove('dragover');
+      handlePhotos(e.dataTransfer.files);
+    });
+    photoInput.addEventListener('change', function() { handlePhotos(this.files); });
+  }
+
+  function handlePhotos(files) {
+    var remaining = 5 - uploadedPhotos.length;
+    for (var i = 0; i < Math.min(files.length, remaining); i++) {
+      var file = files[i];
+      if (!file.type.startsWith('image/')) continue;
+      uploadedPhotos.push(file);
+      var reader = new FileReader();
+      reader.onload = (function(idx) {
+        return function(e) {
+          var item = document.createElement('div');
+          item.className = 'calc-photo-item';
+          item.innerHTML = '<img class="calc-photo-thumb" src="' + e.target.result + '" alt="Photo">' +
+            '<button class="calc-photo-remove" data-idx="' + idx + '">&times;</button>';
+          photoPreviews.appendChild(item);
+          item.querySelector('.calc-photo-remove').addEventListener('click', function(ev) {
+            ev.stopPropagation();
+            uploadedPhotos.splice(parseInt(this.getAttribute('data-idx')), 1);
+            renderPhotoPreviews();
+          });
+        };
+      })(uploadedPhotos.length - 1);
+      reader.readAsDataURL(file);
+    }
+    state.photoCount = uploadedPhotos.length;
+  }
+
+  function renderPhotoPreviews() {
+    photoPreviews.innerHTML = '';
+    uploadedPhotos.forEach(function(file, idx) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var item = document.createElement('div');
+        item.className = 'calc-photo-item';
+        item.innerHTML = '<img class="calc-photo-thumb" src="' + e.target.result + '" alt="Photo">' +
+          '<button class="calc-photo-remove" data-idx="' + idx + '">&times;</button>';
+        photoPreviews.appendChild(item);
+        item.querySelector('.calc-photo-remove').addEventListener('click', function(ev) {
+          ev.stopPropagation();
+          uploadedPhotos.splice(parseInt(this.getAttribute('data-idx')), 1);
+          renderPhotoPreviews();
+        });
+      };
+      reader.readAsDataURL(file);
+    });
+    state.photoCount = uploadedPhotos.length;
+  }
+
+  // Smart Upsell Engine
+  function showSmartUpsell() {
+    var upsell = $('calc-upsell');
+    var upsellText = $('calc-upsell-text');
+    var upsellBtn = $('calc-upsell-btn');
+    if (!upsell) return;
+
+    var suggestion = null;
+    if (state.category === 'cleaning' && state.service !== 'bundle') {
+      suggestion = {
+        text: 'Add lawn care to your cleaning plan and <strong>save an extra 10%</strong> on both services. One company, one bill — most customers save $30-60/visit.',
+        action: function() {
+          var bundleCard = document.querySelector('[data-service="bundle"]');
+          if (bundleCard) bundleCard.click();
+        },
+        btnText: 'Add Lawn Care & Save 10%'
+      };
+    } else if (state.category === 'landscaping') {
+      suggestion = {
+        text: 'Bundle your lawn care with <strong>home cleaning and save 10%</strong> on both. Same team, same day — your whole property handled.',
+        action: function() {
+          var bundleCard = document.querySelector('[data-service="bundle"]');
+          if (bundleCard) bundleCard.click();
+        },
+        btnText: 'Add Cleaning & Save 10%'
+      };
+    } else if (state.service === 'deep-cleaning' || state.service === 'move-cleaning') {
+      suggestion = {
+        text: 'Switching to a <strong>recurring plan saves up to 20%</strong> per visit. Most deep clean customers save $50+ by going bi-weekly.',
+        action: function() {
+          var recurringCard = document.querySelector('[data-service="recurring-cleaning"]');
+          if (recurringCard) recurringCard.click();
+        },
+        btnText: 'See Recurring Savings'
+      };
+    } else if (state.service === 'pressure-washing') {
+      suggestion = {
+        text: 'Add <strong>window cleaning</strong> while we\'re at your property and save 15% on the window service. Bundle exterior services for the best value.',
+        action: function() {
+          var wcCard = document.querySelector('[data-service="window-cleaning"]');
+          if (wcCard) wcCard.click();
+        },
+        btnText: 'Add Window Cleaning'
+      };
+    }
+
+    if (suggestion && state.category !== 'bundle') {
+      upsellText.innerHTML = suggestion.text;
+      upsellBtn.textContent = suggestion.btnText;
+      upsellBtn.onclick = suggestion.action;
+      upsell.style.display = 'block';
+      $('calc-upsell-dismiss').onclick = function() { upsell.style.display = 'none'; };
+    } else {
+      upsell.style.display = 'none';
+    }
+  }
+
+  // Seasonal Notice
+  function showSeasonalNotice() {
+    var el = $('calc-seasonal');
+    if (!el) return;
+    $('calc-seasonal-icon').textContent = SEASONAL.icon;
+    $('calc-seasonal-text').textContent = SEASONAL.msg;
+    el.style.display = 'flex';
+    if ($('calc-hidden-seasonal')) {
+      $('calc-hidden-seasonal').value = SEASONAL.label + (SEASONAL.multiplier < 1 ? ' (' + Math.round((1 - SEASONAL.multiplier) * 100) + '% off)' : '');
+    }
+  }
 
   function calculateEstimate() {
     var p = PRICING[state.service];
@@ -630,6 +980,15 @@
       lines.push({ label: p.label + ' (base)', amount: base });
       if (brCost > 0) lines.push({ label: 'Bedrooms (' + state.bedrooms + ')', amount: brCost });
       if (baCost > 0) lines.push({ label: 'Bathrooms (' + state.bathrooms + ')', amount: baCost });
+    } else if (state.category === 'additional') {
+      if (p.addonBased) {
+        // Pressure washing — price is sum of selected areas
+        lines.push({ label: p.label, amount: 0 });
+      } else {
+        var sizeVal = state.additionalSize || 'medium';
+        total = p.base[sizeVal] || 0;
+        lines.push({ label: p.label, amount: total });
+      }
     } else {
       total = p.base[state.yardSize] || 0;
       lines.push({ label: p.label + ' (base)', amount: total });
@@ -639,7 +998,8 @@
     var addonTotal = 0;
     Object.keys(state.addons).forEach(function(key) {
       addonTotal += state.addons[key];
-      lines.push({ label: key.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); }), amount: state.addons[key] });
+      var label = key.replace(/^pw-/, '').replace(/^wc-/, '').replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+      lines.push({ label: label, amount: state.addons[key] });
     });
     total += addonTotal;
 
@@ -648,6 +1008,21 @@
       var freqDisc = Math.round(total * state.frequencyDiscount / 100);
       lines.push({ label: state.frequency.charAt(0).toUpperCase() + state.frequency.slice(1) + ' discount (-' + state.frequencyDiscount + '%)', amount: -freqDisc });
       total -= freqDisc;
+    }
+
+    // Seasonal discount (winter)
+    if (SEASONAL.multiplier < 1 && (state.category === 'cleaning' || state.category === 'bundle')) {
+      var seasonalPct = Math.round((1 - SEASONAL.multiplier) * 100);
+      var seasonalDisc = Math.round(total * (1 - SEASONAL.multiplier));
+      lines.push({ label: SEASONAL.label + ' (-' + seasonalPct + '%)', amount: -seasonalDisc });
+      total -= seasonalDisc;
+    }
+
+    // Loyalty discount for returning visitors
+    if (isReturning && total > 100) {
+      var loyaltyDisc = Math.round(total * 0.05);
+      lines.push({ label: 'Welcome back discount (-5%)', amount: -loyaltyDisc });
+      total -= loyaltyDisc;
     }
 
     lines.push({ label: 'Estimated Total', amount: total, isTotal: true });
@@ -674,11 +1049,30 @@
     var details = [];
     if (state.homeSize) details.push('Home: ' + state.homeSize);
     if (state.yardSize) details.push('Yard: ' + state.yardSize);
+    if (state.additionalSize) details.push('Size: ' + state.additionalSize);
     if (state.bedrooms) details.push(state.bedrooms + ' bed');
     if (state.bathrooms) details.push(state.bathrooms + ' bath');
     if (state.frequency) details.push('Frequency: ' + state.frequency);
     if (Object.keys(state.addons).length > 0) details.push('Add-ons: ' + Object.keys(state.addons).join(', '));
+    if (SEASONAL.multiplier < 1) details.push('Seasonal: ' + SEASONAL.label);
+    if (isReturning) details.push('Returning customer');
     $('calc-hidden-details').value = details.join(' | ');
+    if ($('calc-hidden-photos')) $('calc-hidden-photos').value = String(state.photoCount);
+
+    // Persist quote to localStorage
+    try {
+      var quoteData = {
+        estimate: '$' + total + ' ' + freqText,
+        total: total,
+        freqText: freqText,
+        service: p.label || state.service,
+        serviceKey: state.service,
+        details: details.join(' | '),
+        breakdown: lines.map(function(l) { return l.label + ': ' + (l.amount < 0 ? '-$' + Math.abs(l.amount) : '$' + l.amount); }).join(', '),
+        timestamp: Date.now()
+      };
+      localStorage.setItem('danicleans_quote', JSON.stringify(quoteData));
+    } catch(e) {}
   }
 })();
 </script>

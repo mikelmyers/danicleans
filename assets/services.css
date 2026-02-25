@@ -238,6 +238,19 @@
     transform: translateY(-1px);
 }
 
+/* Additional Services Section */
+.services-additional {
+    background-color: #f7f0e8;
+}
+
+.services-additional .service-item {
+    border-left-color: #b87333;
+}
+
+.services-additional .service-item ul li::before {
+    color: #b87333;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero-services {

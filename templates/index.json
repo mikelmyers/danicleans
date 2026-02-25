@@ -1,7 +1,7 @@
 {
   "sections": {
     "hero_banner": {
-      "type": "rich-text",
+      "type": "image-banner",
       "blocks": {
         "hero_heading": {
           "type": "heading",
@@ -13,15 +13,16 @@
         "hero_text": {
           "type": "text",
           "settings": {
-            "text": "<p>From spotless homes to beautiful yards — Dani Cleans keeps your property looking its best. Serving Charlottesville, Albemarle County, and surrounding areas.</p>"
+            "text": "From spotless homes to beautiful yards — Dani Cleans keeps your property looking its best. Serving Charlottesville, Albemarle County, and surrounding areas.",
+            "text_style": "subtitle"
           }
         },
         "hero_buttons": {
-          "type": "button",
+          "type": "buttons",
           "settings": {
-            "button_label": "Get a FREE Estimate",
-            "button_link": "shopify:\/\/pages\/request-a-quote",
-            "button_style_secondary": false,
+            "button_label_1": "Get a FREE Estimate",
+            "button_link_1": "shopify:\/\/pages\/request-a-quote",
+            "button_style_secondary_1": false,
             "button_label_2": "Call Now: 434-351-0335",
             "button_link_2": "tel:4343510335",
             "button_style_secondary_2": true
@@ -30,166 +31,150 @@
       },
       "block_order": ["hero_heading", "hero_text", "hero_buttons"],
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "accent-1",
-        "full_width": true,
-        "padding_top": 80,
-        "padding_bottom": 80
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "inverse",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
       }
     },
     "trust_badges": {
-      "type": "multicolumn",
+      "type": "trust-badges-home",
       "blocks": {
         "badge_1": {
-          "type": "column",
+          "type": "badge",
           "settings": {
+            "icon": "map-pin",
             "title": "Locally Owned",
-            "text": "<p>Proudly serving Charlottesville & Albemarle County</p>",
-            "link_label": "",
-            "link": ""
+            "subtitle": "Proudly serving Charlottesville since 2018"
           }
         },
         "badge_2": {
-          "type": "column",
+          "type": "badge",
           "settings": {
+            "icon": "shield",
             "title": "Insured & Bonded",
-            "text": "<p>Your property is fully protected with every service</p>",
-            "link_label": "",
-            "link": ""
+            "subtitle": "Your property is fully protected"
           }
         },
         "badge_3": {
-          "type": "column",
+          "type": "badge",
           "settings": {
+            "icon": "star",
             "title": "5-Star Rated",
-            "text": "<p>Consistently top-rated by Charlottesville homeowners</p>",
-            "link_label": "",
-            "link": ""
+            "subtitle": "500+ happy homeowners"
           }
         },
         "badge_4": {
-          "type": "column",
+          "type": "badge",
           "settings": {
+            "icon": "check-circle",
             "title": "100% Satisfaction",
-            "text": "<p>Not happy? We'll come back and make it right — guaranteed</p>",
-            "link_label": "",
-            "link": ""
+            "subtitle": "Not happy? We'll make it right"
           }
         }
       },
       "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"],
       "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 4,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "color_scheme": "background-2",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "cleaning_services": {
-      "type": "multicolumn",
+      "type": "services-home",
       "blocks": {
         "cleaning_1": {
-          "type": "column",
+          "type": "service",
           "settings": {
+            "icon": "calendar",
             "title": "Recurring Cleaning",
-            "text": "<p>Weekly, bi-weekly, or monthly cleaning plans that keep your home consistently fresh. Customized to your schedule and priorities.</p>",
-            "link_label": "Learn More",
+            "description": "Weekly, bi-weekly, or monthly cleaning plans that keep your home consistently fresh. Customized to your schedule and priorities.",
+            "starting_price": "$100/visit",
+            "link_text": "Learn More",
             "link": "shopify:\/\/pages\/services"
           }
         },
         "cleaning_2": {
-          "type": "column",
+          "type": "service",
           "settings": {
+            "icon": "sparkle",
             "title": "Deep Cleaning",
-            "text": "<p>Top-to-bottom scrub for homes that need extra attention. We get into every corner, fixture, and surface — ideal for seasonal refreshes.</p>",
-            "link_label": "Learn More",
+            "description": "Top-to-bottom scrub for homes that need extra attention. We get into every corner, fixture, and surface — ideal for seasonal refreshes.",
+            "starting_price": "$180",
+            "link_text": "Learn More",
             "link": "shopify:\/\/pages\/services"
           }
         },
         "cleaning_3": {
-          "type": "column",
+          "type": "service",
           "settings": {
-            "title": "Move-In\/Move-Out",
-            "text": "<p>Stress-free transitions for renters, homeowners, and property managers. We handle the cleaning so you can focus on your move.</p>",
-            "link_label": "Learn More",
+            "icon": "truck",
+            "title": "Move-In / Move-Out",
+            "description": "Stress-free transitions for renters, homeowners, and property managers. We handle the cleaning so you can focus on your move.",
+            "starting_price": "$200",
+            "link_text": "Learn More",
             "link": "shopify:\/\/pages\/services"
           }
         }
       },
       "block_order": ["cleaning_1", "cleaning_2", "cleaning_3"],
       "settings": {
-        "title": "Home Cleaning Services",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "Get a Free Cleaning Estimate",
-        "button_link": "shopify:\/\/pages\/request-a-quote",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
+        "heading": "Home Cleaning Services",
+        "subheading": "Professional cleaning tailored to your home and schedule",
+        "cta_text": "Get a Free Cleaning Estimate",
+        "cta_link": "shopify:\/\/pages\/request-a-quote",
         "padding_top": 52,
         "padding_bottom": 20
       }
     },
     "landscaping_services": {
-      "type": "multicolumn",
+      "type": "services-home",
       "blocks": {
         "landscape_1": {
-          "type": "column",
+          "type": "service",
           "settings": {
+            "icon": "leaf",
             "title": "Lawn Care & Mowing",
-            "text": "<p>Regular mowing, edging, and trimming to keep your lawn looking sharp all season. Flexible scheduling for residential and commercial properties.</p>",
-            "link_label": "Learn More",
+            "description": "Regular mowing, edging, and trimming to keep your lawn looking sharp all season. Flexible scheduling for residential and commercial properties.",
+            "starting_price": "$40/visit",
+            "link_text": "Learn More",
             "link": "shopify:\/\/pages\/services"
           }
         },
         "landscape_2": {
-          "type": "column",
+          "type": "service",
           "settings": {
+            "icon": "flower",
             "title": "Landscaping & Design",
-            "text": "<p>Garden beds, mulching, shrub trimming, and seasonal plantings. We design and maintain outdoor spaces that boost your curb appeal.</p>",
-            "link_label": "Learn More",
+            "description": "Garden beds, mulching, shrub trimming, and seasonal plantings. We design and maintain outdoor spaces that boost your curb appeal.",
+            "starting_price": "$200",
+            "link_text": "Learn More",
             "link": "shopify:\/\/pages\/services"
           }
         },
         "landscape_3": {
-          "type": "column",
+          "type": "service",
           "settings": {
+            "icon": "wind",
             "title": "Seasonal Cleanup",
-            "text": "<p>Spring prep, fall leaf removal, gutter clearing, and storm cleanup. Keep your property tidy and protected year-round.</p>",
-            "link_label": "Learn More",
+            "description": "Spring prep, fall leaf removal, gutter clearing, and storm cleanup. Keep your property tidy and protected year-round.",
+            "starting_price": "$150",
+            "link_text": "Learn More",
             "link": "shopify:\/\/pages\/services"
           }
         }
       },
       "block_order": ["landscape_1", "landscape_2", "landscape_3"],
       "settings": {
-        "title": "Landscaping & Lawn Care",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "Get a Free Landscaping Estimate",
-        "button_link": "shopify:\/\/pages\/request-a-quote",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "background-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
+        "heading": "Landscaping & Lawn Care",
+        "subheading": "Keep your property beautiful year-round",
+        "cta_text": "Get a Free Landscaping Estimate",
+        "cta_link": "shopify:\/\/pages\/request-a-quote",
         "padding_top": 52,
         "padding_bottom": 52
       }
