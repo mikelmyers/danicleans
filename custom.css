@@ -1,0 +1,395 @@
+/* === Services Page Styles === */
+
+/* Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Hero Section */
+.hero-services {
+    background-image: url('{{ "services-hero.jpg" | asset_url }}');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 150px 0;
+    text-align: center;
+}
+
+.hero-services .container {
+    max-width: 800px; /* Optional: Narrower container for the hero section */
+}
+
+.hero-services h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-services p {
+    font-size: 24px;
+}
+
+/* Introduction Section */
+.intro {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.intro p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Services Section */
+.services {
+    padding: 60px 0;
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.service-item {
+    margin-bottom: 40px;
+}
+
+.service-item h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.service-item p {
+    font-size: 16px;
+    color: #666;
+}
+
+.service-item ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.service-item ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: flex-start;
+}
+
+.service-item ul li::before {
+    content: '✔';
+    color: #333;
+    margin-right: 10px;
+    font-size: 18px;
+    margin-top: 2px; /* Aligns the checkmark with the text */
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.why-choose-us h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.benefits-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.benefits-list li {
+    width: 45%;
+    margin: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.benefits-list li::before {
+    content: '✔';
+    color: #333;
+    margin-right: 10px;
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+.benefits-list strong {
+    font-weight: 600;
+}
+
+
+/* Testimonials Section */
+.testimonials {
+    padding: 60px 0;
+}
+
+.testimonials h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.testimonial-item {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.testimonial-item p {
+    font-size: 16px;
+    color: #666;
+}
+
+.testimonial-item strong {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Call to Action Section */
+.call-to-action {
+    padding: 80px 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+.call-to-action .container {
+    max-width: 800px; /* Optional: Narrower container for the CTA */
+}
+
+.call-to-action h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.call-to-action p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.call-to-action .btn {
+    background-color: #fff;
+    color: #333;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.call-to-action .btn:hover {
+    background-color: #eaeaea;
+}
+
+/* Footer */
+.footer {
+    background-color: #fff;
+    padding: 20px 0;
+    border-top: 1px solid #eaeaea;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-services h2 {
+        font-size: 36px;
+    }
+    .hero-services p {
+        font-size: 20px;
+    }
+    .benefits-list li {
+        width: 100%;
+    }
+}
+
+/* Quote Form Styles */
+.quote-form {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.quote-form h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 32px;
+    color: #333;
+}
+
+.quote-form p {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: #666;
+}
+
+/* Flex Container for Form and Benefits */
+.form-and-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Form Container */
+.form-container {
+    background-color: #fff;
+    padding: 40px;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    flex: 1 1 55%; /* Adjusts width of the form container */
+    margin-right: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Benefits Container */
+.benefits-container {
+    flex: 1 1 40%; /* Adjusts width of the benefits container */
+    padding: 40px;
+    border-left: 1px solid #eaeaea; /* Separating border */
+}
+
+.benefits-container h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.benefits-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.benefits-list li {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.benefits-list li::before {
+    content: '✔'; /* Adds a checkmark before each benefit */
+    color: #333;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.benefits-list strong {
+    font-weight: 600;
+}
+
+/* Form Styles */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-right: 0;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #999;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .form-and-benefits {
+        flex-direction: column;
+    }
+    .form-container,
+    .benefits-container {
+        flex: 1 1 100%;
+        margin-right: 0;
+        margin-bottom: 40px;
+    }
+    .benefits-container {
+        border-left: none;
+        border-top: 1px solid #eaeaea;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+    .form-group {
+        margin-right: 0;
+    }
+}
