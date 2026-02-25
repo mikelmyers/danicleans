@@ -139,29 +139,9 @@
     </div>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="contact-faq">
-    <div class="contact-container">
-      <h2>Common Questions</h2>
-      <div class="contact-faq-grid">
-        <div class="contact-faq-item">
-          <h4>How quickly do you respond?</h4>
-          <p>We respond to all inquiries within 24 hours, usually much sooner. For urgent needs, call us directly at 434-351-0335.</p>
-        </div>
-        <div class="contact-faq-item">
-          <h4>Do you offer free estimates?</h4>
-          <p>Yes! All estimates are completely free with no obligation. We'll provide a transparent price before any work begins.</p>
-        </div>
-        <div class="contact-faq-item">
-          <h4>What areas do you serve?</h4>
-          <p>We serve Charlottesville, Albemarle County, Crozet, Waynesboro, Staunton, and surrounding communities in Central Virginia.</p>
-        </div>
-        <div class="contact-faq-item">
-          <h4>Can I book online?</h4>
-          <p>You can request a quote online and we'll follow up to schedule. Or call us to book directly over the phone.</p>
-        </div>
-      </div>
-    </div>
+  <!-- FAQ Section (powered by Smart FAQ with schema markup) -->
+  <section class="contact-faq-section">
+    {% section 'smart-faq' %}
   </section>
 
   <!-- CTA -->
@@ -259,14 +239,8 @@
 .contact-success a { color: #2d6a4f; font-weight: 600; }
 
 /* FAQ */
-.contact-faq { padding: 56px 20px; background: #f7faf7; }
-.contact-faq h2 { text-align: center; font-size: 28px; margin-bottom: 32px; }
-.contact-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.contact-faq-item {
-  background: #fff; padding: 24px; border-radius: 12px; border: 1px solid #e0e8e0;
-}
-.contact-faq-item h4 { font-size: 16px; margin-bottom: 8px; color: #1a3a2a; }
-.contact-faq-item p { font-size: 14px; color: #555; line-height: 1.5; margin: 0; }
+.contact-faq-section { background: #f7faf7; }
+.contact-faq-section .smart-faq-section { background: transparent; }
 
 /* CTA */
 .contact-cta {

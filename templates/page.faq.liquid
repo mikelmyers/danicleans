@@ -1,0 +1,306 @@
+{% comment %}
+  FAQ Page Template — Dani Cleans
+  Dedicated FAQ page with hero, expanded smart-faq section, and CTA.
+  Assign this template to a Shopify page at: Pages → FAQ → Template suffix → faq
+{% endcomment %}
+
+<div class="faq-page">
+  <!-- Hero -->
+  <section class="faq-hero">
+    <div class="faq-page-container">
+      <h1>{{ page.title | default: 'Frequently Asked Questions' }}</h1>
+      <p>Everything you need to know about our cleaning and landscaping services. Can't find your answer? <a href="/pages/contact">Contact us</a> — we're happy to help.</p>
+    </div>
+  </section>
+
+  <!-- Smart FAQ Section (reusable section with schema markup) -->
+  <section class="faq-main">
+    <div class="faq-page-container">
+      {% section 'smart-faq' %}
+    </div>
+  </section>
+
+  <!-- Additional Categories -->
+  <section class="faq-categories">
+    <div class="faq-page-container">
+      <h2>More Questions by Topic</h2>
+
+      <div class="faq-cat-grid">
+        <!-- Cleaning Services -->
+        <div class="faq-cat-card">
+          <h3>Cleaning Services</h3>
+          <div class="faq-cat-list">
+            <details>
+              <summary>What's included in a recurring cleaning?</summary>
+              <p>Our recurring cleaning covers all main living areas: vacuuming, mopping, dusting, kitchen counters and appliances (exterior), bathroom sanitizing, trash removal, and general tidying. We follow a detailed checklist every visit so nothing gets missed.</p>
+            </details>
+            <details>
+              <summary>What's the difference between a deep clean and a recurring clean?</summary>
+              <p>A deep clean is a thorough top-to-bottom scrub — inside cabinets, behind appliances, baseboards, light fixtures, window sills, and more. We recommend a deep clean as your first visit, then switch to recurring maintenance cleanings to keep everything fresh.</p>
+            </details>
+            <details>
+              <summary>Do I need to be home during the cleaning?</summary>
+              <p>Nope! Many of our clients give us a key, a lockbox code, or a garage code. We'll lock up when we leave and you'll come home to a spotless house. We're fully insured so your home is always protected.</p>
+            </details>
+            <details>
+              <summary>What if I need to reschedule?</summary>
+              <p>Life happens — just give us 24 hours' notice and we'll happily reschedule at no charge. Same-day cancellations may be subject to a fee since we've reserved the time for your home.</p>
+            </details>
+            <details>
+              <summary>Do you bring your own supplies and equipment?</summary>
+              <p>Yes, we bring everything — vacuums, mops, cleaning solutions, and all supplies. We use eco-friendly products by default, but if you have a preferred product you'd like us to use, just let us know.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- Landscaping -->
+        <div class="faq-cat-card">
+          <h3>Landscaping & Lawn Care</h3>
+          <div class="faq-cat-list">
+            <details>
+              <summary>How often should I have my lawn mowed?</summary>
+              <p>During growing season (April through October), we recommend weekly or bi-weekly mowing. We'll adjust the schedule based on your lawn's growth rate, grass type, and the season. Winter mowing is rarely needed in our area.</p>
+            </details>
+            <details>
+              <summary>Do you handle leaf removal and seasonal cleanup?</summary>
+              <p>Absolutely. Our seasonal cleanup includes leaf blowing and removal, bed cleanup, debris clearing, gutter clearing, and prepping your yard for the next season. Most clients book spring and fall cleanups.</p>
+            </details>
+            <details>
+              <summary>Can you help with landscaping design and planting?</summary>
+              <p>Yes! We offer landscape design consultations, mulching, bed edging, shrub and tree planting, flower bed installation, and hardscape work. We'll work with you to create a plan that fits your style and budget.</p>
+            </details>
+            <details>
+              <summary>What's included in your lawn maintenance package?</summary>
+              <p>Our lawn maintenance includes mowing, edging, trimming, and blowing all walkways and driveways clean. Add-ons like fertilization, aeration, and weed control are available at an additional cost.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- Pricing & Booking -->
+        <div class="faq-cat-card">
+          <h3>Pricing & Booking</h3>
+          <div class="faq-cat-list">
+            <details>
+              <summary>How is pricing determined?</summary>
+              <p>Pricing depends on your home size, number of bedrooms and bathrooms, service frequency, and any add-ons you select. Our online quote calculator gives you an instant estimate, or we can provide a custom quote after learning about your specific needs.</p>
+            </details>
+            <details>
+              <summary>Do you offer bundle discounts?</summary>
+              <p>Yes — bundle cleaning and landscaping services together and save 10%. It's the easiest way to keep your whole property looking great with one company and one bill.</p>
+            </details>
+            <details>
+              <summary>What payment methods do you accept?</summary>
+              <p>We accept credit/debit cards, Venmo, Zelle, and checks. For recurring clients, we can set up automatic billing so you never have to think about it.</p>
+            </details>
+            <details>
+              <summary>Is there a minimum service charge?</summary>
+              <p>Our minimum for cleaning services starts at $100, and lawn mowing starts at $40. Exact pricing depends on your property size and the services requested.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- Trust & Safety -->
+        <div class="faq-cat-card">
+          <h3>Trust & Safety</h3>
+          <div class="faq-cat-list">
+            <details>
+              <summary>Are your employees background checked?</summary>
+              <p>Yes. Every team member goes through a thorough background check and vetting process before they ever enter a client's home. Your safety and trust are our top priorities.</p>
+            </details>
+            <details>
+              <summary>What happens if something is damaged during service?</summary>
+              <p>We're fully insured. If something is accidentally damaged during a visit, report it within 24 hours and we'll handle the claim quickly. We treat your home like our own — damage is extremely rare.</p>
+            </details>
+            <details>
+              <summary>Do you serve commercial properties?</summary>
+              <p>Yes! We handle offices, rental properties, Airbnb turnovers, and commercial spaces. Contact us for a custom commercial quote — pricing varies based on square footage and frequency.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="faq-cta">
+    <div class="faq-page-container">
+      <h2>Still Have Questions?</h2>
+      <p>We're real people, not a call center. Reach out anytime.</p>
+      <div class="faq-cta-buttons">
+        <a href="/pages/request-a-quote" class="faq-cta-primary">Get a Free Estimate</a>
+        <a href="tel:4343510335" class="faq-cta-secondary">Call 434-351-0335</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Additional FAQ Schema for category questions -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's included in a recurring cleaning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our recurring cleaning covers all main living areas: vacuuming, mopping, dusting, kitchen counters and appliances (exterior), bathroom sanitizing, trash removal, and general tidying. We follow a detailed checklist every visit so nothing gets missed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between a deep clean and a recurring clean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A deep clean is a thorough top-to-bottom scrub — inside cabinets, behind appliances, baseboards, light fixtures, window sills, and more. We recommend a deep clean as your first visit, then switch to recurring maintenance cleanings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to be home during the cleaning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nope! Many of our clients give us a key, a lockbox code, or a garage code. We'll lock up when we leave and you'll come home to a spotless house. We're fully insured so your home is always protected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I have my lawn mowed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "During growing season (April through October), we recommend weekly or bi-weekly mowing. We'll adjust the schedule based on your lawn's growth rate, grass type, and the season."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you handle leaf removal and seasonal cleanup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Our seasonal cleanup includes leaf blowing and removal, bed cleanup, debris clearing, gutter clearing, and prepping your yard for the next season."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is pricing determined?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pricing depends on your home size, number of bedrooms and bathrooms, service frequency, and any add-ons. Our online quote calculator gives you an instant estimate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer bundle discounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — bundle cleaning and landscaping services together and save 10%. It's the easiest way to keep your whole property looking great with one company and one bill."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are your employees background checked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every team member goes through a thorough background check and vetting process before they ever enter a client's home."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if something is damaged during service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We're fully insured. If something is accidentally damaged during a visit, report it within 24 hours and we'll handle the claim quickly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you serve commercial properties?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! We handle offices, rental properties, Airbnb turnovers, and commercial spaces. Contact us for a custom commercial quote."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+.faq-page { color: #1a3a2a; }
+.faq-page-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Hero */
+.faq-hero {
+  background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 100%);
+  color: #fff; padding: 64px 20px; text-align: center;
+}
+.faq-hero h1 { font-size: 40px; margin-bottom: 12px; }
+.faq-hero p { font-size: 18px; opacity: 0.9; max-width: 560px; margin: 0 auto; }
+.faq-hero a { color: #b7e4c7; text-decoration: underline; }
+
+/* Main FAQ section override */
+.faq-main { padding: 48px 0 0; }
+.faq-main .smart-faq-section { padding-top: 0 !important; }
+
+/* Category Cards */
+.faq-categories { padding: 56px 0; }
+.faq-categories h2 { text-align: center; font-size: 28px; margin-bottom: 32px; color: #1a3a2a; }
+.faq-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.faq-cat-card {
+  background: #f7faf7; border-radius: 12px; padding: 28px;
+  border: 1px solid #e0e8e0;
+}
+.faq-cat-card h3 {
+  font-size: 20px; color: #1a3a2a; margin-bottom: 16px;
+  padding-bottom: 12px; border-bottom: 2px solid #2d6a4f;
+}
+.faq-cat-list details {
+  border-bottom: 1px solid #e0e8e0; padding: 0;
+}
+.faq-cat-list details:last-child { border-bottom: none; }
+.faq-cat-list summary {
+  padding: 14px 0; cursor: pointer; font-weight: 600;
+  font-size: 15px; color: #1a3a2a; list-style: none;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.faq-cat-list summary::-webkit-details-marker { display: none; }
+.faq-cat-list summary::after {
+  content: '+'; font-size: 20px; font-weight: 400; color: #2d6a4f;
+  transition: transform 0.2s;
+}
+.faq-cat-list details[open] summary::after {
+  content: '−';
+}
+.faq-cat-list summary:hover { color: #2d6a4f; }
+.faq-cat-list details p {
+  padding: 0 0 14px; margin: 0; font-size: 14px;
+  color: #555; line-height: 1.6;
+}
+
+/* CTA */
+.faq-cta {
+  padding: 56px 20px; background: #1a3a2a; color: #fff; text-align: center;
+}
+.faq-cta h2 { font-size: 28px; margin-bottom: 8px; }
+.faq-cta p { opacity: 0.9; margin-bottom: 24px; }
+.faq-cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.faq-cta-primary {
+  display: inline-block; padding: 16px 32px; background: #fff; color: #2d6a4f;
+  border-radius: 8px; font-size: 16px; font-weight: 700; text-decoration: none;
+  transition: transform 0.2s;
+}
+.faq-cta-primary:hover { transform: translateY(-2px); }
+.faq-cta-secondary {
+  display: inline-block; padding: 16px 32px; background: transparent;
+  color: #fff; border: 2px solid rgba(255,255,255,0.5); border-radius: 8px;
+  font-size: 16px; font-weight: 700; text-decoration: none;
+  transition: border-color 0.2s;
+}
+.faq-cta-secondary:hover { border-color: #fff; }
+
+@media (max-width: 768px) {
+  .faq-hero h1 { font-size: 28px; }
+  .faq-hero { padding: 48px 20px; }
+  .faq-cat-grid { grid-template-columns: 1fr; }
+  .faq-cta-buttons { flex-direction: column; align-items: center; }
+}
+</style>

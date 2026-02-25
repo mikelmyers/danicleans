@@ -1451,5 +1451,61 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Analytics & Tracking",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Google Analytics 4"
+      },
+      {
+        "type": "text",
+        "id": "ga4_measurement_id",
+        "label": "GA4 Measurement ID",
+        "info": "Starts with G- (e.g. G-ABC123XYZ). Find yours at analytics.google.com → Admin → Data Streams.",
+        "placeholder": "G-XXXXXXXXXX"
+      },
+      {
+        "type": "header",
+        "content": "Google Ads"
+      },
+      {
+        "type": "text",
+        "id": "google_ads_id",
+        "label": "Google Ads Conversion ID",
+        "info": "Starts with AW- (e.g. AW-123456789). Find yours at Google Ads → Tools → Conversions.",
+        "placeholder": "AW-XXXXXXXXX"
+      },
+      {
+        "type": "text",
+        "id": "google_ads_conversion_label",
+        "label": "Google Ads Conversion Label",
+        "info": "The conversion label for lead form submissions (e.g. AbCdEfGhIjK). Leave blank to skip Ads conversion tracking.",
+        "placeholder": "XXXXXXXXXXXX"
+      },
+      {
+        "type": "header",
+        "content": "Facebook / Meta Pixel"
+      },
+      {
+        "type": "text",
+        "id": "facebook_pixel_id",
+        "label": "Facebook Pixel ID",
+        "info": "A 15-16 digit number. Find yours at Meta Business Suite → Events Manager → Data Sources.",
+        "placeholder": "XXXXXXXXXXXXXXX"
+      },
+      {
+        "type": "header",
+        "content": "Google Business Profile"
+      },
+      {
+        "type": "text",
+        "id": "google_place_id",
+        "label": "Google Place ID",
+        "info": "Used for the review link that sends customers to leave a Google review. Find yours at developers.google.com/maps/documentation/places/web-service/place-id-lookup",
+        "placeholder": "ChIJ..."
+      }
+    ]
   }
 ]

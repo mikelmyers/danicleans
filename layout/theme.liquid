@@ -386,6 +386,60 @@
     }
     </script>
 
+    <!-- Review Schema Markup for Google Rich Snippets -->
+    <!-- Dynamically loads reviews from reviews.json and injects structured data -->
+    <script>
+    (function() {
+      // Fetch reviews and build schema after page load
+      document.addEventListener('DOMContentLoaded', function() {
+        fetch('{{ 'reviews.json' | asset_url }}')
+          .then(function(r) { return r.json(); })
+          .then(function(reviews) {
+            if (!reviews || reviews.length === 0) return;
+
+            var totalRating = 0;
+            var reviewSchema = [];
+            reviews.forEach(function(r) {
+              var rating = r.rating || 5;
+              totalRating += rating;
+              reviewSchema.push({
+                "@type": "Review",
+                "reviewRating": { "@type": "Rating", "ratingValue": rating, "bestRating": 5 },
+                "author": { "@type": "Person", "name": r.name.split(',')[0].trim() },
+                "reviewBody": r.review
+              });
+            });
+
+            var schema = {
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Dani Cleans",
+              "telephone": "+1-434-351-0335",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Charlottesville",
+                "addressRegion": "VA",
+                "addressCountry": "US"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": (totalRating / reviews.length).toFixed(1),
+                "reviewCount": reviews.length,
+                "bestRating": 5,
+                "worstRating": 1
+              },
+              "review": reviewSchema
+            };
+
+            var el = document.createElement('script');
+            el.type = 'application/ld+json';
+            el.textContent = JSON.stringify(schema);
+            document.head.appendChild(el);
+          })
+          .catch(function() {});
+      });
+    })();
+    </script>
 
   </head>
 
