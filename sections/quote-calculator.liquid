@@ -1,0 +1,728 @@
+{% comment %}
+  Instant Quote Calculator Section
+  Gives customers an immediate price estimate — reduces back-and-forth,
+  qualifies leads automatically, and captures contact info.
+{% endcomment %}
+
+<div id="quote-calculator" class="quote-calc-section" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="quote-calc-container">
+    <h2 class="quote-calc-title">{{ section.settings.heading }}</h2>
+    <p class="quote-calc-subtitle">{{ section.settings.subheading }}</p>
+
+    <!-- Step Indicator -->
+    <div class="calc-steps">
+      <div class="calc-step active" data-step="1"><span>1</span> Service</div>
+      <div class="calc-step" data-step="2"><span>2</span> Details</div>
+      <div class="calc-step" data-step="3"><span>3</span> Estimate</div>
+    </div>
+
+    <!-- Step 1: Service Type -->
+    <div class="calc-panel active" id="calc-step-1">
+      <h3>What do you need help with?</h3>
+      <div class="calc-service-grid">
+        <button class="calc-service-card" data-service="recurring-cleaning" data-category="cleaning">
+          <span class="calc-card-icon">🏠</span>
+          <span class="calc-card-title">Recurring Cleaning</span>
+          <span class="calc-card-desc">Weekly, bi-weekly, or monthly</span>
+        </button>
+        <button class="calc-service-card" data-service="deep-cleaning" data-category="cleaning">
+          <span class="calc-card-icon">✨</span>
+          <span class="calc-card-title">Deep Cleaning</span>
+          <span class="calc-card-desc">Top-to-bottom thorough clean</span>
+        </button>
+        <button class="calc-service-card" data-service="move-cleaning" data-category="cleaning">
+          <span class="calc-card-icon">📦</span>
+          <span class="calc-card-title">Move-In / Move-Out</span>
+          <span class="calc-card-desc">Get your deposit back</span>
+        </button>
+        <button class="calc-service-card" data-service="lawn-mowing" data-category="landscaping">
+          <span class="calc-card-icon">🌿</span>
+          <span class="calc-card-title">Lawn Mowing</span>
+          <span class="calc-card-desc">Regular mowing & edging</span>
+        </button>
+        <button class="calc-service-card" data-service="landscaping" data-category="landscaping">
+          <span class="calc-card-icon">🌺</span>
+          <span class="calc-card-title">Landscaping</span>
+          <span class="calc-card-desc">Garden design & maintenance</span>
+        </button>
+        <button class="calc-service-card" data-service="seasonal-cleanup" data-category="landscaping">
+          <span class="calc-card-icon">🍂</span>
+          <span class="calc-card-title">Seasonal Cleanup</span>
+          <span class="calc-card-desc">Spring prep or fall cleanup</span>
+        </button>
+        <button class="calc-service-card" data-service="bundle" data-category="bundle">
+          <span class="calc-card-icon">⭐</span>
+          <span class="calc-card-title">Cleaning + Landscaping</span>
+          <span class="calc-card-desc">Bundle & save 10%</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Property Details (dynamic based on service) -->
+    <div class="calc-panel" id="calc-step-2">
+      <h3>Tell us about your property</h3>
+
+      <!-- Cleaning Details -->
+      <div class="calc-details-group" id="cleaning-details" style="display:none;">
+        <div class="calc-field">
+          <label>Home Size</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="home-size" data-value="small" data-label="Under 1,000 sqft">Under 1,000 sqft</button>
+            <button class="calc-option" data-field="home-size" data-value="medium" data-label="1,000–2,000 sqft">1,000–2,000 sqft</button>
+            <button class="calc-option" data-field="home-size" data-value="large" data-label="2,000–3,500 sqft">2,000–3,500 sqft</button>
+            <button class="calc-option" data-field="home-size" data-value="xlarge" data-label="3,500+ sqft">3,500+ sqft</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Bedrooms</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="bedrooms" data-value="1">1</button>
+            <button class="calc-option" data-field="bedrooms" data-value="2">2</button>
+            <button class="calc-option" data-field="bedrooms" data-value="3">3</button>
+            <button class="calc-option" data-field="bedrooms" data-value="4">4+</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Bathrooms</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="bathrooms" data-value="1">1</button>
+            <button class="calc-option" data-field="bathrooms" data-value="2">2</button>
+            <button class="calc-option" data-field="bathrooms" data-value="3">3</button>
+            <button class="calc-option" data-field="bathrooms" data-value="4">4+</button>
+          </div>
+        </div>
+        <div class="calc-field" id="frequency-field" style="display:none;">
+          <label>How Often?</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="frequency" data-value="weekly" data-discount="20">Weekly (save 20%)</button>
+            <button class="calc-option" data-field="frequency" data-value="biweekly" data-discount="10">Bi-weekly (save 10%)</button>
+            <button class="calc-option" data-field="frequency" data-value="monthly" data-discount="0">Monthly</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Add-Ons (optional)</label>
+          <div class="calc-addon-row">
+            <button class="calc-addon" data-addon="inside-fridge" data-price="35">Inside Fridge (+$35)</button>
+            <button class="calc-addon" data-addon="inside-oven" data-price="35">Inside Oven (+$35)</button>
+            <button class="calc-addon" data-addon="windows" data-price="50">Window Cleaning (+$50)</button>
+            <button class="calc-addon" data-addon="laundry" data-price="25">Laundry (+$25)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Landscaping Details -->
+      <div class="calc-details-group" id="landscaping-details" style="display:none;">
+        <div class="calc-field">
+          <label>Yard Size</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="yard-size" data-value="small" data-label="Under ¼ acre">Under ¼ acre</button>
+            <button class="calc-option" data-field="yard-size" data-value="medium" data-label="¼ – ½ acre">¼ – ½ acre</button>
+            <button class="calc-option" data-field="yard-size" data-value="large" data-label="½ – 1 acre">½ – 1 acre</button>
+            <button class="calc-option" data-field="yard-size" data-value="xlarge" data-label="1+ acre">1+ acre</button>
+          </div>
+        </div>
+        <div class="calc-field" id="mowing-frequency-field" style="display:none;">
+          <label>How Often?</label>
+          <div class="calc-option-row">
+            <button class="calc-option" data-field="mowing-frequency" data-value="weekly" data-discount="15">Weekly (save 15%)</button>
+            <button class="calc-option" data-field="mowing-frequency" data-value="biweekly" data-discount="5">Bi-weekly (save 5%)</button>
+            <button class="calc-option" data-field="mowing-frequency" data-value="onetime" data-discount="0">One-time</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Extras (optional)</label>
+          <div class="calc-addon-row">
+            <button class="calc-addon" data-addon="hedge-trimming" data-price="60">Hedge Trimming (+$60)</button>
+            <button class="calc-addon" data-addon="mulching" data-price="75">Mulching (+$75)</button>
+            <button class="calc-addon" data-addon="leaf-removal" data-price="80">Leaf Removal (+$80)</button>
+            <button class="calc-addon" data-addon="gutter-cleaning" data-price="65">Gutter Cleaning (+$65)</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="calc-next-btn" id="calc-to-step-3" disabled>See My Estimate →</button>
+    </div>
+
+    <!-- Step 3: Estimate + Lead Capture -->
+    <div class="calc-panel" id="calc-step-3">
+      <div class="calc-estimate-card">
+        <h3>Your Estimated Price</h3>
+        <div class="calc-price-display">
+          <span class="calc-price-label">Starting at</span>
+          <span class="calc-price-amount" id="calc-price">$0</span>
+          <span class="calc-price-freq" id="calc-price-freq">per visit</span>
+        </div>
+        <div class="calc-estimate-breakdown" id="calc-breakdown"></div>
+        <p class="calc-estimate-note">* Final price confirmed after a quick walkthrough. Most estimates are within 10% of this number.</p>
+      </div>
+
+      <div class="calc-lead-capture">
+        <h3>Lock In This Price — Get Your Exact Quote</h3>
+        <p>We'll confirm your price within 24 hours. No spam, no obligation.</p>
+
+        <form method="post" action="/contact" id="CalcLeadForm" accept-charset="UTF-8" class="calc-lead-form">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="return_to" value="/pages/request-a-quote?form_type=contact&success=true">
+          <input type="hidden" name="contact[Calculator Estimate]" id="calc-hidden-estimate" value="">
+          <input type="hidden" name="contact[Service Requested]" id="calc-hidden-service" value="">
+          <input type="hidden" name="contact[Property Details]" id="calc-hidden-details" value="">
+
+          <div class="calc-form-row">
+            <input type="text" name="contact[name]" placeholder="Your Name" required>
+            <input type="tel" name="contact[Phone Number]" placeholder="Phone Number" required>
+          </div>
+          <div class="calc-form-row">
+            <input type="email" name="contact[email]" placeholder="Email" required>
+            <input type="text" name="contact[Property Address]" placeholder="Property Address" required>
+          </div>
+
+          <button type="submit" class="calc-submit-btn">Get My Exact Quote — It's Free</button>
+        </form>
+      </div>
+    </div>
+
+    <button class="calc-back-btn" id="calc-back" style="display:none;">← Back</button>
+  </div>
+</div>
+
+<style>
+.quote-calc-section {
+  background: #f7faf7;
+}
+.quote-calc-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.quote-calc-title {
+  text-align: center;
+  font-size: 32px;
+  color: #1a3a2a;
+  margin-bottom: 8px;
+}
+.quote-calc-subtitle {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+.calc-steps {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.calc-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #e0e8e0;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.3s;
+}
+.calc-step.active {
+  background: #2d6a4f;
+  color: #fff;
+}
+.calc-step.completed {
+  background: #1a3a2a;
+  color: #fff;
+}
+.calc-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  font-size: 12px;
+}
+.calc-panel {
+  display: none;
+}
+.calc-panel.active {
+  display: block;
+}
+.calc-panel h3 {
+  font-size: 20px;
+  color: #1a3a2a;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.calc-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.calc-service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+  background: #fff;
+  border: 2px solid #e0e8e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  font-family: inherit;
+}
+.calc-service-card:hover {
+  border-color: #2d6a4f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45,106,79,0.15);
+}
+.calc-service-card.selected {
+  border-color: #2d6a4f;
+  background: #f0f7f0;
+}
+.calc-card-icon { font-size: 28px; margin-bottom: 8px; }
+.calc-card-title { font-weight: 700; font-size: 15px; color: #1a3a2a; margin-bottom: 4px; }
+.calc-card-desc { font-size: 13px; color: #666; }
+.calc-field {
+  margin-bottom: 20px;
+}
+.calc-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a3a2a;
+  margin-bottom: 8px;
+}
+.calc-option-row, .calc-addon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.calc-option, .calc-addon {
+  padding: 10px 16px;
+  background: #fff;
+  border: 2px solid #e0e8e0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  color: #333;
+}
+.calc-option:hover, .calc-addon:hover {
+  border-color: #2d6a4f;
+}
+.calc-option.selected {
+  border-color: #2d6a4f;
+  background: #2d6a4f;
+  color: #fff;
+}
+.calc-addon.selected {
+  border-color: #2d6a4f;
+  background: #f0f7f0;
+  color: #1a3a2a;
+}
+.calc-next-btn, .calc-submit-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: #2d6a4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 24px;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+.calc-next-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.calc-next-btn:not(:disabled):hover, .calc-submit-btn:hover {
+  background: #245a42;
+}
+.calc-back-btn {
+  display: block;
+  margin: 16px auto 0;
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  color: #555;
+}
+.calc-estimate-card {
+  background: #fff;
+  border: 2px solid #2d6a4f;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.calc-price-display {
+  margin: 20px 0;
+}
+.calc-price-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+.calc-price-amount {
+  display: block;
+  font-size: 48px;
+  font-weight: 800;
+  color: #2d6a4f;
+  line-height: 1.1;
+}
+.calc-price-freq {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+.calc-estimate-breakdown {
+  text-align: left;
+  max-width: 400px;
+  margin: 20px auto 0;
+  font-size: 14px;
+  color: #555;
+}
+.calc-estimate-breakdown .breakdown-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.calc-estimate-breakdown .breakdown-line.total {
+  font-weight: 700;
+  color: #1a3a2a;
+  border-bottom: none;
+  border-top: 2px solid #2d6a4f;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+.calc-estimate-note {
+  font-size: 12px;
+  color: #888;
+  margin-top: 16px;
+  font-style: italic;
+}
+.calc-lead-capture {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid #e0e8e0;
+}
+.calc-lead-capture h3 {
+  margin-bottom: 8px;
+}
+.calc-lead-capture p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.calc-form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.calc-form-row input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+}
+.calc-form-row input:focus {
+  outline: none;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 2px rgba(45,106,79,0.15);
+}
+@media (max-width: 600px) {
+  .calc-service-grid { grid-template-columns: 1fr 1fr; }
+  .calc-form-row { flex-direction: column; }
+  .calc-option-row { flex-direction: column; }
+  .calc-price-amount { font-size: 36px; }
+  .calc-estimate-card, .calc-lead-capture { padding: 20px; }
+}
+</style>
+
+<script>
+(function() {
+  // Pricing tables (Charlottesville market rates)
+  var PRICING = {
+    'recurring-cleaning': {
+      base: { small: 100, medium: 140, large: 190, xlarge: 260 },
+      bedroom: 15, bathroom: 20,
+      hasFrequency: true, label: 'Recurring Cleaning'
+    },
+    'deep-cleaning': {
+      base: { small: 180, medium: 250, large: 340, xlarge: 450 },
+      bedroom: 25, bathroom: 35,
+      hasFrequency: false, label: 'Deep Cleaning'
+    },
+    'move-cleaning': {
+      base: { small: 200, medium: 280, large: 380, xlarge: 500 },
+      bedroom: 30, bathroom: 40,
+      hasFrequency: false, label: 'Move-In/Move-Out Cleaning'
+    },
+    'lawn-mowing': {
+      base: { small: 40, medium: 65, large: 100, xlarge: 160 },
+      hasFrequency: true, label: 'Lawn Mowing & Maintenance'
+    },
+    'landscaping': {
+      base: { small: 200, medium: 350, large: 500, xlarge: 750 },
+      hasFrequency: false, label: 'Landscaping & Garden Design'
+    },
+    'seasonal-cleanup': {
+      base: { small: 150, medium: 250, large: 375, xlarge: 550 },
+      hasFrequency: false, label: 'Seasonal Cleanup'
+    },
+    'bundle': {
+      cleaning: { small: 100, medium: 140, large: 190, xlarge: 260 },
+      landscaping: { small: 40, medium: 65, large: 100, xlarge: 160 },
+      bedroom: 15, bathroom: 20, discount: 10,
+      hasFrequency: true, label: 'Cleaning + Landscaping Bundle'
+    }
+  };
+
+  var state = {
+    service: null, category: null,
+    homeSize: null, yardSize: null,
+    bedrooms: null, bathrooms: null,
+    frequency: null, frequencyDiscount: 0,
+    addons: {}, currentStep: 1
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function $$(sel, ctx) { return (ctx || document).querySelectorAll(sel); }
+
+  function goToStep(step) {
+    state.currentStep = step;
+    $$('.calc-panel').forEach(function(p) { p.classList.remove('active'); });
+    $('calc-step-' + step).classList.add('active');
+    $$('.calc-step').forEach(function(s) {
+      var n = parseInt(s.getAttribute('data-step'));
+      s.classList.toggle('active', n === step);
+      s.classList.toggle('completed', n < step);
+    });
+    $('calc-back').style.display = step > 1 ? 'block' : 'none';
+    if (step === 3) calculateEstimate();
+  }
+
+  // Step 1: Service selection
+  $$('.calc-service-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      $$('.calc-service-card').forEach(function(c) { c.classList.remove('selected'); });
+      card.classList.add('selected');
+      state.service = card.getAttribute('data-service');
+      state.category = card.getAttribute('data-category');
+      state.addons = {};
+      $$('.calc-addon').forEach(function(a) { a.classList.remove('selected'); });
+
+      // Show step 2 with appropriate fields
+      var isCleaning = state.category === 'cleaning' || state.category === 'bundle';
+      var isLandscaping = state.category === 'landscaping' || state.category === 'bundle';
+      $('cleaning-details').style.display = isCleaning ? 'block' : 'none';
+      $('landscaping-details').style.display = isLandscaping ? 'block' : 'none';
+
+      var p = PRICING[state.service];
+      if (p) {
+        $('frequency-field').style.display = (p.hasFrequency && isCleaning) ? 'block' : 'none';
+        $('mowing-frequency-field').style.display = (p.hasFrequency && isLandscaping) ? 'block' : 'none';
+      }
+
+      setTimeout(function() { goToStep(2); }, 300);
+    });
+  });
+
+  // Step 2: Option buttons
+  $$('.calc-option').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var field = btn.getAttribute('data-field');
+      btn.parentElement.querySelectorAll('.calc-option').forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+
+      var val = btn.getAttribute('data-value');
+      if (field === 'home-size') state.homeSize = val;
+      else if (field === 'yard-size') state.yardSize = val;
+      else if (field === 'bedrooms') state.bedrooms = parseInt(val) || 4;
+      else if (field === 'bathrooms') state.bathrooms = parseInt(val) || 4;
+      else if (field === 'frequency' || field === 'mowing-frequency') {
+        state.frequency = val;
+        state.frequencyDiscount = parseInt(btn.getAttribute('data-discount')) || 0;
+      }
+
+      checkStep2Complete();
+    });
+  });
+
+  // Add-ons
+  $$('.calc-addon').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btn.classList.toggle('selected');
+      var addon = btn.getAttribute('data-addon');
+      var price = parseInt(btn.getAttribute('data-price')) || 0;
+      if (btn.classList.contains('selected')) state.addons[addon] = price;
+      else delete state.addons[addon];
+    });
+  });
+
+  function checkStep2Complete() {
+    var ready = false;
+    if (state.category === 'cleaning') {
+      ready = state.homeSize && state.bedrooms && state.bathrooms;
+    } else if (state.category === 'landscaping') {
+      ready = !!state.yardSize;
+    } else if (state.category === 'bundle') {
+      ready = state.homeSize && state.bedrooms && state.bathrooms && state.yardSize;
+    }
+    $('calc-to-step-3').disabled = !ready;
+  }
+
+  $('calc-to-step-3').addEventListener('click', function() {
+    if (!this.disabled) goToStep(3);
+  });
+
+  $('calc-back').addEventListener('click', function() {
+    goToStep(state.currentStep - 1);
+  });
+
+  function calculateEstimate() {
+    var p = PRICING[state.service];
+    if (!p) return;
+
+    var total = 0;
+    var lines = [];
+
+    if (state.category === 'bundle') {
+      var cleanBase = p.cleaning[state.homeSize] || 0;
+      var bedroomCost = (state.bedrooms - 1) * p.bedroom;
+      var bathroomCost = (state.bathrooms - 1) * p.bathroom;
+      var cleanSubtotal = cleanBase + bedroomCost + bathroomCost;
+      var lawnBase = p.landscaping[state.yardSize] || 0;
+      var subtotal = cleanSubtotal + lawnBase;
+      var bundleDiscount = Math.round(subtotal * p.discount / 100);
+      total = subtotal - bundleDiscount;
+
+      lines.push({ label: 'Cleaning (base)', amount: cleanBase });
+      if (bedroomCost > 0) lines.push({ label: 'Bedrooms (' + state.bedrooms + ')', amount: bedroomCost });
+      if (bathroomCost > 0) lines.push({ label: 'Bathrooms (' + state.bathrooms + ')', amount: bathroomCost });
+      lines.push({ label: 'Lawn care (base)', amount: lawnBase });
+      lines.push({ label: 'Bundle discount (-' + p.discount + '%)', amount: -bundleDiscount });
+    } else if (state.category === 'cleaning') {
+      var base = p.base[state.homeSize] || 0;
+      var brCost = (state.bedrooms - 1) * (p.bedroom || 0);
+      var baCost = (state.bathrooms - 1) * (p.bathroom || 0);
+      total = base + brCost + baCost;
+      lines.push({ label: p.label + ' (base)', amount: base });
+      if (brCost > 0) lines.push({ label: 'Bedrooms (' + state.bedrooms + ')', amount: brCost });
+      if (baCost > 0) lines.push({ label: 'Bathrooms (' + state.bathrooms + ')', amount: baCost });
+    } else {
+      total = p.base[state.yardSize] || 0;
+      lines.push({ label: p.label + ' (base)', amount: total });
+    }
+
+    // Add-ons
+    var addonTotal = 0;
+    Object.keys(state.addons).forEach(function(key) {
+      addonTotal += state.addons[key];
+      lines.push({ label: key.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); }), amount: state.addons[key] });
+    });
+    total += addonTotal;
+
+    // Frequency discount
+    if (state.frequencyDiscount > 0 && state.frequency) {
+      var freqDisc = Math.round(total * state.frequencyDiscount / 100);
+      lines.push({ label: state.frequency.charAt(0).toUpperCase() + state.frequency.slice(1) + ' discount (-' + state.frequencyDiscount + '%)', amount: -freqDisc });
+      total -= freqDisc;
+    }
+
+    lines.push({ label: 'Estimated Total', amount: total, isTotal: true });
+
+    // Render
+    $('calc-price').textContent = '$' + total;
+    var freqText = 'per visit';
+    if (state.frequency === 'weekly') freqText = 'per week';
+    else if (state.frequency === 'biweekly') freqText = 'every 2 weeks';
+    else if (state.frequency === 'monthly') freqText = 'per month';
+    $('calc-price-freq').textContent = freqText;
+
+    var breakdownHtml = '';
+    lines.forEach(function(line) {
+      var cls = line.isTotal ? ' total' : '';
+      var sign = line.amount < 0 ? '-$' + Math.abs(line.amount) : '$' + line.amount;
+      breakdownHtml += '<div class="breakdown-line' + cls + '"><span>' + line.label + '</span><span>' + sign + '</span></div>';
+    });
+    $('calc-breakdown').innerHTML = breakdownHtml;
+
+    // Populate hidden fields for lead capture
+    $('calc-hidden-estimate').value = '$' + total + ' ' + freqText;
+    $('calc-hidden-service').value = p.label || state.service;
+    var details = [];
+    if (state.homeSize) details.push('Home: ' + state.homeSize);
+    if (state.yardSize) details.push('Yard: ' + state.yardSize);
+    if (state.bedrooms) details.push(state.bedrooms + ' bed');
+    if (state.bathrooms) details.push(state.bathrooms + ' bath');
+    if (state.frequency) details.push('Frequency: ' + state.frequency);
+    if (Object.keys(state.addons).length > 0) details.push('Add-ons: ' + Object.keys(state.addons).join(', '));
+    $('calc-hidden-details').value = details.join(' | ');
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Quote Calculator",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get an Instant Estimate"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Answer a few quick questions and see your price in under 60 seconds."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Calculator"
+    }
+  ]
+}
+{% endschema %}

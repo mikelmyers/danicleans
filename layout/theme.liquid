@@ -307,7 +307,59 @@
 
     {{ 'custom.css' | asset_url | stylesheet_tag }}
 
-
+    <!-- Local Business Schema for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Dani Cleans",
+      "description": "Professional cleaning and landscaping services in Charlottesville, VA. Residential and commercial cleaning, lawn care, and landscaping.",
+      "url": "{{ shop.url }}",
+      "telephone": "+1-434-351-0335",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Charlottesville",
+        "addressRegion": "VA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "38.0293",
+        "longitude": "-78.4767"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Charlottesville" },
+        { "@type": "AdministrativeArea", "name": "Albemarle County" },
+        { "@type": "City", "name": "Crozet" },
+        { "@type": "City", "name": "Waynesboro" },
+        { "@type": "City", "name": "Staunton" }
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "8"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Recurring House Cleaning" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Deep Cleaning" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Move-In/Move-Out Cleaning" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lawn Mowing & Maintenance" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landscaping & Garden Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Seasonal Cleanup" } }
+        ]
+      }
+    }
+    </script>
 
 
   </head>
