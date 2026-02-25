@@ -232,6 +232,25 @@
         "padding_bottom": 52
       }
     },
+    "meet_the_team": {
+      "type": "meet-the-team",
+      "blocks": {
+        "val_1": { "type": "value", "settings": { "icon": "🏠", "title": "Locally Owned", "description": "Born and raised in the Charlottesville area" }},
+        "val_2": { "type": "value", "settings": { "icon": "🛡️", "title": "Fully Insured", "description": "Licensed, bonded, and insured for your protection" }},
+        "val_3": { "type": "value", "settings": { "icon": "🌿", "title": "Eco-Conscious", "description": "Safe products for your family and pets" }},
+        "val_4": { "type": "value", "settings": { "icon": "💯", "title": "Guaranteed", "description": "Not satisfied? We redo it free" }}
+      },
+      "block_order": ["val_1", "val_2", "val_3", "val_4"],
+      "settings": {
+        "tag": "Meet the Owner",
+        "heading": "Hi, I'm Dani — and I Started This Company to Do Things Right",
+        "story": "<p>I started Dani Cleans in 2018 because I saw too many cleaning and landscaping companies cutting corners. I believed Charlottesville families deserved better — reliable scheduling, consistent quality, and people who actually care about your home.</p><p>Today our team serves hundreds of families across Charlottesville and Albemarle County. We're not a franchise. We're your neighbors. And we treat every home like it's our own.</p>",
+        "cta_text": "Get a Free Estimate",
+        "cta2_text": "See Our Pricing",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
     "stats_counter": {
       "type": "stats-counter",
       "blocks": {
@@ -433,6 +452,7 @@
     "cleaning_services",
     "landscaping_services",
     "why_choose_us",
+    "meet_the_team",
     "stats_counter",
     "before_after",
     "reviews_homepage",
