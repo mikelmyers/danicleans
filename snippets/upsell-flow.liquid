@@ -15,7 +15,14 @@
   var isCleaning = plan.indexOf('cleaning') !== -1 || window.location.pathname.indexOf('clean') !== -1;
   var isLandscaping = plan.indexOf('lawn') !== -1 || plan.indexOf('landscape') !== -1;
 
-  // Determine what to upsell
+  // Smart upsell — check what they booked and suggest complementary services
+  var path = window.location.pathname.toLowerCase();
+  var isPressureWash = plan.indexOf('pressure') !== -1 || path.indexOf('pressure') !== -1;
+  var isWindowClean = plan.indexOf('window') !== -1 || path.indexOf('window') !== -1;
+  var isJunkRemoval = plan.indexOf('junk') !== -1 || path.indexOf('junk') !== -1;
+  var isHolidayLights = plan.indexOf('holiday') !== -1 || plan.indexOf('light') !== -1;
+
+  // Determine what to upsell — prioritize high-value cross-sells
   var upsellService, upsellTitle, upsellDesc, upsellLink;
   if (isCleaning) {
     upsellService = 'landscaping';
@@ -27,8 +34,23 @@
     upsellTitle = 'Add Home Cleaning & Save 10%';
     upsellDesc = 'Bundle your lawn care with indoor cleaning and save 10% on both. One company handles everything.';
     upsellLink = '/pages/request-a-quote?plan=bundle&upsell=from-lawn';
+  } else if (isPressureWash) {
+    upsellTitle = 'Add Window Cleaning — Save 15%';
+    upsellDesc = 'Since we\'re already at your property, add window cleaning at 15% off. Crystal clear inside and out.';
+    upsellLink = '/pages/request-a-quote?plan=window-cleaning&upsell=from-pressure-wash';
+  } else if (isWindowClean) {
+    upsellTitle = 'Add Pressure Washing — Save 15%';
+    upsellDesc = 'Complete your exterior refresh! Add pressure washing for your driveway, patio, or siding at 15% off.';
+    upsellLink = '/pages/request-a-quote?plan=pressure-washing&upsell=from-windows';
+  } else if (isJunkRemoval) {
+    upsellTitle = 'Need a Deep Clean After?';
+    upsellDesc = 'Most junk removal customers add a deep clean afterward. Get 15% off when you book both together.';
+    upsellLink = '/pages/request-a-quote?plan=deep-cleaning&upsell=from-junk';
+  } else if (isHolidayLights) {
+    upsellTitle = 'Get Your Home Guest-Ready';
+    upsellDesc = 'Holiday season? Add a deep clean so your home sparkles inside AND out. 10% off when you bundle.';
+    upsellLink = '/pages/request-a-quote?plan=deep-cleaning&upsell=from-lights';
   } else {
-    // Generic upsell for unknown services
     upsellTitle = 'Did You Know We Also Offer Bundles?';
     upsellDesc = 'Combine cleaning + landscaping and save 10% on both services. One company, one bill.';
     upsellLink = '/pages/pricing?tab=bundle';
