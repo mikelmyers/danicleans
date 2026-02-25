@@ -1,0 +1,367 @@
+<div class="review-carousel-wrapper">
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+  
+  <div id="reviews-container" class="review-carousel">
+    <p>Loading reviews...</p>
+  </div>
+  
+  <div class="carousel-controls">
+    <button id="prev-review" class="carousel-control">←</button>
+    <div id="carousel-dots" class="carousel-dots"></div>
+    <button id="next-review" class="carousel-control">→</button>
+  </div>
+  
+  {% if section.settings.show_form %}
+    <div class="review-form-container">
+      {% render 'review-form' %}
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  // Function to load reviews for carousel
+  function loadCarouselReviews() {
+    fetch('{{ 'reviews.json' | asset_url }}')
+      .then(response => response.json())
+      .then(reviews => {
+        const container = document.getElementById('reviews-container');
+        container.innerHTML = '';
+        
+        if (reviews.length === 0) {
+          container.innerHTML = '<p>No reviews available.</p>';
+          return;
+        }
+        
+        // Create a div to hold all slides
+        const slidesWrapper = document.createElement('div');
+        slidesWrapper.className = 'slides-wrapper';
+        container.appendChild(slidesWrapper);
+        
+        // Add each review as a slide
+        reviews.forEach((review, index) => {
+          const rating = review.rating || 5;
+          let starsHtml = '';
+          
+          for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+              starsHtml += '<span class="star star-filled">★</span>';
+            } else {
+              starsHtml += '<span class="star">★</span>';
+            }
+          }
+          
+          const reviewElement = document.createElement('div');
+          reviewElement.className = 'review-slide';
+          reviewElement.dataset.index = index;
+          reviewElement.innerHTML = `
+            <div class="review-stars">${starsHtml}</div>
+            <p class="review-text">"${review.review}"</p>
+            <p class="reviewer-name">- ${review.name}</p>
+          `;
+          
+          slidesWrapper.appendChild(reviewElement);
+        });
+        
+        // Set up the carousel dot indicators
+        const dotsContainer = document.getElementById('carousel-dots');
+        reviews.forEach((_, index) => {
+          const dot = document.createElement('span');
+          dot.className = 'carousel-dot';
+          if (index === 0) dot.classList.add('active');
+          dot.dataset.index = index;
+          dot.addEventListener('click', () => {
+            goToSlide(index);
+          });
+          dotsContainer.appendChild(dot);
+        });
+        
+        // Initialize the carousel
+        initializeCarousel(reviews.length);
+      })
+      .catch(error => {
+        console.error('Error loading reviews:', error);
+        document.getElementById('reviews-container').innerHTML = 
+          '<p>There was an error loading reviews. Please try again later.</p>';
+      });
+  }
+  
+  // Initialize carousel controls and auto-rotation
+  function initializeCarousel(totalSlides) {
+    let currentSlide = 0;
+    let autoRotateInterval;
+    const slideDuration = {{ section.settings.slide_duration }} * 1000; // Convert to milliseconds
+    
+    // Function to go to a specific slide
+    window.goToSlide = function(index) {
+      // Stop any current animations
+      const slidesWrapper = document.querySelector('.slides-wrapper');
+      if (!slidesWrapper) return;
+      
+      // Update the transform to show the correct slide
+      slidesWrapper.style.transform = `translateX(-${index * 100}%)`;
+      
+      // Update current slide index
+      currentSlide = index;
+      
+      // Update the active dot
+      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+      
+      // Reset the auto-rotation timer
+      if ({{ section.settings.auto_rotate }}) {
+        clearInterval(autoRotateInterval);
+        startAutoRotation();
+      }
+    };
+    
+    // Function to go to the next slide
+    function nextSlide() {
+      let nextIndex = currentSlide + 1;
+      if (nextIndex >= totalSlides) {
+        nextIndex = 0; // Loop back to the first slide
+      }
+      goToSlide(nextIndex);
+    }
+    
+    // Function to go to the previous slide
+    function prevSlide() {
+      let prevIndex = currentSlide - 1;
+      if (prevIndex < 0) {
+        prevIndex = totalSlides - 1; // Loop to the last slide
+      }
+      goToSlide(prevIndex);
+    }
+    
+    // Function to start auto-rotation
+    function startAutoRotation() {
+      if ({{ section.settings.auto_rotate }}) {
+        autoRotateInterval = setInterval(nextSlide, slideDuration);
+      }
+    }
+    
+    // Set up next/prev buttons
+    document.getElementById('next-review').addEventListener('click', () => {
+      nextSlide();
+    });
+    
+    document.getElementById('prev-review').addEventListener('click', () => {
+      prevSlide();
+    });
+    
+    // Start auto-rotation if enabled
+    if ({{ section.settings.auto_rotate }}) {
+      startAutoRotation();
+    }
+    
+    // Pause auto-rotation when user hovers over the carousel
+    const carousel = document.querySelector('.review-carousel-wrapper');
+    carousel.addEventListener('mouseenter', () => {
+      if ({{ section.settings.auto_rotate }}) {
+        clearInterval(autoRotateInterval);
+      }
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      if ({{ section.settings.auto_rotate }}) {
+        startAutoRotation();
+      }
+    });
+  }
+  
+  // Load carousel reviews when the page is ready
+  document.addEventListener('DOMContentLoaded', loadCarouselReviews);
+</script>
+
+<style>
+.review-carousel-wrapper {
+  padding: 2rem 0;
+  max-width: {{ section.settings.max_width }}px;
+  margin: 0 auto;
+  position: relative;
+  font-family: 'Assistant', sans-serif;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: {{ section.settings.heading_size }}px;
+  font-family: 'Assistant', sans-serif;
+}
+.review-carousel {
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+.slides-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+}
+.review-slide {
+  flex: 0 0 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  font-family: 'Assistant', sans-serif;
+  /* Center content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.review-stars {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.star {
+  color: #ddd;
+}
+.star-filled {
+  color: #FFD700;
+}
+.review-text {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 1rem;
+  font-family: 'Assistant', sans-serif;
+  /* Set a fixed width for the text */
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.reviewer-name {
+  font-weight: bold;
+  font-family: 'Assistant', sans-serif;
+  font-size: 1.8rem;
+}
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+.carousel-control {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-family: 'Assistant', sans-serif;
+}
+.carousel-control:hover {
+  color: #000;
+}
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin: 0 1rem;
+}
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.carousel-dot.active {
+  background: #555;
+}
+.review-form-container {
+  margin-top: 3rem;
+}
+
+/* Additional responsive adjustments */
+@media (min-width: 768px) {
+  .review-slide {
+    padding: 3rem;
+  }
+  .review-text {
+    font-size: 1.8rem;
+    max-width: 70%;
+  }
+  .reviewer-name {
+  font-weight: bold;
+  font-family: 'Assistant', sans-serif;
+  font-size: 2.0rem;
+}
+}
+
+/* Extra style for very large screens */
+@media (min-width: 1200px) {
+  .review-slide {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Reviews Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "What Customers Are Saying"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "default": 24,
+      "label": "Heading Size (px)"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1600,
+      "step": 50,
+      "default": 1200,
+      "label": "Max Width"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto-rotate Slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "slide_duration",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "label": "Slide Duration (seconds)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Show Review Form",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Carousel",
+      "category": "Customer content"
+    }
+  ]
+}
+{% endschema %}

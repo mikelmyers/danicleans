@@ -1,0 +1,253 @@
+<div class="reviews-page-wrapper">
+  <h1 class="section-title">{{ section.settings.title }}</h1>
+  
+  {% if section.settings.show_form %}
+    <div class="review-form-container">
+      <h2 class="form-title">{{ section.settings.form_title }}</h2>
+      {% if section.settings.form_description != blank %}
+        <div class="form-description">{{ section.settings.form_description }}</div>
+      {% endif %}
+      {% render 'review-form' %}
+    </div>
+  {% endif %}
+  
+  <div class="reviews-section">
+    <h2 class="reviews-subtitle">{{ section.settings.reviews_subtitle }}</h2>
+    <div id="reviews-grid" class="reviews-grid">
+      <p>Loading reviews...</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to load reviews for grid layout
+  function loadGridReviews() {
+    fetch('{{ 'reviews.json' | asset_url }}')
+      .then(response => response.json())
+      .then(reviews => {
+        const container = document.getElementById('reviews-grid');
+        container.innerHTML = '';
+        
+        if (reviews.length === 0) {
+          container.innerHTML = '<p class="no-reviews">No reviews available yet. Be the first to share your experience!</p>';
+          return;
+        }
+        
+        reviews.forEach(review => {
+          const rating = review.rating || 5;
+          let starsHtml = '';
+          
+          for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+              starsHtml += '<span class="star star-filled">★</span>';
+            } else {
+              starsHtml += '<span class="star">★</span>';
+            }
+          }
+          
+          const reviewElement = document.createElement('div');
+          reviewElement.className = 'review-card';
+          reviewElement.innerHTML = `
+            <div class="review-stars">${starsHtml}</div>
+            <p class="review-text">"${review.review}"</p>
+            <p class="reviewer-name">- ${review.name}</p>
+          `;
+          
+          container.appendChild(reviewElement);
+        });
+      })
+      .catch(error => {
+        console.error('Error loading reviews:', error);
+        document.getElementById('reviews-grid').innerHTML = 
+          '<p>There was an error loading reviews. Please try again later.</p>';
+      });
+  }
+  
+  // Load grid reviews when the page is ready
+  document.addEventListener('DOMContentLoaded', loadGridReviews);
+</script>
+
+<style>
+.reviews-page-wrapper {
+  padding: 2rem 0;
+  max-width: {{ section.settings.max_width }}px;
+  margin: 0 auto;
+  font-family: 'Assistant', sans-serif;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: {{ section.settings.heading_size }}px;
+  font-family: 'Assistant', sans-serif;
+}
+.review-form-container {
+  margin-bottom: 4rem;
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.form-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.form-description {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+.reviews-section {
+  margin-top: 3rem;
+}
+.reviews-subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+  }
+}
+.review-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Assistant', sans-serif;
+}
+.review-stars {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+.star {
+  color: #ddd;
+}
+.star-filled {
+  color: #FFD700;
+}
+.review-text {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  font-family: 'Assistant', sans-serif;
+}
+.reviewer-name {
+  font-weight: bold;
+  text-align: right;
+  margin-top: auto;
+  font-family: 'Assistant', sans-serif;
+  font-size: 1.5rem;
+}
+.no-reviews {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-style: italic;
+  font-family: 'Assistant', sans-serif;
+}
+@media (min-width: 768px) {
+  .review-text {
+    font-size: 1.4rem;
+  }
+  .form-title {
+    font-size: 1.8rem;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Reviews Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Page Title",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form Title",
+      "default": "Share Your Experience"
+    },
+    {
+      "type": "textarea",
+      "id": "form_description",
+      "label": "Form Description",
+      "default": "We value your feedback! Please take a moment to share your experience with us."
+    },
+    {
+      "type": "text",
+      "id": "reviews_subtitle",
+      "label": "Reviews Section Title",
+      "default": "What Our Customers Are Saying"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "default": 32,
+      "label": "Heading Size (px)"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1600,
+      "step": 50,
+      "default": 1200,
+      "label": "Max Width"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "Columns (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "label": "Columns (Mobile)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Show Review Form",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Grid",
+      "category": "Customer content"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,102 @@
+<div class="review-form-wrapper">
+  <h2>Share Your Experience</h2>
+  <form method="post" action="/contact#review-submitted" accept-charset="UTF-8" class="review-form">
+    <input type="hidden" name="form_type" value="contact">
+    <input type="hidden" name="contact[tags]" value="Customer Review Submission">
+
+    <label for="name">Name</label>
+    <input required type="text" id="name" name="contact[name]" placeholder="Your Name">
+
+    <label for="email">Email</label>
+    <input required type="email" id="email" name="contact[email]" placeholder="Your Email">
+
+    <div class="review-rating-field">
+      <label>Rating</label>
+      <div class="star-rating">
+        <div class="star-rating-group">
+          <input type="radio" id="rating-5" name="contact[rating]" value="5" checked><label for="rating-5">★</label>
+          <input type="radio" id="rating-4" name="contact[rating]" value="4"><label for="rating-4">★</label>
+          <input type="radio" id="rating-3" name="contact[rating]" value="3"><label for="rating-3">★</label>
+          <input type="radio" id="rating-2" name="contact[rating]" value="2"><label for="rating-2">★</label>
+          <input type="radio" id="rating-1" name="contact[rating]" value="1"><label for="rating-1">★</label>
+        </div>
+      </div>
+    </div>
+
+    <label for="review">Your Review</label>
+    <textarea required id="review" name="contact[body]" rows="5" placeholder="What did you think?"></textarea>
+
+    <button type="submit">Submit Review</button>
+
+    {% if form.posted_successfully? and request.path contains '/contact' %}
+      <p class="review-success">Thanks! We're verifying your review to keep spam away.</p>
+    {% endif %}
+  </form>
+</div>
+
+<style>
+.review-form-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fafafa;
+  border-radius: 8px;
+  font-family: 'Assistant', sans-serif;
+}
+.review-form input, .review-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-family: 'Assistant', sans-serif;
+}
+.review-success {
+  margin-top: 1rem;
+  color: green;
+  font-weight: bold;
+  font-family: 'Assistant', sans-serif;
+}
+.review-rating-field {
+  margin-bottom: 1rem;
+  font-family: 'Assistant', sans-serif;
+}
+.star-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.star-rating-group {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1.8rem;
+}
+.star-rating-group input {
+  display: none;
+}
+.star-rating-group label {
+  color: #ddd;
+  cursor: pointer;
+  margin: 0 2px;
+  transition: color 0.2s;
+}
+.star-rating-group:hover label {
+  color: #FFD700;
+}
+.star-rating-group input:checked ~ label {
+  color: #FFD700;
+}
+.star-rating-group label:hover,
+.star-rating-group label:hover ~ label {
+  color: #FFD700;
+}
+.star-rating-group input:checked + label:hover,
+.star-rating-group input:checked ~ label:hover,
+.star-rating-group input:checked ~ label:hover ~ label,
+.star-rating-group label:hover ~ input:checked ~ label {
+  color: #FFED85;
+}
+button {
+  font-family: 'Assistant', sans-serif;
+}
+</style>
