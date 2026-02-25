@@ -1,0 +1,147 @@
+{% comment %}
+  Referral Program Section
+  Word of mouth is the #1 growth channel for local services.
+  This systemizes it: refer a friend, you both get $25 off.
+{% endcomment %}
+
+<section class="referral-section" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="referral-container">
+    <div class="referral-card">
+      <div class="referral-icon">&#127873;</div>
+      <h2>{{ section.settings.heading }}</h2>
+      <p class="referral-sub">{{ section.settings.subheading }}</p>
+
+      <div class="referral-how">
+        <div class="referral-step">
+          <div class="referral-step-num">1</div>
+          <h4>Share the Link</h4>
+          <p>Send your unique link or just tell them your name</p>
+        </div>
+        <div class="referral-arrow">→</div>
+        <div class="referral-step">
+          <div class="referral-step-num">2</div>
+          <h4>They Book</h4>
+          <p>Your friend mentions your name when they book</p>
+        </div>
+        <div class="referral-arrow">→</div>
+        <div class="referral-step">
+          <div class="referral-step-num">3</div>
+          <h4>You Both Save</h4>
+          <p>$25 off for them AND $25 credit for you</p>
+        </div>
+      </div>
+
+      <div class="referral-form-wrap">
+        <h3>Refer a Friend Now</h3>
+        <form method="post" action="/contact" accept-charset="UTF-8" class="referral-form">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[Source]" value="Referral Program">
+          <input type="hidden" name="return_to" value="/?form_type=contact&success=true&ref=sent">
+
+          <div class="referral-form-row">
+            <input type="text" name="contact[name]" placeholder="Your Name" required>
+            <input type="email" name="contact[email]" placeholder="Your Email" required>
+          </div>
+          <div class="referral-form-row">
+            <input type="text" name="contact[Referred Friend Name]" placeholder="Friend's Name" required>
+            <input type="tel" name="contact[Referred Friend Phone]" placeholder="Friend's Phone or Email" required>
+          </div>
+          <input type="hidden" name="contact[body]" value="REFERRAL: Customer is referring a friend for $25 off each.">
+          <button type="submit">Send the Referral</button>
+        </form>
+        <p class="referral-note">We'll reach out to your friend and mention you sent them. No limit on referrals — the more you share, the more you save!</p>
+      </div>
+
+      <div class="referral-share">
+        <p><strong>Or share directly:</strong></p>
+        <div class="referral-share-btns">
+          <a href="sms:?body=Hey!%20I%20use%20Dani%20Cleans%20for%20my%20house%20cleaning%20and%20lawn%20care%20in%20Charlottesville.%20They%27re%20great.%20Mention%20my%20name%20and%20we%20both%20get%20%2425%20off!%20Check%20them%20out%3A%20{{ shop.url }}" class="referral-share-btn sms">Text a Friend</a>
+          <a href="mailto:?subject=Check%20out%20Dani%20Cleans&body=Hey!%20I%20use%20Dani%20Cleans%20for%20cleaning%20and%20lawn%20care%20in%20Charlottesville.%20They%27re%20awesome.%20Mention%20my%20name%20when%20you%20book%20and%20we%20both%20get%20%2425%20off!%20{{ shop.url }}" class="referral-share-btn email">Email a Friend</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.referral-section { background: #f7faf7; }
+.referral-container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.referral-card { background: #fff; border-radius: 16px; padding: 48px 36px; border: 2px solid #e0e8e0; text-align: center; }
+.referral-icon { font-size: 48px; margin-bottom: 12px; }
+.referral-card h2 { font-size: 28px; color: #1a3a2a; margin-bottom: 8px; }
+.referral-sub { color: #555; font-size: 16px; margin-bottom: 32px; }
+.referral-how { display: flex; align-items: flex-start; justify-content: center; gap: 16px; margin-bottom: 36px; flex-wrap: wrap; }
+.referral-step { flex: 1; min-width: 150px; max-width: 200px; }
+.referral-step-num {
+  width: 36px; height: 36px; background: #2d6a4f; color: #fff;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700; margin-bottom: 8px;
+}
+.referral-step h4 { font-size: 16px; color: #1a3a2a; margin-bottom: 4px; }
+.referral-step p { font-size: 13px; color: #666; }
+.referral-arrow { font-size: 24px; color: #2d6a4f; padding-top: 20px; font-weight: 700; }
+.referral-form-wrap { margin-top: 32px; padding-top: 32px; border-top: 1px solid #eee; }
+.referral-form-wrap h3 { margin-bottom: 16px; font-size: 20px; color: #1a3a2a; }
+.referral-form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.referral-form-row input {
+  flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px;
+  font-size: 15px; font-family: inherit;
+}
+.referral-form button {
+  width: 100%; padding: 14px; background: #2d6a4f; color: #fff; border: none;
+  border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: background 0.2s;
+}
+.referral-form button:hover { background: #245a42; }
+.referral-note { font-size: 13px; color: #888; margin-top: 12px; }
+.referral-share { margin-top: 24px; padding-top: 24px; border-top: 1px solid #eee; }
+.referral-share p { margin-bottom: 12px; font-size: 15px; color: #1a3a2a; }
+.referral-share-btns { display: flex; gap: 12px; justify-content: center; }
+.referral-share-btn {
+  padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.referral-share-btn.sms { background: #25D366; color: #fff; }
+.referral-share-btn.email { background: #2d6a4f; color: #fff; }
+.referral-share-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+@media (max-width: 600px) {
+  .referral-card { padding: 28px 20px; }
+  .referral-form-row { flex-direction: column; }
+  .referral-arrow { display: none; }
+  .referral-how { gap: 20px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Referral Program",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Give $25, Get $25"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Refer a friend to Dani Cleans. When they book, you both get $25 off your next service."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Top padding", "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Bottom padding", "default": 52
+    }
+  ],
+  "presets": [{ "name": "Referral Program" }]
+}
+{% endschema %}

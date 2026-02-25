@@ -25,6 +25,9 @@
     <meta name="geo.placename" content="Charlottesville">
     <meta name="geo.position" content="38.0293;-78.4767">
 
+    <!-- Analytics & Conversion Tracking -->
+    {% render 'analytics-tracking' %}
+
     <!-- Speed Optimizations -->
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.shopify.com">
@@ -395,6 +398,7 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
+    {% section 'promo-banner' %}
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
@@ -408,6 +412,7 @@
     {% render 'social-proof' %}
     {% render 'exit-intent-popup' %}
     {% render 'lead-automations' %}
+    {% render 'upsell-flow' %}
     {% render 'review-request' %}
 
     <!-- Sticky Mobile CTA Bar -->

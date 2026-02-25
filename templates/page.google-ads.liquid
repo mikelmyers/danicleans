@@ -1,0 +1,185 @@
+{% comment %}
+  Google Ads Landing Page
+  Stripped-down, high-conversion page for paid traffic.
+  No navigation distractions. One goal: get the lead.
+  Use this template for pages linked from Google Ads campaigns.
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>{{ page.title }} | Dani Cleans</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a3a2a; }
+    .ads-header {
+      background: #1a3a2a; color: #fff; padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ads-logo { font-size: 20px; font-weight: 800; }
+    .ads-phone { color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }
+    .ads-hero {
+      background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
+      color: #fff; padding: 48px 20px; text-align: center;
+    }
+    .ads-hero h1 { font-size: 36px; line-height: 1.2; margin-bottom: 12px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .ads-hero p { font-size: 18px; opacity: 0.9; margin-bottom: 8px; }
+    .ads-trust {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      margin-top: 20px; font-size: 14px; opacity: 0.85;
+    }
+    .ads-body { max-width: 600px; margin: -40px auto 0; padding: 0 20px 48px; position: relative; z-index: 1; }
+    .ads-form-card {
+      background: #fff; border-radius: 16px; padding: 36px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .ads-form-card h2 { text-align: center; font-size: 22px; margin-bottom: 4px; }
+    .ads-form-card .ads-form-sub { text-align: center; color: #666; font-size: 14px; margin-bottom: 20px; }
+    .ads-field { margin-bottom: 12px; }
+    .ads-field input, .ads-field select {
+      width: 100%; padding: 14px; border: 2px solid #e0e8e0; border-radius: 8px;
+      font-size: 16px; font-family: inherit; transition: border-color 0.2s;
+    }
+    .ads-field input:focus, .ads-field select:focus { outline: none; border-color: #2d6a4f; }
+    .ads-row { display: flex; gap: 12px; }
+    .ads-row .ads-field { flex: 1; }
+    .ads-submit {
+      width: 100%; padding: 16px; background: #2d6a4f; color: #fff; border: none;
+      border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer;
+      font-family: inherit; margin-top: 8px; transition: background 0.2s;
+    }
+    .ads-submit:hover { background: #245a42; }
+    .ads-fine { text-align: center; font-size: 12px; color: #999; margin-top: 12px; }
+    .ads-benefits {
+      margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .ads-benefit {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: #f7faf7; padding: 16px; border-radius: 8px;
+    }
+    .ads-benefit-icon { font-size: 20px; flex-shrink: 0; }
+    .ads-benefit h4 { font-size: 14px; margin-bottom: 2px; }
+    .ads-benefit p { font-size: 13px; color: #555; }
+    .ads-social-proof {
+      text-align: center; margin-top: 32px; padding: 20px;
+      background: #f7faf7; border-radius: 10px;
+    }
+    .ads-stars { font-size: 24px; color: #f5a623; margin-bottom: 4px; }
+    .ads-review-text { font-style: italic; color: #555; font-size: 15px; margin-bottom: 4px; }
+    .ads-reviewer { font-size: 13px; color: #888; }
+    @media (max-width: 600px) {
+      .ads-hero h1 { font-size: 26px; }
+      .ads-row { flex-direction: column; }
+      .ads-benefits { grid-template-columns: 1fr; }
+      .ads-form-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="ads-header">
+    <div class="ads-logo">Dani Cleans</div>
+    <a href="tel:4343510335" class="ads-phone">&#128222; 434-351-0335</a>
+  </header>
+
+  <section class="ads-hero">
+    <h1>{{ page.title | default: "Professional Cleaning & Landscaping in Charlottesville" }}</h1>
+    <p>Free estimates. No contracts. 100% satisfaction guaranteed.</p>
+    <div class="ads-trust">
+      <span>&#10003; Locally Owned</span>
+      <span>&#10003; Insured & Bonded</span>
+      <span>&#10003; 5-Star Rated</span>
+      <span>&#10003; Eco-Friendly</span>
+    </div>
+  </section>
+
+  <div class="ads-body">
+    <div class="ads-form-card">
+      <h2>Get Your Free Estimate in 24 Hours</h2>
+      <p class="ads-form-sub">No obligation. No spam. Just an honest price.</p>
+
+      <form method="post" action="/contact" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[Source]" value="Google Ads Landing Page">
+        <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
+
+        <div class="ads-row">
+          <div class="ads-field">
+            <input type="text" name="contact[name]" placeholder="Full Name *" required>
+          </div>
+          <div class="ads-field">
+            <input type="tel" name="contact[Phone Number]" placeholder="Phone *" required>
+          </div>
+        </div>
+        <div class="ads-field">
+          <input type="email" name="contact[email]" placeholder="Email *" required>
+        </div>
+        <div class="ads-field">
+          <select name="contact[Service Category]" required>
+            <option value="">What do you need? *</option>
+            <option value="Recurring Cleaning">Recurring Home Cleaning</option>
+            <option value="Deep Cleaning">Deep Cleaning</option>
+            <option value="Move-In/Move-Out">Move-In / Move-Out Cleaning</option>
+            <option value="Lawn Mowing">Lawn Mowing & Care</option>
+            <option value="Landscaping">Landscaping & Design</option>
+            <option value="Bundle">Cleaning + Landscaping Bundle (Save 10%)</option>
+          </select>
+        </div>
+        <div class="ads-field">
+          <input type="text" name="contact[Property Address]" placeholder="Property Address *" required>
+        </div>
+        <button type="submit" class="ads-submit">Get My Free Estimate →</button>
+        <p class="ads-fine">We respond within 24 hours. Your info is never shared.</p>
+      </form>
+    </div>
+
+    <div class="ads-benefits">
+      <div class="ads-benefit">
+        <span class="ads-benefit-icon">&#128176;</span>
+        <div><h4>Transparent Pricing</h4><p>No hidden fees. Know your price upfront.</p></div>
+      </div>
+      <div class="ads-benefit">
+        <span class="ads-benefit-icon">&#128170;</span>
+        <div><h4>Satisfaction Guaranteed</h4><p>Not happy? We'll redo it for free.</p></div>
+      </div>
+      <div class="ads-benefit">
+        <span class="ads-benefit-icon">&#128197;</span>
+        <div><h4>Flexible Scheduling</h4><p>No contracts. Cancel anytime.</p></div>
+      </div>
+      <div class="ads-benefit">
+        <span class="ads-benefit-icon">&#127793;</span>
+        <div><h4>Eco-Friendly Options</h4><p>Safe for kids, pets, and the planet.</p></div>
+      </div>
+    </div>
+
+    <div class="ads-social-proof">
+      <div class="ads-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="ads-review-text">"Dani Cleans is the best cleaning service we've ever used. Consistent, thorough, and so easy to work with."</p>
+      <p class="ads-reviewer">— Sarah M., Charlottesville</p>
+    </div>
+  </div>
+
+  <!-- Conversion tracking snippet placeholder -->
+  <script>
+    // Track form submission for Google Ads conversion
+    if (window.location.search.indexOf('success=true') !== -1) {
+      // Google Ads conversion (uncomment and add your conversion ID)
+      // gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/XXXXX' });
+
+      // Facebook Pixel conversion (uncomment and add your pixel)
+      // fbq('track', 'Lead');
+
+      document.querySelector('.ads-form-card').innerHTML =
+        '<div style="text-align:center;padding:40px 0;">' +
+        '<div style="font-size:48px;margin-bottom:12px;">&#10003;</div>' +
+        '<h2>We Got Your Request!</h2>' +
+        '<p style="color:#555;margin-top:8px;">We\'ll call or text you within 24 hours with your personalized estimate.</p>' +
+        '<p style="margin-top:16px;"><a href="tel:4343510335" style="color:#2d6a4f;font-weight:600;">Need it sooner? Call 434-351-0335</a></p>' +
+        '</div>';
+    }
+  </script>
+</body>
+</html>

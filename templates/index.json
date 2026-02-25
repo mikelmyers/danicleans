@@ -394,6 +394,15 @@
         "padding_bottom": 60
       }
     },
+    "referral_program": {
+      "type": "referral-program",
+      "settings": {
+        "heading": "Give $25, Get $25",
+        "subheading": "Refer a friend to Dani Cleans. When they book, you both get $25 off your next service.",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
@@ -431,6 +440,7 @@
     "service_areas",
     "smart_faq",
     "booking_calendar",
+    "referral_program",
     "cta_bottom",
     "newsletter"
   ]
