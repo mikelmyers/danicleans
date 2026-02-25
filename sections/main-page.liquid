@@ -14,14 +14,68 @@
   }
 {%- endstyle -%}
 
+<!-- Branded Page Hero -->
+<div class="dc-page-hero">
+  <div class="dc-page-hero-inner">
+    <h1 class="dc-page-hero-title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {{ page.title | escape }}
+    </h1>
+  </div>
+</div>
+
+<!-- Page Content -->
 <div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | escape }}
-  </h1>
-  <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <div class="dc-page-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     {{ page.content }}
   </div>
 </div>
+
+<style>
+  .dc-page-hero {
+    background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 100%);
+    padding: 56px 20px;
+    text-align: center;
+  }
+  .dc-page-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .dc-page-hero-title {
+    color: #fff;
+    font-size: 36px;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .dc-page-content {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #444;
+  }
+  .dc-page-content h2,
+  .dc-page-content h3 {
+    color: #1a3a2a;
+    margin-top: 2em;
+  }
+  .dc-page-content a {
+    color: #2d6a4f;
+    font-weight: 600;
+  }
+  .dc-page-content ul,
+  .dc-page-content ol {
+    padding-left: 1.5em;
+  }
+  .dc-page-content li {
+    margin-bottom: 0.5em;
+  }
+  .dc-page-content img {
+    border-radius: 12px;
+    margin: 1.5em 0;
+  }
+  @media (max-width: 768px) {
+    .dc-page-hero { padding: 40px 20px; }
+    .dc-page-hero-title { font-size: 28px; }
+  }
+</style>
 
 {% schema %}
 {
