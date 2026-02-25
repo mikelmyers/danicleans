@@ -26,11 +26,22 @@
     {% else %}
       <!-- Built-in scheduling request form -->
       <div class="booking-form-wrap">
+        <!-- Quote persistence banner (populated by JS if quote exists) -->
+        <div class="booking-quote-banner" id="bookingQuoteBanner" style="display:none;">
+          <div class="booking-quote-banner-inner">
+            <div class="booking-quote-badge">Your Estimate</div>
+            <div class="booking-quote-amount" id="bookingQuoteAmount"></div>
+            <div class="booking-quote-service" id="bookingQuoteService"></div>
+            <div class="booking-quote-details" id="bookingQuoteDetails"></div>
+          </div>
+        </div>
+
         <form method="post" action="/contact" id="BookingForm" accept-charset="UTF-8" class="booking-form">
           <input type="hidden" name="form_type" value="contact">
           <input type="hidden" name="utf8" value="✓">
           <input type="hidden" name="contact[Source]" value="Booking Calendar">
           <input type="hidden" name="return_to" value="{{ request.path }}?form_type=contact&success=true">
+          <input type="hidden" name="contact[Calculator Estimate]" id="booking-calc-estimate" value="">
 
           <div class="booking-row">
             <div class="booking-field">
@@ -142,10 +153,50 @@
 }
 .booking-success h3 { color: #1a3a2a; margin-bottom: 8px; }
 .booking-success p { color: #555; }
+/* Quote persistence banner */
+.booking-quote-banner {
+  background: linear-gradient(135deg, #f0f7f0, #e8f5e9);
+  border: 2px solid #2d6a4f;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.booking-quote-banner-inner { max-width: 400px; margin: 0 auto; }
+.booking-quote-badge {
+  display: inline-block;
+  background: #2d6a4f;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+.booking-quote-amount {
+  font-size: 36px;
+  font-weight: 800;
+  color: #2d6a4f;
+  line-height: 1.1;
+}
+.booking-quote-service {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a3a2a;
+  margin-top: 4px;
+}
+.booking-quote-details {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
 @media (max-width: 600px) {
   .booking-row { flex-direction: column; }
   .booking-slots { grid-template-columns: 1fr 1fr; }
   .booking-form-wrap { padding: 20px; }
+  .booking-quote-amount { font-size: 28px; }
 }
 </style>
 
@@ -215,6 +266,51 @@
       successEl.style.display = 'block';
     }
   }
+
+  // Quote persistence: Read saved quote from localStorage and display it
+  try {
+    var savedQuote = localStorage.getItem('danicleans_quote');
+    if (savedQuote) {
+      var quote = JSON.parse(savedQuote);
+      // Only show if quote is less than 24 hours old
+      if (quote.timestamp && (Date.now() - quote.timestamp) < 86400000) {
+        var banner = document.getElementById('bookingQuoteBanner');
+        var amountEl = document.getElementById('bookingQuoteAmount');
+        var serviceEl = document.getElementById('bookingQuoteService');
+        var detailsEl = document.getElementById('bookingQuoteDetails');
+        var hiddenEstimate = document.getElementById('booking-calc-estimate');
+        if (banner && amountEl) {
+          amountEl.textContent = quote.estimate;
+          if (serviceEl) serviceEl.textContent = quote.service;
+          if (detailsEl) detailsEl.textContent = quote.details;
+          if (hiddenEstimate) hiddenEstimate.value = quote.estimate + ' — ' + quote.service + ' — ' + quote.details;
+          banner.style.display = 'block';
+        }
+        // Auto-select the service dropdown to match the quote
+        var serviceSelect = document.getElementById('booking-service');
+        if (serviceSelect && quote.service) {
+          var SERVICE_MAP = {
+            'Recurring Cleaning': 'Recurring Cleaning',
+            'Deep Cleaning': 'Deep Cleaning',
+            'Move-In/Move-Out Cleaning': 'Move-In/Move-Out',
+            'Lawn Mowing & Maintenance': 'Lawn Mowing',
+            'Landscaping & Garden Design': 'Landscaping',
+            'Seasonal Cleanup': 'Seasonal Cleanup',
+            'Cleaning + Landscaping Bundle': 'Bundle'
+          };
+          var mapped = SERVICE_MAP[quote.service];
+          if (mapped) {
+            for (var i = 0; i < serviceSelect.options.length; i++) {
+              if (serviceSelect.options[i].value === mapped) {
+                serviceSelect.selectedIndex = i;
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+  } catch(e) {}
 })();
 </script>
 

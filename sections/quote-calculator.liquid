@@ -679,6 +679,21 @@
     if (state.frequency) details.push('Frequency: ' + state.frequency);
     if (Object.keys(state.addons).length > 0) details.push('Add-ons: ' + Object.keys(state.addons).join(', '));
     $('calc-hidden-details').value = details.join(' | ');
+
+    // Persist quote to localStorage so it follows the customer through booking
+    try {
+      var quoteData = {
+        estimate: '$' + total + ' ' + freqText,
+        total: total,
+        freqText: freqText,
+        service: p.label || state.service,
+        serviceKey: state.service,
+        details: details.join(' | '),
+        breakdown: lines.map(function(l) { return l.label + ': ' + (l.amount < 0 ? '-$' + Math.abs(l.amount) : '$' + l.amount); }).join(', '),
+        timestamp: Date.now()
+      };
+      localStorage.setItem('danicleans_quote', JSON.stringify(quoteData));
+    } catch(e) {}
   }
 })();
 </script>
