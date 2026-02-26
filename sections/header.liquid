@@ -77,6 +77,54 @@
 </style>
 
 {%- style -%}
+  /* --- Utility Top Bar --- */
+  .header-utility-bar {
+    background: #1a3a2a;
+    color: #c8d9c8;
+    font-size: 13px;
+    padding: 6px 20px;
+    display: none;
+  }
+  @media screen and (min-width: 750px) {
+    .header-utility-bar { display: block; }
+  }
+  .header-utility-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-utility-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-utility-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #c8d9c8;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  a.header-utility-item:hover { color: #fff; }
+  .header-utility-item svg { flex-shrink: 0; opacity: 0.7; }
+  .header-utility-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-utility-right a {
+    color: #b7e4c7;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .header-utility-right a:hover { color: #fff; }
+
+  /* --- Header Phone & CTA --- */
   .header__phone {
     display: inline-flex;
     align-items: center;
@@ -98,7 +146,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 20px;
+    padding: 10px 22px;
     background: #2d6a4f;
     color: #fff;
     font-size: 14px;
@@ -106,19 +154,66 @@
     text-decoration: none;
     border-radius: 6px;
     white-space: nowrap;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
     margin-left: 4px;
   }
   .header__cta-button:hover {
     background: #245a42;
     color: #fff;
+    transform: translateY(-1px);
   }
+
+  /* --- Nav Link Styling --- */
+  .header__inline-menu .header__menu-item {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: none;
+    padding: 8px 14px;
+    color: rgba(var(--color-foreground), 0.85);
+    border-radius: 6px;
+    transition: color 0.2s, background-color 0.2s;
+  }
+  .header__inline-menu .header__menu-item:hover {
+    color: rgb(var(--color-foreground));
+    background-color: rgba(45, 106, 79, 0.08);
+  }
+  .header__inline-menu .header__active-menu-item {
+    color: #2d6a4f;
+    position: relative;
+  }
+  .header__inline-menu .header__active-menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 14px;
+    right: 14px;
+    height: 2px;
+    background: #2d6a4f;
+    border-radius: 1px;
+  }
+
+  /* --- Logo Enhancements --- */
+  .header__heading-link {
+    transition: opacity 0.2s;
+  }
+  .header__heading-link:hover {
+    opacity: 0.85;
+  }
+  .header__heading-link .h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a3a2a;
+    letter-spacing: -0.5px;
+  }
+
+  /* --- Header Layout --- */
   .header {
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
   .section-header {
-    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
+    position: sticky;
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
   }
 
@@ -133,6 +228,23 @@
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
+  }
+
+  /* --- Submenu Polish --- */
+  .header__submenu {
+    border-radius: 8px;
+    border: 1px solid #e0e8e0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    min-width: 200px;
+  }
+  .header__submenu .header__menu-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 0;
+  }
+  .header__submenu .header__menu-item:hover {
+    background: #f0f5f0;
   }
 {%- endstyle -%}
 
@@ -153,6 +265,26 @@
     assign header_tag = 'sticky-header'
   endif
 %}
+
+<!-- Utility Top Bar — Business info for credibility -->
+<div class="header-utility-bar">
+  <div class="header-utility-inner">
+    <div class="header-utility-left">
+      <span class="header-utility-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Mon-Fri 8am-6pm &bull; Sat 8am-4pm
+      </span>
+      <span class="header-utility-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Charlottesville &amp; Surrounding Areas
+      </span>
+    </div>
+    <div class="header-utility-right">
+      <a href="/pages/request-a-quote">Free Estimate</a>
+      <a href="tel:{{ section.settings.phone_number | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}">{{ section.settings.phone_number | default: '434-351-0335' }}</a>
+    </div>
+  </div>
+</div>
 
 <{{ header_tag }}
   {% if header_tag == 'sticky-header' %}
