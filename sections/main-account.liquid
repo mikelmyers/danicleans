@@ -1,4 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'account-dashboard.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -14,141 +15,771 @@
   }
 {%- endstyle -%}
 
+{%- comment -%}Detect account type from customer tags{%- endcomment -%}
+{%- assign is_realtor = false -%}
+{%- assign is_commercial = false -%}
+{%- for tag in customer.tags -%}
+  {%- assign tag_lower = tag | downcase -%}
+  {%- if tag_lower == 'realtor' or tag_lower == 'realtor-partner' or tag_lower == 'realtor partner' -%}
+    {%- assign is_realtor = true -%}
+  {%- endif -%}
+  {%- if tag_lower == 'commercial' or tag_lower == 'business' -%}
+    {%- assign is_commercial = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}Calculate account stats{%- endcomment -%}
+{%- assign total_spent = 0 -%}
+{%- assign total_cleanings = customer.orders_count -%}
+{%- for order in customer.orders -%}
+  {%- assign order_total_cents = order.total_net_amount | times: 1 -%}
+  {%- assign total_spent = total_spent | plus: order_total_cents -%}
+{%- endfor -%}
+
 <div class="customer account section-{{ section.id }}-padding">
-  <div>
-    <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1>
-    <a href="{{ routes.account_logout_url }}">
-      <span class="svg-wrapper">
-        {{- 'icon-account.svg' | inline_asset_content -}}
-      </span>
-      {{ 'customer.log_out' | t }}
-    </a>
-  </div>
-
-  <div>
-    <div>
-      <h2>{{ 'customer.orders.title' | t }}</h2>
-
-      {% paginate customer.orders by 20 %}
-        {%- if customer.orders.size > 0 -%}
-          <table role="table" class="order-history">
-            <caption class="visually-hidden">
-              {{ 'customer.orders.title' | t }}
-            </caption>
-            <thead role="rowgroup">
-              <tr role="row">
-                <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
-                <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
-                <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
-                <th id="ColumnFulfillment" scope="col" role="columnheader">
-                  {{ 'customer.orders.fulfillment_status' | t }}
-                </th>
-                <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
-              </tr>
-            </thead>
-            <tbody role="rowgroup">
-              {%- for order in customer.orders -%}
-                <tr role="row">
-                  <td
-                    id="RowOrder"
-                    role="cell"
-                    headers="ColumnOrder"
-                    data-label="{{ 'customer.orders.order_number' | t }}"
-                  >
-                    <a
-                      href="{{ order.customer_url }}"
-                      aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
-                    >
-                      {{ order.name }}
-                    </a>
-                  </td>
-                  <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
-                    {{ order.created_at | time_tag: format: 'date' }}
-                  </td>
-                  <td
-                    headers="RowOrder ColumnPayment"
-                    role="cell"
-                    data-label="{{ 'customer.orders.payment_status' | t }}"
-                  >
-                    {{ order.financial_status_label }}
-                  </td>
-                  <td
-                    headers="RowOrder ColumnFulfillment"
-                    role="cell"
-                    data-label="{{ 'customer.orders.fulfillment_status' | t }}"
-                  >
-                    {{ order.fulfillment_status_label }}
-                  </td>
-                  <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
-                    {{ order.total_net_amount | money_with_currency }}
-                  </td>
-                </tr>
-              {%- endfor -%}
-            </tbody>
-          </table>
-        {%- else -%}
-          <p>{{ 'customer.orders.none' | t }}</p>
-        {%- endif -%}
-
-        {%- if paginate.pages > 1 -%}
-          {%- if paginate.parts.size > 0 -%}
-            <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-              <ul role="list">
-                {%- if paginate.previous -%}
-                  <li>
-                    <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
-                      <span class="svg-wrapper">
-                        {{- 'icon-caret.svg' | inline_asset_content -}}
-                      </span>
-                    </a>
-                  </li>
-                {%- endif -%}
-
-                {%- for part in paginate.parts -%}
-                  <li>
-                    {%- if part.is_link -%}
-                      <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
-                        {{- part.title -}}
-                      </a>
-                    {%- else -%}
-                      {%- if part.title == paginate.current_page -%}
-                        <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
-                          {{- part.title -}}
-                        </span>
-                      {%- else -%}
-                        <span>{{ part.title }}</span>
-                      {%- endif -%}
-                    {%- endif -%}
-                  </li>
-                {%- endfor -%}
-
-                {%- if paginate.next -%}
-                  <li>
-                    <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
-                      <span class="svg-wrapper">
-                        {{- 'icon-caret.svg' | inline_asset_content -}}
-                      </span>
-                    </a>
-                  </li>
-                {%- endif -%}
-              </ul>
-            </nav>
-          {%- endif -%}
-        {%- endif -%}
-      {% endpaginate %}
+  <!-- Account Header -->
+  <div class="account-dashboard__header">
+    <div class="account-dashboard__welcome">
+      <h1>Welcome back, {{ customer.first_name | default: 'Valued Customer' }}</h1>
+      {%- if is_realtor -%}
+        <span class="account-dashboard__badge account-dashboard__badge--realtor">Realtor Partner</span>
+      {%- elsif is_commercial -%}
+        <span class="account-dashboard__badge account-dashboard__badge--commercial">Commercial Client</span>
+      {%- else -%}
+        <span class="account-dashboard__badge account-dashboard__badge--homeowner">Homeowner</span>
+      {%- endif -%}
     </div>
-
-    <div>
-      <h2>{{ 'customer.account.details' | t }}</h2>
-
-      {{ customer.default_address | format_address }}
-
-      <a href="{{ routes.account_addresses_url }}">
-        {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
+    <div class="account-dashboard__header-actions">
+      <a href="{{ routes.account_logout_url }}" class="account-dashboard__logout">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Log Out
       </a>
     </div>
   </div>
+
+  <!-- Quick Stats -->
+  <div class="account-dashboard__stats">
+    <div class="account-dashboard__stat-card">
+      <span class="account-dashboard__stat-number">{{ total_cleanings }}</span>
+      <span class="account-dashboard__stat-label">Total Cleanings</span>
+    </div>
+    <div class="account-dashboard__stat-card">
+      <span class="account-dashboard__stat-number">{{ total_spent | money }}</span>
+      <span class="account-dashboard__stat-label">Total Spent</span>
+    </div>
+    <div class="account-dashboard__stat-card">
+      <span class="account-dashboard__stat-number">{{ customer.addresses_count }}</span>
+      <span class="account-dashboard__stat-label">Properties</span>
+    </div>
+    <div class="account-dashboard__stat-card">
+      <span class="account-dashboard__stat-number">
+        {%- if customer.orders.size > 0 -%}
+          {{ customer.orders.first.created_at | date: "%b %d" }}
+        {%- else -%}
+          --
+        {%- endif -%}
+      </span>
+      <span class="account-dashboard__stat-label">Last Cleaning</span>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="account-dashboard__tabs" role="tablist" aria-label="Account sections">
+    <button class="account-dashboard__tab account-dashboard__tab--active" role="tab" aria-selected="true" aria-controls="tab-dashboard" data-tab="dashboard">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="account-dashboard__tab" role="tab" aria-selected="false" aria-controls="tab-history" data-tab="history">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Cleaning History</span>
+    </button>
+    <button class="account-dashboard__tab" role="tab" aria-selected="false" aria-controls="tab-invoices" data-tab="invoices">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <span>Invoices & Billing</span>
+    </button>
+    {%- if is_realtor -%}
+      <button class="account-dashboard__tab" role="tab" aria-selected="false" aria-controls="tab-scheduling" data-tab="scheduling">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Scheduling</span>
+      </button>
+      <button class="account-dashboard__tab" role="tab" aria-selected="false" aria-controls="tab-properties" data-tab="properties">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Properties</span>
+      </button>
+    {%- endif -%}
+    <button class="account-dashboard__tab" role="tab" aria-selected="false" aria-controls="tab-account" data-tab="account">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Account Details</span>
+    </button>
+  </div>
+
+  <!-- Tab Panels -->
+  <div class="account-dashboard__panels">
+
+    <!-- ===== DASHBOARD TAB ===== -->
+    <div class="account-dashboard__panel account-dashboard__panel--active" id="tab-dashboard" role="tabpanel">
+      {%- if is_realtor -%}
+        <!-- Realtor Quick Actions -->
+        <div class="account-dashboard__section">
+          <h2 class="account-dashboard__section-title">Quick Actions</h2>
+          <div class="account-dashboard__quick-actions">
+            <a href="/pages/request-a-quote" class="account-dashboard__action-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+              <span>Schedule a Cleaning</span>
+            </a>
+            <a href="#" class="account-dashboard__action-card" data-tab-link="scheduling">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <span>Adjust Schedule</span>
+            </a>
+            <a href="#" class="account-dashboard__action-card" data-tab-link="properties">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Manage Properties</span>
+            </a>
+            <a href="#" class="account-dashboard__action-card" data-tab-link="invoices">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>View Invoices</span>
+            </a>
+          </div>
+        </div>
+      {%- else -%}
+        <!-- Homeowner Quick Actions -->
+        <div class="account-dashboard__section">
+          <h2 class="account-dashboard__section-title">Quick Actions</h2>
+          <div class="account-dashboard__quick-actions">
+            <a href="/pages/request-a-quote" class="account-dashboard__action-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+              <span>Book a Cleaning</span>
+            </a>
+            <a href="#" class="account-dashboard__action-card" data-tab-link="history">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>View History</span>
+            </a>
+            <a href="#" class="account-dashboard__action-card" data-tab-link="invoices">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>View Invoices</span>
+            </a>
+            <a href="/pages/referral" class="account-dashboard__action-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Refer a Friend</span>
+            </a>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Recent Cleanings Preview -->
+      <div class="account-dashboard__section">
+        <div class="account-dashboard__section-header">
+          <h2 class="account-dashboard__section-title">Recent Cleanings</h2>
+          <button class="account-dashboard__link-btn" data-tab-link="history">View All</button>
+        </div>
+        {%- if customer.orders.size > 0 -%}
+          <div class="account-dashboard__recent-list">
+            {%- assign preview_count = 0 -%}
+            {%- for order in customer.orders -%}
+              {%- if preview_count < 5 -%}
+                <div class="account-dashboard__recent-item">
+                  <div class="account-dashboard__recent-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  </div>
+                  <div class="account-dashboard__recent-details">
+                    <span class="account-dashboard__recent-title">
+                      {%- for line_item in order.line_items limit: 1 -%}
+                        {{ line_item.title | default: 'Cleaning Service' }}
+                      {%- endfor -%}
+                    </span>
+                    <span class="account-dashboard__recent-date">{{ order.created_at | date: "%B %d, %Y" }}</span>
+                  </div>
+                  <div class="account-dashboard__recent-meta">
+                    <span class="account-dashboard__recent-amount">{{ order.total_net_amount | money }}</span>
+                    <span class="account-dashboard__status account-dashboard__status--{{ order.financial_status }}">{{ order.financial_status_label }}</span>
+                  </div>
+                </div>
+                {%- assign preview_count = preview_count | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="account-dashboard__empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <p>No cleanings yet. Book your first cleaning to get started!</p>
+            <a href="/pages/request-a-quote" class="account-dashboard__btn account-dashboard__btn--primary">Request a Quote</a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- ===== CLEANING HISTORY TAB ===== -->
+    <div class="account-dashboard__panel" id="tab-history" role="tabpanel" hidden>
+      <div class="account-dashboard__section">
+        <h2 class="account-dashboard__section-title">Cleaning History</h2>
+        <p class="account-dashboard__section-desc">Complete record of all your cleaning services.</p>
+
+        {% paginate customer.orders by 20 %}
+          {%- if customer.orders.size > 0 -%}
+            <!-- Timeline View -->
+            <div class="account-dashboard__timeline">
+              {%- assign current_month = '' -%}
+              {%- for order in customer.orders -%}
+                {%- assign order_month = order.created_at | date: "%B %Y" -%}
+                {%- if order_month != current_month -%}
+                  {%- assign current_month = order_month -%}
+                  <div class="account-dashboard__timeline-month">{{ current_month }}</div>
+                {%- endif -%}
+                <div class="account-dashboard__timeline-item">
+                  <div class="account-dashboard__timeline-dot"></div>
+                  <div class="account-dashboard__timeline-content">
+                    <div class="account-dashboard__timeline-header">
+                      <div>
+                        <h3 class="account-dashboard__timeline-title">
+                          {%- for line_item in order.line_items limit: 1 -%}
+                            {{ line_item.title | default: 'Cleaning Service' }}
+                          {%- endfor -%}
+                        </h3>
+                        <span class="account-dashboard__timeline-date">{{ order.created_at | date: "%A, %B %d, %Y" }}</span>
+                      </div>
+                      <div class="account-dashboard__timeline-meta">
+                        <span class="account-dashboard__timeline-amount">{{ order.total_net_amount | money }}</span>
+                        <span class="account-dashboard__status account-dashboard__status--{{ order.fulfillment_status }}">
+                          {%- if order.fulfillment_status == 'fulfilled' -%}
+                            Completed
+                          {%- elsif order.fulfillment_status == 'partial' -%}
+                            In Progress
+                          {%- elsif order.fulfillment_status == nil -%}
+                            Scheduled
+                          {%- else -%}
+                            {{ order.fulfillment_status_label }}
+                          {%- endif -%}
+                        </span>
+                      </div>
+                    </div>
+                    <!-- Line item details -->
+                    {%- if order.line_items.size > 0 -%}
+                      <div class="account-dashboard__timeline-services">
+                        {%- for line_item in order.line_items -%}
+                          <div class="account-dashboard__service-line">
+                            <span>{{ line_item.title }}</span>
+                            <span>{{ line_item.final_line_price | money }}</span>
+                          </div>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                    <div class="account-dashboard__timeline-actions">
+                      <a href="{{ order.customer_url }}" class="account-dashboard__link-btn">View Details</a>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="account-dashboard__pagination" role="navigation" aria-label="Cleaning history pages">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}" class="account-dashboard__page-btn">Previous</a>
+                {%- endif -%}
+                <span class="account-dashboard__page-info">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}" class="account-dashboard__page-btn">Next</a>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
+          {%- else -%}
+            <div class="account-dashboard__empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <p>No cleaning history yet.</p>
+              <a href="/pages/request-a-quote" class="account-dashboard__btn account-dashboard__btn--primary">Book Your First Cleaning</a>
+            </div>
+          {%- endif -%}
+        {% endpaginate %}
+      </div>
+    </div>
+
+    <!-- ===== INVOICES & BILLING TAB ===== -->
+    <div class="account-dashboard__panel" id="tab-invoices" role="tabpanel" hidden>
+      <div class="account-dashboard__section">
+        <h2 class="account-dashboard__section-title">Invoices & Billing</h2>
+        <p class="account-dashboard__section-desc">View and manage your invoices and payment history.</p>
+
+        {%- if customer.orders.size > 0 -%}
+          <!-- Billing Summary -->
+          <div class="account-dashboard__billing-summary">
+            <div class="account-dashboard__billing-card">
+              <span class="account-dashboard__billing-label">Total Invoices</span>
+              <span class="account-dashboard__billing-value">{{ customer.orders_count }}</span>
+            </div>
+            <div class="account-dashboard__billing-card">
+              <span class="account-dashboard__billing-label">Total Paid</span>
+              <span class="account-dashboard__billing-value">{{ total_spent | money }}</span>
+            </div>
+            <div class="account-dashboard__billing-card">
+              <span class="account-dashboard__billing-label">Last Payment</span>
+              <span class="account-dashboard__billing-value">
+                {%- for order in customer.orders limit: 1 -%}
+                  {{ order.created_at | date: "%b %d, %Y" }}
+                {%- endfor -%}
+              </span>
+            </div>
+          </div>
+
+          <!-- Invoice Table -->
+          <div class="account-dashboard__table-wrap">
+            <table class="account-dashboard__table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Date</th>
+                  <th>Service</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td data-label="Invoice #">
+                      <strong>{{ order.name }}</strong>
+                    </td>
+                    <td data-label="Date">{{ order.created_at | date: "%b %d, %Y" }}</td>
+                    <td data-label="Service">
+                      {%- for line_item in order.line_items limit: 1 -%}
+                        {{ line_item.title | truncate: 35 }}
+                      {%- endfor -%}
+                      {%- if order.line_items.size > 1 -%}
+                        <span class="account-dashboard__more-items">+{{ order.line_items.size | minus: 1 }} more</span>
+                      {%- endif -%}
+                    </td>
+                    <td data-label="Status">
+                      <span class="account-dashboard__status account-dashboard__status--{{ order.financial_status }}">
+                        {{ order.financial_status_label }}
+                      </span>
+                    </td>
+                    <td data-label="Amount">
+                      <strong>{{ order.total_net_amount | money }}</strong>
+                    </td>
+                    <td data-label="Actions">
+                      <a href="{{ order.customer_url }}" class="account-dashboard__link-btn">View</a>
+                    </td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        {%- else -%}
+          <div class="account-dashboard__empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <p>No invoices yet.</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if is_realtor -%}
+    <!-- ===== SCHEDULING TAB (Realtor Only) ===== -->
+    <div class="account-dashboard__panel" id="tab-scheduling" role="tabpanel" hidden>
+      <div class="account-dashboard__section">
+        <h2 class="account-dashboard__section-title">Scheduling & Auto-Schedule</h2>
+        <p class="account-dashboard__section-desc">Manage your recurring cleaning schedules and make adjustments as needed.</p>
+
+        <!-- Auto-Schedule Setup -->
+        <div class="account-dashboard__schedule-setup">
+          <div class="account-dashboard__schedule-card account-dashboard__schedule-card--highlight">
+            <div class="account-dashboard__schedule-card-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              <h3>Auto-Schedule</h3>
+            </div>
+            <p>Set up recurring cleanings for your properties. We'll automatically schedule and confirm appointments based on your preferences.</p>
+            <form class="account-dashboard__schedule-form" id="auto-schedule-form">
+              <div class="account-dashboard__form-row">
+                <div class="account-dashboard__form-group">
+                  <label for="schedule-frequency">Cleaning Frequency</label>
+                  <select id="schedule-frequency" name="frequency">
+                    <option value="weekly">Weekly</option>
+                    <option value="biweekly" selected>Every 2 Weeks</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="after-each-tenant">After Each Tenant</option>
+                  </select>
+                </div>
+                <div class="account-dashboard__form-group">
+                  <label for="schedule-day">Preferred Day</label>
+                  <select id="schedule-day" name="preferred_day">
+                    <option value="monday">Monday</option>
+                    <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
+                    <option value="saturday">Saturday</option>
+                  </select>
+                </div>
+              </div>
+              <div class="account-dashboard__form-row">
+                <div class="account-dashboard__form-group">
+                  <label for="schedule-time">Preferred Time</label>
+                  <select id="schedule-time" name="preferred_time">
+                    <option value="morning">Morning (8am - 11am)</option>
+                    <option value="midday">Midday (11am - 2pm)</option>
+                    <option value="afternoon">Afternoon (2pm - 5pm)</option>
+                  </select>
+                </div>
+                <div class="account-dashboard__form-group">
+                  <label for="schedule-property">Property</label>
+                  <select id="schedule-property" name="property">
+                    {%- for address in customer.addresses -%}
+                      <option value="{{ address.id }}">
+                        {{ address.address1 }}{% if address.city %}, {{ address.city }}{% endif %}
+                      </option>
+                    {%- endfor -%}
+                    <option value="all">All Properties</option>
+                  </select>
+                </div>
+              </div>
+              <div class="account-dashboard__form-group">
+                <label for="schedule-notes">Special Instructions</label>
+                <textarea id="schedule-notes" name="notes" rows="3" placeholder="Lockbox code, access instructions, specific areas of focus..."></textarea>
+              </div>
+              <button type="submit" class="account-dashboard__btn account-dashboard__btn--primary">Save Auto-Schedule</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Adjust Upcoming Cleaning -->
+        <div class="account-dashboard__schedule-adjust">
+          <h3 class="account-dashboard__subsection-title">Adjust Upcoming Cleaning</h3>
+          <p>Need to change the date for your next scheduled cleaning? Use the form below to request a reschedule.</p>
+
+          <form class="account-dashboard__adjust-form" id="adjust-schedule-form">
+            <div class="account-dashboard__form-row">
+              <div class="account-dashboard__form-group">
+                <label for="adjust-property">Property</label>
+                <select id="adjust-property" name="property">
+                  {%- for address in customer.addresses -%}
+                    <option value="{{ address.id }}">
+                      {{ address.address1 }}{% if address.city %}, {{ address.city }}{% endif %}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+              <div class="account-dashboard__form-group">
+                <label for="adjust-date">New Preferred Date</label>
+                <input type="date" id="adjust-date" name="new_date">
+              </div>
+            </div>
+            <div class="account-dashboard__form-row">
+              <div class="account-dashboard__form-group">
+                <label for="adjust-time">Preferred Time</label>
+                <select id="adjust-time" name="preferred_time">
+                  <option value="morning">Morning (8am - 11am)</option>
+                  <option value="midday">Midday (11am - 2pm)</option>
+                  <option value="afternoon">Afternoon (2pm - 5pm)</option>
+                </select>
+              </div>
+              <div class="account-dashboard__form-group">
+                <label for="adjust-reason">Reason (Optional)</label>
+                <input type="text" id="adjust-reason" name="reason" placeholder="e.g., Tenant checkout moved up">
+              </div>
+            </div>
+            <button type="submit" class="account-dashboard__btn account-dashboard__btn--secondary">Request Reschedule</button>
+          </form>
+        </div>
+
+        <!-- Upcoming Cleanings from orders -->
+        <div class="account-dashboard__upcoming">
+          <h3 class="account-dashboard__subsection-title">Upcoming & Recent Cleanings</h3>
+          {%- assign has_upcoming = false -%}
+          {%- for order in customer.orders -%}
+            {%- if order.fulfillment_status == nil or order.fulfillment_status == 'partial' -%}
+              {%- assign has_upcoming = true -%}
+              <div class="account-dashboard__upcoming-item">
+                <div class="account-dashboard__upcoming-date">
+                  <span class="account-dashboard__upcoming-month">{{ order.created_at | date: "%b" }}</span>
+                  <span class="account-dashboard__upcoming-day">{{ order.created_at | date: "%d" }}</span>
+                </div>
+                <div class="account-dashboard__upcoming-details">
+                  <span class="account-dashboard__upcoming-title">
+                    {%- for line_item in order.line_items limit: 1 -%}
+                      {{ line_item.title | default: 'Cleaning Service' }}
+                    {%- endfor -%}
+                  </span>
+                  <span class="account-dashboard__upcoming-info">Order {{ order.name }} &middot; {{ order.total_net_amount | money }}</span>
+                </div>
+                <span class="account-dashboard__status account-dashboard__status--pending">Scheduled</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- unless has_upcoming -%}
+            <p class="account-dashboard__muted-text">No upcoming cleanings scheduled. Use the auto-schedule feature above or <a href="/pages/request-a-quote">request a new cleaning</a>.</p>
+          {%- endunless -%}
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PROPERTIES TAB (Realtor Only) ===== -->
+    <div class="account-dashboard__panel" id="tab-properties" role="tabpanel" hidden>
+      <div class="account-dashboard__section">
+        <h2 class="account-dashboard__section-title">Your Properties</h2>
+        <p class="account-dashboard__section-desc">Manage the properties you need cleaned regularly.</p>
+
+        <div class="account-dashboard__properties-grid">
+          {%- for address in customer.addresses -%}
+            <div class="account-dashboard__property-card">
+              <div class="account-dashboard__property-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <h3>{{ address.address1 }}</h3>
+                {%- if address == customer.default_address -%}
+                  <span class="account-dashboard__badge account-dashboard__badge--small">Primary</span>
+                {%- endif -%}
+              </div>
+              <div class="account-dashboard__property-address">
+                {%- if address.address2 != blank -%}<p>{{ address.address2 }}</p>{%- endif -%}
+                <p>{{ address.city }}, {{ address.province_code }} {{ address.zip }}</p>
+                {%- if address.phone != blank -%}<p>{{ address.phone }}</p>{%- endif -%}
+              </div>
+              <div class="account-dashboard__property-actions">
+                <a href="{{ routes.account_addresses_url }}" class="account-dashboard__link-btn">Edit</a>
+              </div>
+            </div>
+          {%- endfor -%}
+
+          <!-- Add Property Card -->
+          <a href="{{ routes.account_addresses_url }}" class="account-dashboard__property-card account-dashboard__property-card--add">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Add New Property</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    {%- endif -%}
+
+    <!-- ===== ACCOUNT DETAILS TAB ===== -->
+    <div class="account-dashboard__panel" id="tab-account" role="tabpanel" hidden>
+      <div class="account-dashboard__section">
+        <h2 class="account-dashboard__section-title">Account Details</h2>
+
+        <div class="account-dashboard__details-grid">
+          <!-- Personal Info -->
+          <div class="account-dashboard__details-card">
+            <h3>Personal Information</h3>
+            <div class="account-dashboard__detail-row">
+              <span class="account-dashboard__detail-label">Name</span>
+              <span class="account-dashboard__detail-value">{{ customer.name }}</span>
+            </div>
+            <div class="account-dashboard__detail-row">
+              <span class="account-dashboard__detail-label">Email</span>
+              <span class="account-dashboard__detail-value">{{ customer.email }}</span>
+            </div>
+            {%- if customer.phone != blank -%}
+              <div class="account-dashboard__detail-row">
+                <span class="account-dashboard__detail-label">Phone</span>
+                <span class="account-dashboard__detail-value">{{ customer.phone }}</span>
+              </div>
+            {%- endif -%}
+            <div class="account-dashboard__detail-row">
+              <span class="account-dashboard__detail-label">Account Type</span>
+              <span class="account-dashboard__detail-value">
+                {%- if is_realtor -%}Realtor Partner{%- elsif is_commercial -%}Commercial{%- else -%}Homeowner{%- endif -%}
+              </span>
+            </div>
+            <div class="account-dashboard__detail-row">
+              <span class="account-dashboard__detail-label">Member Since</span>
+              <span class="account-dashboard__detail-value">{{ customer.created_at | date: "%B %Y" }}</span>
+            </div>
+          </div>
+
+          <!-- Default Address -->
+          <div class="account-dashboard__details-card">
+            <h3>Default Address</h3>
+            {%- if customer.default_address -%}
+              <div class="account-dashboard__address-block">
+                {{ customer.default_address | format_address }}
+              </div>
+            {%- else -%}
+              <p class="account-dashboard__muted-text">No default address set.</p>
+            {%- endif -%}
+            <a href="{{ routes.account_addresses_url }}" class="account-dashboard__btn account-dashboard__btn--secondary" style="margin-top: 1.5rem;">
+              Manage Addresses ({{ customer.addresses_count }})
+            </a>
+          </div>
+
+          <!-- Customer Tags / Account Features -->
+          <div class="account-dashboard__details-card">
+            <h3>Account Features</h3>
+            {%- if is_realtor -%}
+              <ul class="account-dashboard__features-list">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Priority scheduling
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Auto-recurring cleanings
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Multi-property management
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Flexible rescheduling
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Dedicated account support
+                </li>
+              </ul>
+            {%- else -%}
+              <ul class="account-dashboard__features-list">
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Full cleaning history
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Invoice access & records
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Easy rebooking
+                </li>
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ead69" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  Referral rewards
+                </li>
+              </ul>
+              <p class="account-dashboard__muted-text" style="margin-top: 1.5rem;">
+                Are you a realtor? <a href="/pages/realtor-partner">Learn about our Realtor Partner program</a> for priority scheduling and multi-property management.
+              </p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+{% javascript %}
+  class AccountDashboard {
+    constructor() {
+      this.tabs = document.querySelectorAll('.account-dashboard__tab');
+      this.panels = document.querySelectorAll('.account-dashboard__panel');
+      this.tabLinks = document.querySelectorAll('[data-tab-link]');
+      this.init();
+    }
+
+    init() {
+      // Handle tab clicks
+      this.tabs.forEach(tab => {
+        tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
+      });
+
+      // Handle data-tab-link clicks (quick action cards and "View All" links)
+      this.tabLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.switchTab(link.dataset.tabLink);
+        });
+      });
+
+      // Check URL hash for direct tab linking
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById('tab-' + hash)) {
+        this.switchTab(hash);
+      }
+
+      // Handle schedule form submissions
+      this.initScheduleForms();
+    }
+
+    switchTab(tabName) {
+      // Update tabs
+      this.tabs.forEach(tab => {
+        const isActive = tab.dataset.tab === tabName;
+        tab.classList.toggle('account-dashboard__tab--active', isActive);
+        tab.setAttribute('aria-selected', isActive);
+      });
+
+      // Update panels
+      this.panels.forEach(panel => {
+        const isActive = panel.id === 'tab-' + tabName;
+        panel.classList.toggle('account-dashboard__panel--active', isActive);
+        panel.hidden = !isActive;
+      });
+
+      // Update URL hash
+      history.replaceState(null, null, '#' + tabName);
+
+      // Scroll to top of dashboard on mobile
+      if (window.innerWidth < 750) {
+        document.querySelector('.account-dashboard__tabs').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    initScheduleForms() {
+      const autoScheduleForm = document.getElementById('auto-schedule-form');
+      const adjustForm = document.getElementById('adjust-schedule-form');
+
+      if (autoScheduleForm) {
+        autoScheduleForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          this.handleScheduleSubmit(autoScheduleForm, 'Auto-Schedule');
+        });
+      }
+
+      if (adjustForm) {
+        adjustForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          this.handleScheduleSubmit(adjustForm, 'Reschedule Request');
+        });
+      }
+    }
+
+    handleScheduleSubmit(form, type) {
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      // Send via Shopify contact form API
+      const contactBody = new URLSearchParams();
+      contactBody.append('form_type', 'contact');
+      contactBody.append('utf8', '\u2713');
+      contactBody.append('contact[email]', document.querySelector('[data-customer-email]')?.textContent || '');
+      contactBody.append('contact[body]', type + ' Request:\n' + JSON.stringify(data, null, 2));
+      contactBody.append('contact[tags]', 'schedule-request,' + type.toLowerCase().replace(/ /g, '-'));
+
+      fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: contactBody.toString()
+      })
+      .then(() => {
+        btn.textContent = 'Request Sent!';
+        btn.classList.add('account-dashboard__btn--success');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.disabled = false;
+          btn.classList.remove('account-dashboard__btn--success');
+        }, 3000);
+      })
+      .catch(() => {
+        btn.textContent = 'Error - Try Again';
+        btn.disabled = false;
+        setTimeout(() => { btn.textContent = originalText; }, 3000);
+      });
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new AccountDashboard());
+  } else {
+    new AccountDashboard();
+  }
+{% endjavascript %}
+
+<span data-customer-email style="display:none;">{{ customer.email }}</span>
 
 {% schema %}
 {
