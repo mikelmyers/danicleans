@@ -19,6 +19,13 @@
 </div>
 
 <script>
+  // Escape HTML to prevent XSS from review content
+  function escapeCarouselHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   // Function to load reviews for carousel
   function loadCarouselReviews() {
     fetch('{{ 'reviews.json' | asset_url }}')
@@ -26,22 +33,22 @@
       .then(reviews => {
         const container = document.getElementById('reviews-container');
         container.innerHTML = '';
-        
+
         if (reviews.length === 0) {
           container.innerHTML = '<p>No reviews available.</p>';
           return;
         }
-        
+
         // Create a div to hold all slides
         const slidesWrapper = document.createElement('div');
         slidesWrapper.className = 'slides-wrapper';
         container.appendChild(slidesWrapper);
-        
+
         // Add each review as a slide
         reviews.forEach((review, index) => {
           const rating = review.rating || 5;
           let starsHtml = '';
-          
+
           for (let i = 1; i <= 5; i++) {
             if (i <= rating) {
               starsHtml += '<span class="star star-filled">★</span>';
@@ -49,16 +56,14 @@
               starsHtml += '<span class="star">★</span>';
             }
           }
-          
+
           const reviewElement = document.createElement('div');
           reviewElement.className = 'review-slide';
           reviewElement.dataset.index = index;
-          reviewElement.innerHTML = `
-            <div class="review-stars">${starsHtml}</div>
-            <p class="review-text">"${review.review}"</p>
-            <p class="reviewer-name">- ${review.name}</p>
-          `;
-          
+          reviewElement.innerHTML = '<div class="review-stars">' + starsHtml + '</div>' +
+            '<p class="review-text">&ldquo;' + escapeCarouselHtml(review.review) + '&rdquo;</p>' +
+            '<p class="reviewer-name">- ' + escapeCarouselHtml(review.name) + '</p>';
+
           slidesWrapper.appendChild(reviewElement);
         });
         
@@ -294,10 +299,10 @@
     max-width: 70%;
   }
   .reviewer-name {
-  font-weight: bold;
-  font-family: 'Assistant', sans-serif;
-  font-size: 2.0rem;
-}
+    font-weight: bold;
+    font-family: 'Assistant', sans-serif;
+    font-size: 2.0rem;
+  }
 }
 
 /* Extra style for very large screens */
