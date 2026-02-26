@@ -1006,11 +1006,427 @@
   color: rgb(var(--color-foreground));
 }
 
+/* Verification Banner */
+.account-dashboard__verification-banner {
+  display: flex;
+  gap: 1.5rem;
+  background: #fff8e1;
+  border: 1px solid #ffcc02;
+  border-radius: 1.2rem;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.account-dashboard__verification-icon {
+  flex-shrink: 0;
+  color: #f57f17;
+}
+
+.account-dashboard__verification-text strong {
+  display: block;
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: #f57f17;
+}
+
+.account-dashboard__verification-text p {
+  margin: 0.5rem 0 0 0;
+  font-size: 1.4rem;
+  color: #5d4037;
+}
+
+.account-dashboard__verification-text a {
+  color: #e65100;
+  font-weight: 600;
+}
+
+/* Pending badge */
+.account-dashboard__badge--pending {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px dashed #e65100;
+}
+
+.account-dashboard__badges {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+}
+
+/* Pending features list */
+.account-dashboard__features-list--pending {
+  opacity: 0.6;
+}
+
+.account-dashboard__features-list--pending li {
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+/* Contracts */
+.account-dashboard__contract-card {
+  background: rgba(var(--color-foreground), 0.02);
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+  border-radius: 1.2rem;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.account-dashboard__contract-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.account-dashboard__contract-header h3 {
+  font-size: calc(var(--font-heading-scale) * 1.8rem);
+  margin: 0 1rem 0 0;
+  display: inline;
+}
+
+.account-dashboard__contract-details {
+  margin-bottom: 2rem;
+}
+
+.account-dashboard__contract-scope {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.account-dashboard__contract-scope h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.account-dashboard__contract-scope ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.account-dashboard__contract-scope li {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 2rem;
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.account-dashboard__contract-scope li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: #0ead69;
+  font-weight: bold;
+}
+
+.account-dashboard__contract-actions-section {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+/* Service Preferences */
+.account-dashboard__preferences-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.account-dashboard__pref-card {
+  background: rgba(var(--color-foreground), 0.02);
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+  border-radius: 1.2rem;
+  padding: 2rem;
+}
+
+.account-dashboard__pref-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: calc(var(--font-heading-scale) * 1.4rem);
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.account-dashboard__pref-card h3 svg {
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.account-dashboard__checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.account-dashboard__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.account-dashboard__checkbox input[type="checkbox"] {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin: 0;
+  cursor: pointer;
+  accent-color: rgb(var(--color-foreground));
+}
+
+/* Feedback Modal */
+.account-dashboard__modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.account-dashboard__modal {
+  background: rgb(var(--color-background));
+  border-radius: 1.6rem;
+  padding: 3rem;
+  max-width: 50rem;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.account-dashboard__modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 2.4rem;
+  cursor: pointer;
+  color: rgba(var(--color-foreground), 0.5);
+  line-height: 1;
+  padding: 0;
+}
+
+.account-dashboard__modal-close:hover {
+  color: rgb(var(--color-foreground));
+}
+
+.account-dashboard__modal h3 {
+  font-size: calc(var(--font-heading-scale) * 2rem);
+  margin: 0 0 0.5rem 0;
+}
+
+.account-dashboard__modal-subtitle {
+  color: rgba(var(--color-foreground), 0.5);
+  font-size: 1.4rem;
+  margin: 0 0 2rem 0;
+}
+
+/* Star Rating */
+.account-dashboard__star-rating {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.account-dashboard__star {
+  background: none;
+  border: none;
+  font-size: 3.2rem;
+  cursor: pointer;
+  color: rgba(var(--color-foreground), 0.2);
+  transition: color 0.15s, transform 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+
+.account-dashboard__star:hover,
+.account-dashboard__star--active {
+  color: #ffc107;
+  transform: scale(1.1);
+}
+
+/* Registration Form Styles */
+.register__subtitle {
+  color: rgba(var(--color-foreground), 0.6);
+  font-size: 1.4rem;
+  margin: -1rem 0 2rem 0;
+}
+
+.register__account-type {
+  margin: 2rem 0 3rem 0;
+}
+
+.register__type-label {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.register__type-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media screen and (max-width: 749px) {
+  .register__type-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.register__type-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border: 2px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.register__type-option:hover {
+  border-color: rgba(var(--color-foreground), 0.2);
+}
+
+.register__type-option--active {
+  border-color: rgb(var(--color-foreground));
+  background: rgba(var(--color-foreground), 0.03);
+}
+
+.register__type-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.register__type-icon {
+  margin-bottom: 0.8rem;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.register__type-option--active .register__type-icon {
+  color: rgb(var(--color-foreground));
+}
+
+.register__type-name {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.register__type-desc {
+  display: block;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.register__type-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: #fff8e1;
+  border-radius: 0.6rem;
+  font-size: 1.3rem;
+  color: #5d4037;
+}
+
+.register__type-note svg {
+  flex-shrink: 0;
+  color: #f57f17;
+  margin-top: 0.1rem;
+}
+
+.register__row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .register__row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.register__row .field {
+  flex: 1;
+}
+
+.register__conditional-fields {
+  margin-top: 1rem;
+  padding: 2rem;
+  background: rgba(var(--color-foreground), 0.02);
+  border: 1px solid rgba(var(--color-foreground), 0.08);
+  border-radius: 1.2rem;
+}
+
+.register__conditional-header {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: rgba(var(--color-foreground), 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.register__conditional-fields .field {
+  margin-top: 1rem;
+}
+
+.register__login-link {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+}
+
 /* Override default customer account styles to avoid conflict */
-.customer.account .account-dashboard__header + .account-dashboard__stats {
+.customer.account .account-dashboard__header + .account-dashboard__stats,
+.customer.account .account-dashboard__verification-banner + .account-dashboard__stats {
   margin-top: 0;
 }
 
 .customer.account h2.account-dashboard__section-title {
   margin-top: 0;
+}
+
+/* Form group for number inputs */
+.account-dashboard__form-group input[type="number"],
+.account-dashboard__form-group input[type="tel"] {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  border-radius: 0.6rem;
+  font-size: 1.4rem;
+  font-family: inherit;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.account-dashboard__form-group input[type="number"]:focus,
+.account-dashboard__form-group input[type="tel"]:focus {
+  outline: none;
+  border-color: rgba(var(--color-foreground), 0.4);
 }

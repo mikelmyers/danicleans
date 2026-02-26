@@ -1,4 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'account-dashboard.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -15,9 +16,9 @@
 {%- endstyle -%}
 
 <div class="customer register section-{{ section.id }}-padding">
-  <h1>
-    {{ 'customer.register.title' | t }}
-  </h1>
+  <h1>Create Your Account</h1>
+  <p class="register__subtitle">Join DaniCleans and manage your cleanings, invoices, and scheduling all in one place.</p>
+
   {%- form 'create_customer', novalidate: 'novalidate' -%}
     {%- if form.errors -%}
       <h2 class="form__message" tabindex="-1" autofocus>
@@ -41,36 +42,73 @@
         {%- endfor -%}
       </ul>
     {%- endif -%}
-    <div class="field">
-      <input
-        type="text"
-        name="customer[first_name]"
-        id="RegisterForm-FirstName"
-        {% if form.first_name %}
-          value="{{ form.first_name }}"
-        {% endif %}
-        autocomplete="given-name"
-        placeholder="{{ 'customer.register.first_name' | t }}"
-      >
-      <label for="RegisterForm-FirstName">
-        {{ 'customer.register.first_name' | t }}
-      </label>
+
+    <!-- Account Type Selection -->
+    <div class="register__account-type">
+      <label class="register__type-label">I am a...</label>
+      <div class="register__type-options">
+        <label class="register__type-option register__type-option--active" data-type="homeowner">
+          <input type="radio" name="customer[tags]" value="homeowner" checked>
+          <span class="register__type-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <span class="register__type-name">Homeowner</span>
+          <span class="register__type-desc">Residential cleaning for my home</span>
+        </label>
+        <label class="register__type-option" data-type="realtor">
+          <input type="radio" name="customer[tags]" value="realtor-pending">
+          <span class="register__type-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </span>
+          <span class="register__type-name">Realtor</span>
+          <span class="register__type-desc">Turnover cleanings for rental properties</span>
+        </label>
+        <label class="register__type-option" data-type="commercial">
+          <input type="radio" name="customer[tags]" value="commercial-pending">
+          <span class="register__type-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>
+          </span>
+          <span class="register__type-name">Commercial</span>
+          <span class="register__type-desc">Office, retail, or business cleaning</span>
+        </label>
+      </div>
+      <p class="register__type-note" id="register-type-note" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        Realtor and commercial accounts require verification. You'll get full access once we confirm your account.
+      </p>
     </div>
-    <div class="field">
-      <input
-        type="text"
-        name="customer[last_name]"
-        id="RegisterForm-LastName"
-        {% if form.last_name %}
-          value="{{ form.last_name }}"
-        {% endif %}
-        autocomplete="family-name"
-        placeholder="{{ 'customer.register.last_name' | t }}"
-      >
-      <label for="RegisterForm-LastName">
-        {{ 'customer.register.last_name' | t }}
-      </label>
+
+    <!-- Name Fields -->
+    <div class="register__row">
+      <div class="field">
+        <input
+          type="text"
+          name="customer[first_name]"
+          id="RegisterForm-FirstName"
+          {% if form.first_name %}
+            value="{{ form.first_name }}"
+          {% endif %}
+          autocomplete="given-name"
+          placeholder="First name"
+        >
+        <label for="RegisterForm-FirstName">First Name</label>
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          name="customer[last_name]"
+          id="RegisterForm-LastName"
+          {% if form.last_name %}
+            value="{{ form.last_name }}"
+          {% endif %}
+          autocomplete="family-name"
+          placeholder="Last name"
+        >
+        <label for="RegisterForm-LastName">Last Name</label>
+      </div>
     </div>
+
+    <!-- Email -->
     <div class="field">
       <input
         type="email"
@@ -87,11 +125,9 @@
           aria-invalid="true"
           aria-describedby="RegisterForm-email-error"
         {% endif %}
-        placeholder="{{ 'customer.register.email' | t }}"
+        placeholder="Email address"
       >
-      <label for="RegisterForm-email">
-        {{ 'customer.register.email' | t }}
-      </label>
+      <label for="RegisterForm-email">Email</label>
     </div>
     {%- if form.errors contains 'email' -%}
       <span id="RegisterForm-email-error" class="form__message">
@@ -102,6 +138,20 @@
         {{ form.errors.messages.email }}.
       </span>
     {%- endif -%}
+
+    <!-- Phone -->
+    <div class="field">
+      <input
+        type="tel"
+        name="customer[phone]"
+        id="RegisterForm-phone"
+        autocomplete="tel"
+        placeholder="Phone number"
+      >
+      <label for="RegisterForm-phone">Phone Number</label>
+    </div>
+
+    <!-- Password -->
     <div class="field">
       <input
         type="password"
@@ -112,11 +162,9 @@
           aria-invalid="true"
           aria-describedby="RegisterForm-password-error"
         {% endif %}
-        placeholder="{{ 'customer.register.password' | t }}"
+        placeholder="Password"
       >
-      <label for="RegisterForm-password">
-        {{ 'customer.register.password' | t }}
-      </label>
+      <label for="RegisterForm-password">Password</label>
     </div>
     {%- if form.errors contains 'password' -%}
       <span id="RegisterForm-password-error" class="form__message">
@@ -127,11 +175,104 @@
         {{ form.errors.messages.password }}.
       </span>
     {%- endif -%}
-    <button>
-      {{ 'customer.register.submit' | t }}
-    </button>
+
+    <!-- Realtor-specific fields (shown/hidden via JS) -->
+    <div class="register__conditional-fields" id="realtor-fields" style="display: none;">
+      <div class="register__conditional-header">Realtor Details</div>
+      <div class="field">
+        <input
+          type="text"
+          name="customer[note][brokerage]"
+          id="RegisterForm-brokerage"
+          placeholder="Brokerage / agency name"
+        >
+        <label for="RegisterForm-brokerage">Brokerage / Agency</label>
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          name="customer[note][license]"
+          id="RegisterForm-license"
+          placeholder="Real estate license # (optional)"
+        >
+        <label for="RegisterForm-license">License # (Optional)</label>
+      </div>
+      <div class="field">
+        <input
+          type="number"
+          name="customer[note][num_properties]"
+          id="RegisterForm-properties"
+          placeholder="Approximate # of properties"
+          min="1"
+        >
+        <label for="RegisterForm-properties">Number of Properties</label>
+      </div>
+    </div>
+
+    <!-- Commercial-specific fields -->
+    <div class="register__conditional-fields" id="commercial-fields" style="display: none;">
+      <div class="register__conditional-header">Business Details</div>
+      <div class="field">
+        <input
+          type="text"
+          name="customer[note][company_name]"
+          id="RegisterForm-company"
+          placeholder="Company / business name"
+        >
+        <label for="RegisterForm-company">Company Name</label>
+      </div>
+      <div class="field">
+        <input
+          type="text"
+          name="customer[note][business_type]"
+          id="RegisterForm-business-type"
+          placeholder="e.g., Office, Retail, Restaurant"
+        >
+        <label for="RegisterForm-business-type">Type of Business</label>
+      </div>
+      <div class="field">
+        <input
+          type="number"
+          name="customer[note][num_locations]"
+          id="RegisterForm-locations"
+          placeholder="Number of locations"
+          min="1"
+        >
+        <label for="RegisterForm-locations">Number of Locations</label>
+      </div>
+    </div>
+
+    <button>Create Account</button>
   {%- endform -%}
+
+  <p class="register__login-link">Already have an account? <a href="{{ routes.account_login_url }}">Log in</a></p>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const typeOptions = document.querySelectorAll('.register__type-option');
+    const typeNote = document.getElementById('register-type-note');
+    const realtorFields = document.getElementById('realtor-fields');
+    const commercialFields = document.getElementById('commercial-fields');
+
+    typeOptions.forEach(function(option) {
+      option.addEventListener('click', function() {
+        // Update active state
+        typeOptions.forEach(function(opt) { opt.classList.remove('register__type-option--active'); });
+        option.classList.add('register__type-option--active');
+
+        var type = option.dataset.type;
+
+        // Show/hide verification note
+        typeNote.style.display = (type === 'realtor' || type === 'commercial') ? 'flex' : 'none';
+
+        // Show/hide conditional fields
+        realtorFields.style.display = type === 'realtor' ? 'block' : 'none';
+        commercialFields.style.display = type === 'commercial' ? 'block' : 'none';
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
