@@ -30,7 +30,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Get a FREE Estimate",
-            "button_link_1": "shopify:\/\/pages\/request-a-quote",
+            "button_link_1": "shopify://pages/request-a-quote",
             "button_style_secondary_1": false,
             "button_label_2": "Call Now: 434-351-0335",
             "button_link_2": "tel:4343510335",
@@ -38,7 +38,11 @@
           }
         }
       },
-      "block_order": ["hero_heading", "hero_text", "hero_buttons"],
+      "block_order": [
+        "hero_heading",
+        "hero_text",
+        "hero_buttons"
+      ],
       "settings": {
         "image_overlay_opacity": 40,
         "image_height": "large",
@@ -47,8 +51,8 @@
         "desktop_content_alignment": "center",
         "show_text_box": true,
         "color_scheme": "inverse",
-        "mobile_content_alignment": "center",
         "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
         "show_text_below": false
       }
     },
@@ -88,7 +92,12 @@
           }
         }
       },
-      "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"],
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ],
       "settings": {
         "padding_top": 0,
         "padding_bottom": 0
@@ -105,7 +114,7 @@
             "description": "Weekly, bi-weekly, or monthly cleaning plans that keep your home consistently fresh. Customized to your schedule and priorities.",
             "starting_price": "$100/visit",
             "link_text": "Learn More",
-            "link": "shopify:\/\/pages\/services"
+            "link": "shopify://pages/services"
           }
         },
         "cleaning_2": {
@@ -116,7 +125,7 @@
             "description": "Top-to-bottom scrub for homes that need extra attention. We get into every corner, fixture, and surface — ideal for seasonal refreshes.",
             "starting_price": "$180",
             "link_text": "Learn More",
-            "link": "shopify:\/\/pages\/services"
+            "link": "shopify://pages/services"
           }
         },
         "cleaning_3": {
@@ -127,16 +136,20 @@
             "description": "Stress-free transitions for renters, homeowners, and property managers. We handle the cleaning so you can focus on your move.",
             "starting_price": "$200",
             "link_text": "Learn More",
-            "link": "shopify:\/\/pages\/services"
+            "link": "shopify://pages/services"
           }
         }
       },
-      "block_order": ["cleaning_1", "cleaning_2", "cleaning_3"],
+      "block_order": [
+        "cleaning_1",
+        "cleaning_2",
+        "cleaning_3"
+      ],
       "settings": {
         "heading": "Home Cleaning Services",
         "subheading": "Professional cleaning tailored to your home and schedule",
         "cta_text": "Get a Free Cleaning Estimate",
-        "cta_link": "shopify:\/\/pages\/request-a-quote",
+        "cta_link": "shopify://pages/request-a-quote",
         "padding_top": 52,
         "padding_bottom": 20
       }
@@ -152,7 +165,7 @@
             "description": "Regular mowing, edging, and trimming to keep your lawn looking sharp all season. Flexible scheduling for residential and commercial properties.",
             "starting_price": "$40/visit",
             "link_text": "Learn More",
-            "link": "shopify:\/\/pages\/services"
+            "link": "shopify://pages/services"
           }
         },
         "landscape_2": {
@@ -163,7 +176,7 @@
             "description": "Garden beds, mulching, shrub trimming, and seasonal plantings. We design and maintain outdoor spaces that boost your curb appeal.",
             "starting_price": "$200",
             "link_text": "Learn More",
-            "link": "shopify:\/\/pages\/services"
+            "link": "shopify://pages/services"
           }
         },
         "landscape_3": {
@@ -174,16 +187,20 @@
             "description": "Spring prep, fall leaf removal, gutter clearing, and storm cleanup. Keep your property tidy and protected year-round.",
             "starting_price": "$150",
             "link_text": "Learn More",
-            "link": "shopify:\/\/pages\/services"
+            "link": "shopify://pages/services"
           }
         }
       },
-      "block_order": ["landscape_1", "landscape_2", "landscape_3"],
+      "block_order": [
+        "landscape_1",
+        "landscape_2",
+        "landscape_3"
+      ],
       "settings": {
         "heading": "Landscaping & Lawn Care",
         "subheading": "Keep your property beautiful year-round",
         "cta_text": "Get a Free Landscaping Estimate",
-        "cta_link": "shopify:\/\/pages\/request-a-quote",
+        "cta_link": "shopify://pages/request-a-quote",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -208,7 +225,7 @@
           "type": "button",
           "settings": {
             "button_label": "Book Your First Service",
-            "button_link": "shopify:\/\/pages\/request-a-quote",
+            "button_link": "shopify://pages/request-a-quote",
             "button_style_secondary": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -216,7 +233,11 @@
           }
         }
       },
-      "block_order": ["why_heading", "why_text", "why_button"],
+      "block_order": [
+        "why_heading",
+        "why_text",
+        "why_button"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -229,18 +250,54 @@
     "meet_the_team": {
       "type": "meet-the-team",
       "blocks": {
-        "val_1": { "type": "value", "settings": { "icon": "🏠", "title": "Locally Owned", "description": "Born and raised in the Charlottesville area" }},
-        "val_2": { "type": "value", "settings": { "icon": "🛡️", "title": "Fully Insured", "description": "Licensed, bonded, and insured for your protection" }},
-        "val_3": { "type": "value", "settings": { "icon": "🌿", "title": "Eco-Conscious", "description": "Safe products for your family and pets" }},
-        "val_4": { "type": "value", "settings": { "icon": "💯", "title": "Guaranteed", "description": "Not satisfied? We redo it free" }}
+        "val_1": {
+          "type": "value",
+          "settings": {
+            "icon": "🏠",
+            "title": "Locally Owned",
+            "description": "Born and raised in the Charlottesville area"
+          }
+        },
+        "val_2": {
+          "type": "value",
+          "settings": {
+            "icon": "🛡️",
+            "title": "Fully Insured",
+            "description": "Licensed, bonded, and insured for your protection"
+          }
+        },
+        "val_3": {
+          "type": "value",
+          "settings": {
+            "icon": "🌿",
+            "title": "Eco-Conscious",
+            "description": "Safe products for your family and pets"
+          }
+        },
+        "val_4": {
+          "type": "value",
+          "settings": {
+            "icon": "💯",
+            "title": "Guaranteed",
+            "description": "Not satisfied? We redo it free"
+          }
+        }
       },
-      "block_order": ["val_1", "val_2", "val_3", "val_4"],
+      "block_order": [
+        "val_1",
+        "val_2",
+        "val_3",
+        "val_4"
+      ],
       "settings": {
         "tag": "Meet the Owner",
         "heading": "Hi, I'm Dani — and I Started This Company to Do Things Right",
         "story": "<p>I started Dani Cleans in 2018 because I saw too many cleaning and landscaping companies cutting corners. I believed Charlottesville families deserved better — reliable scheduling, consistent quality, and people who actually care about your home.</p><p>Today our team serves hundreds of families across Charlottesville and Albemarle County. We're not a franchise. We're your neighbors. And we treat every home like it's our own.</p>",
         "cta_text": "Get a Free Estimate",
+        "cta_url": "",
         "cta2_text": "See Our Pricing",
+        "cta2_url": "",
+        "bg_color": "#ffffff",
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -248,12 +305,45 @@
     "stats_counter": {
       "type": "stats-counter",
       "blocks": {
-        "stat_1": { "type": "stat", "settings": { "number": "500", "suffix": "+", "label": "Homes Serviced" } },
-        "stat_2": { "type": "stat", "settings": { "number": "5", "suffix": "★", "label": "Average Rating" } },
-        "stat_3": { "type": "stat", "settings": { "number": "8", "suffix": "+", "label": "Years Experience" } },
-        "stat_4": { "type": "stat", "settings": { "number": "98", "suffix": "%", "label": "Repeat Customers" } }
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "500",
+            "suffix": "+",
+            "label": "Homes Serviced"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "5",
+            "suffix": "★",
+            "label": "Average Rating"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "8",
+            "suffix": "+",
+            "label": "Years Experience"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "98",
+            "suffix": "%",
+            "label": "Repeat Customers"
+          }
+        }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"],
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
       "settings": {
         "heading": "Trusted Across Central Virginia",
         "padding_top": 52,
@@ -263,11 +353,32 @@
     "before_after": {
       "type": "before-after-gallery",
       "blocks": {
-        "ba_1": { "type": "comparison", "settings": { "label": "Kitchen Deep Clean — Charlottesville" } },
-        "ba_2": { "type": "comparison", "settings": { "label": "Lawn Transformation — Crozet" } },
-        "ba_3": { "type": "comparison", "settings": { "label": "Move-Out Cleaning — Albemarle County" } }
+        "ba_1": {
+          "type": "comparison",
+          "settings": {
+            "label": "Kitchen Deep Clean — Charlottesville"
+          }
+        },
+        "ba_2": {
+          "type": "comparison",
+          "settings": {
+            "before_image": "shopify://shop_images/IMG_2659.jpg",
+            "after_image": "shopify://shop_images/IMG_2658.jpg",
+            "label": "Lawn Transformation — Lake Monticello"
+          }
+        },
+        "ba_3": {
+          "type": "comparison",
+          "settings": {
+            "label": "Move-Out Cleaning — Albemarle County"
+          }
+        }
       },
-      "block_order": ["ba_1", "ba_2", "ba_3"],
+      "block_order": [
+        "ba_1",
+        "ba_2",
+        "ba_3"
+      ],
       "settings": {
         "heading": "See the Dani Cleans Difference",
         "subheading": "Drag the slider to see the transformation. Real results from real customers.",
@@ -285,6 +396,15 @@
         "auto_rotate": true,
         "slide_duration": 5,
         "show_form": false
+      }
+    },
+    "quote_calculator": {
+      "type": "quote-calculator",
+      "settings": {
+        "heading": "Get an Instant Estimate",
+        "subheading": "Answer a few quick questions and see your price in under 60 seconds.",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "service_areas": {
@@ -327,7 +447,12 @@
           }
         }
       },
-      "block_order": ["area_charlottesville", "area_albemarle", "area_surrounding", "area_commercial"],
+      "block_order": [
+        "area_charlottesville",
+        "area_albemarle",
+        "area_surrounding",
+        "area_commercial"
+      ],
       "settings": {
         "caption": "We Come to You",
         "heading": "Areas We Serve",
@@ -343,15 +468,6 @@
         "padding_bottom": 40
       }
     },
-    "quote_calculator": {
-      "type": "quote-calculator",
-      "settings": {
-        "heading": "Get an Instant Estimate",
-        "subheading": "Answer a few quick questions and see your price in under 60 seconds.",
-        "padding_top": 52,
-        "padding_bottom": 52
-      }
-    },
     "smart_faq": {
       "type": "smart-faq",
       "settings": {
@@ -365,6 +481,16 @@
       "settings": {
         "heading": "Book Your Service",
         "subheading": "Pick a day and time that works for you. We'll confirm within 24 hours.",
+        "calendar_url": "",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "referral_program": {
+      "type": "referral-program",
+      "settings": {
+        "heading": "Give $25, Get $25",
+        "subheading": "Refer a friend to Dani Cleans. When they book, you both get $25 off your next service.",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -389,7 +515,7 @@
           "type": "button",
           "settings": {
             "button_label": "Request a FREE Estimate",
-            "button_link": "shopify:\/\/pages\/request-a-quote",
+            "button_link": "shopify://pages/request-a-quote",
             "button_style_secondary": false,
             "button_label_2": "Call 434-351-0335",
             "button_link_2": "tel:4343510335",
@@ -397,7 +523,11 @@
           }
         }
       },
-      "block_order": ["cta_heading", "cta_text", "cta_buttons"],
+      "block_order": [
+        "cta_heading",
+        "cta_text",
+        "cta_buttons"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -405,15 +535,6 @@
         "full_width": true,
         "padding_top": 60,
         "padding_bottom": 60
-      }
-    },
-    "referral_program": {
-      "type": "referral-program",
-      "settings": {
-        "heading": "Give $25, Get $25",
-        "subheading": "Refer a friend to Dani Cleans. When they book, you both get $25 off your next service.",
-        "padding_top": 52,
-        "padding_bottom": 52
       }
     },
     "newsletter": {
@@ -431,7 +552,10 @@
           "settings": {}
         }
       },
-      "block_order": ["nl_heading", "nl_form"],
+      "block_order": [
+        "nl_heading",
+        "nl_form"
+      ],
       "settings": {
         "color_scheme": "",
         "full_width": true,
