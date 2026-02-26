@@ -144,6 +144,14 @@
   <section class="rp-form-section" id="rp-form">
     <div class="rp-inner">
       <div class="rp-form-card">
+        {% if request.query.success == 'true' and request.query.form_type == 'contact' %}
+        <div style="text-align:center;padding:32px 0;">
+          <div style="font-size:48px;margin-bottom:12px;">&#10003;</div>
+          <h2 style="color:#2d6a4f;">Welcome to the Program!</h2>
+          <p style="color:#555;margin-top:8px;">We'll follow up within 24 hours to get you set up and discuss your preferred plan.</p>
+          <p style="margin-top:16px;"><a href="tel:4343510335" style="color:#2d6a4f;font-weight:600;">Want to get started now? Call 434-351-0335</a></p>
+        </div>
+        {% else %}
         <h2>Join the Realtor Partner Program</h2>
         <p>Takes 2 minutes. No contracts. We'll follow up within 24 hours to get you set up.</p>
 
@@ -179,6 +187,7 @@
           <textarea name="contact[body]" placeholder="Anything else we should know? (optional)" rows="3" class="rp-full-field"></textarea>
           <button type="submit" class="rp-submit">Join the Partner Program</button>
         </form>
+        {% endif %}
       </div>
     </div>
   </section>

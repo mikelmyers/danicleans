@@ -150,6 +150,14 @@
   <section class="comm-form-section" id="comm-form">
     <div class="comm-inner">
       <div class="comm-form-card">
+        {% if request.query.success == 'true' and request.query.form_type == 'contact' %}
+        <div style="text-align:center;padding:32px 0;">
+          <div style="font-size:48px;margin-bottom:12px;">&#10003;</div>
+          <h2 style="color:#2d6a4f;">Quote Request Received!</h2>
+          <p style="color:#555;margin-top:8px;">Our commercial team will put together a custom proposal and follow up within 48 hours.</p>
+          <p style="margin-top:16px;"><a href="tel:4343510335" style="color:#2d6a4f;font-weight:600;">Need it sooner? Call 434-351-0335</a></p>
+        </div>
+        {% else %}
         <h2>Get a Commercial Quote</h2>
         <p>Tell us about your property and we'll put together a custom proposal within 48 hours.</p>
 
@@ -192,6 +200,7 @@
           <textarea name="contact[body]" placeholder="Tell us about your property — size, number of units, current frequency, etc." rows="4" class="comm-full-field"></textarea>
           <button type="submit" class="comm-submit">Request Commercial Quote</button>
         </form>
+        {% endif %}
       </div>
     </div>
   </section>
