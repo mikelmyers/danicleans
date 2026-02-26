@@ -56,6 +56,15 @@
 
 <script>
 (function() {
+  var MAX_TOASTS_PER_SESSION = 3;
+  var INTERVAL_MS = 90000; // 90 seconds between toasts
+  var FIRST_DELAY_MS = 30000; // 30 seconds before first toast
+
+  // Check how many toasts have already been shown this session
+  var toastsShown = 0;
+  try { toastsShown = parseInt(sessionStorage.getItem('dc_proof_count') || '0'); } catch(e) {}
+  if (toastsShown >= MAX_TOASTS_PER_SESSION) return;
+
   var PROOFS = [
     { name: "Sarah from Crozet", action: "booked a recurring cleaning" },
     { name: "James from Charlottesville", action: "requested a deep cleaning estimate" },
@@ -82,6 +91,9 @@
 
   function showProof() {
     if (dismissed) return;
+    try { toastsShown = parseInt(sessionStorage.getItem('dc_proof_count') || '0'); } catch(e) {}
+    if (toastsShown >= MAX_TOASTS_PER_SESSION) return;
+
     var proof = PROOFS[currentIndex % PROOFS.length];
     var time = TIMES[Math.floor(Math.random() * TIMES.length)];
 
@@ -90,21 +102,26 @@
     document.getElementById('proofTime').textContent = time;
     toast.style.display = 'flex';
     toast.style.animation = 'none';
-    toast.offsetHeight; // trigger reflow
+    toast.offsetHeight;
     toast.style.animation = 'proofSlideIn 0.4s ease';
 
     currentIndex++;
+    toastsShown++;
+    try { sessionStorage.setItem('dc_proof_count', toastsShown.toString()); } catch(e) {}
 
-    // Hide after 6 seconds
     setTimeout(function() {
       if (!dismissed) toast.style.display = 'none';
     }, 6000);
   }
 
-  // Show first proof after 20 seconds, then every 45 seconds
+  // Show first proof after 30 seconds, then every 90 seconds (max 3 per session)
   setTimeout(function() {
     showProof();
-    setInterval(showProof, 45000);
-  }, 20000);
+    var interval = setInterval(function() {
+      try { toastsShown = parseInt(sessionStorage.getItem('dc_proof_count') || '0'); } catch(e) {}
+      if (toastsShown >= MAX_TOASTS_PER_SESSION) { clearInterval(interval); return; }
+      showProof();
+    }, INTERVAL_MS);
+  }, FIRST_DELAY_MS);
 })();
 </script>

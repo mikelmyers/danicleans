@@ -8,7 +8,7 @@
 
 <div class="fv-overlay" id="firstVisitOverlay" style="display:none;">
   <div class="fv-popup">
-    <button class="fv-close" onclick="document.getElementById('firstVisitOverlay').style.display='none';try{sessionStorage.setItem('dc_fv_seen','1')}catch(e){}" aria-label="Close">&times;</button>
+    <button class="fv-close" onclick="document.getElementById('firstVisitOverlay').style.display='none';try{localStorage.setItem('dc_fv_seen','1')}catch(e){}" aria-label="Close">&times;</button>
 
     <div class="fv-content">
       <div class="fv-badge">NEW CUSTOMER OFFER</div>
@@ -80,19 +80,19 @@
 <script>
 (function() {
   try {
-    // Only show on first visit, not on success pages, and not if already seen
-    if (sessionStorage.getItem('dc_fv_seen')) return;
+    // Only show once ever (localStorage persists across sessions/tabs)
+    if (localStorage.getItem('dc_fv_seen')) return;
     if (window.location.search.indexOf('success') !== -1) return;
     if (window.location.pathname.indexOf('google-ads') !== -1) return;
 
-    // Show after 8 seconds
+    // Show after 10 seconds
     setTimeout(function() {
       var overlay = document.getElementById('firstVisitOverlay');
       if (overlay) {
         overlay.style.display = 'flex';
-        sessionStorage.setItem('dc_fv_seen', '1');
+        localStorage.setItem('dc_fv_seen', '1');
       }
-    }, 8000);
+    }, 10000);
 
     // Close on overlay click
     var overlay = document.getElementById('firstVisitOverlay');
@@ -104,7 +104,7 @@
 
     // Success state
     if (window.location.search.indexOf('fv_success=true') !== -1) {
-      sessionStorage.setItem('dc_fv_seen', '1');
+      localStorage.setItem('dc_fv_seen', '1');
     }
   } catch(e) {}
 })();
