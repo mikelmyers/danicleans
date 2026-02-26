@@ -78,9 +78,13 @@
   var shown = false;
   var STORAGE_KEY = 'dc_exit_popup_shown';
 
-  // Don't show if already shown this session, if another popup is visible, or if user already converted
+  // Don't show if shown in last 7 days, or if user already converted
   try {
-    if (sessionStorage.getItem(STORAGE_KEY)) return;
+    var lastShown = localStorage.getItem(STORAGE_KEY);
+    if (lastShown) {
+      var daysSince = (Date.now() - parseInt(lastShown)) / (1000 * 60 * 60 * 24);
+      if (daysSince < 7) return;
+    }
     var conversions = JSON.parse(localStorage.getItem('dc_conversions') || '[]');
     if (conversions.length > 0) return;
   } catch(e) {}
@@ -94,7 +98,7 @@
     var fvOverlay = document.getElementById('firstVisitOverlay');
     if (fvOverlay && fvOverlay.style.display !== 'none') return;
     shown = true;
-    try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+    try { localStorage.setItem(STORAGE_KEY, Date.now().toString()); } catch(e) {}
     document.getElementById('exitPopupOverlay').style.display = 'flex';
   }
 

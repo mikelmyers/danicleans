@@ -116,9 +116,10 @@
     var conversions = JSON.parse(localStorage.getItem('dc_conversions') || '[]');
     var hasConverted = conversions.length > 0;
 
-    // If returning visitor (2+ visits) who hasn't submitted a form, show a nudge after 10s
-    if (visits >= 2 && !hasConverted) {
+    // If returning visitor (3+ visits) who hasn't submitted a form, show a nudge once per session
+    if (visits >= 3 && !hasConverted && !sessionStorage.getItem('dc_return_nudge_shown')) {
       setTimeout(function() {
+        sessionStorage.setItem('dc_return_nudge_shown', '1');
         var nudge = document.createElement('div');
         nudge.id = 'returnNudge';
         nudge.innerHTML = '<div style="position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:998;background:#fff;border:2px solid #2d6a4f;border-radius:12px;padding:16px 20px;box-shadow:0 4px 20px rgba(0,0,0,0.15);max-width:380px;width:90vw;text-align:center;animation:toastSlide 0.4s ease;">' +
@@ -128,7 +129,7 @@
           '<button onclick="this.closest(\'#returnNudge\').remove()" style="padding:10px 16px;background:transparent;border:1px solid #ccc;border-radius:8px;cursor:pointer;font-size:14px;">Not Now</button>' +
           '</div></div>';
         document.body.appendChild(nudge);
-      }, 10000);
+      }, 15000);
     }
   } catch(e) {}
 })();
