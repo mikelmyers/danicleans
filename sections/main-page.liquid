@@ -41,6 +41,10 @@
       assign known_page = true
     when 'referral'
       assign known_page = true
+    when 'privacy-policy'
+      assign known_page = true
+    when 'terms-of-service'
+      assign known_page = true
   endcase
 
   unless known_page
@@ -70,6 +74,10 @@
       {% render 'page-content-request-a-quote' %}
     {%- when 'referral' -%}
       {% render 'page-content-referral' %}
+    {%- when 'privacy-policy' -%}
+      {% render 'page-content-privacy-policy' %}
+    {%- when 'terms-of-service' -%}
+      {% render 'page-content-terms-of-service' %}
     {%- else -%}
       {% if page.handle contains 'cleaning-services-in-' %}
         {% render 'page-content-neighborhood' %}

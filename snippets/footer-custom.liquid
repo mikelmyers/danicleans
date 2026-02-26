@@ -114,8 +114,10 @@
     <div class="dc-footer-inner">
       <p>&copy; {{ 'now' | date: '%Y' }} Dani Cleans. All rights reserved. Charlottesville, VA.</p>
       <div class="dc-footer-bottom-links">
+        <a href="/pages/privacy-policy">Privacy Policy</a>
+        <a href="/pages/terms-of-service">Terms of Service</a>
         {%- for policy in shop.policies -%}
-          {%- if policy != blank -%}
+          {%- if policy != blank and policy.title != 'Privacy Policy' and policy.title != 'Terms of Service' -%}
             <a href="{{ policy.url }}">{{ policy.title }}</a>
           {%- endif -%}
         {%- endfor -%}

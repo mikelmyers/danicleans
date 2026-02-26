@@ -69,6 +69,14 @@
   <section class="svc-quote" id="svc-quote">
     <div class="svc-container">
       <div class="svc-quote-card">
+        {% if request.query.success == 'true' and request.query.form_type == 'contact' %}
+        <div style="text-align:center;padding:32px 0;">
+          <div style="font-size:48px;margin-bottom:12px;">&#10003;</div>
+          <h2 style="color:#2d6a4f;">Thank You!</h2>
+          <p style="color:#555;margin-top:8px;">We'll call or text you within 24 hours with your personalized estimate.</p>
+          <p style="margin-top:16px;"><a href="tel:4343510335" style="color:#2d6a4f;font-weight:600;">Need it sooner? Call 434-351-0335</a></p>
+        </div>
+        {% else %}
         <h2>Get Your Free Estimate</h2>
         <p>Most quotes returned within 24 hours. No spam, no obligation.</p>
 
@@ -84,7 +92,7 @@
           </div>
           <div class="svc-form-row">
             <input type="email" name="contact[email]" placeholder="Email" required>
-            <select name="contact[Service Category]">
+            <select name="contact[Service Category]" required>
               <option value="">Select a Service</option>
               <option value="Recurring Cleaning">Recurring Cleaning</option>
               <option value="Deep Cleaning">Deep Cleaning</option>
@@ -104,6 +112,7 @@
           <textarea name="contact[body]" rows="3" placeholder="Tell us about your property (optional)"></textarea>
           <button type="submit">Get My Free Estimate</button>
         </form>
+        {% endif %}
       </div>
     </div>
   </section>
