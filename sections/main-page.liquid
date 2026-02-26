@@ -14,21 +14,83 @@
   }
 {%- endstyle -%}
 
-<!-- Branded Page Hero -->
-<div class="dc-page-hero">
-  <div class="dc-page-hero-inner">
-    <h1 class="dc-page-hero-title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {{ page.title | escape }}
-    </h1>
-  </div>
-</div>
+{% comment %}
+  Smart Page Routing — Auto-renders branded page content based on page handle.
+  When a page uses the default template (no custom template assigned in admin),
+  this detects the page URL and renders the correct custom content automatically.
+{% endcomment %}
 
-<!-- Page Content -->
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <div class="dc-page-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
+{%- liquid
+  assign known_page = false
+  case page.handle
+    when 'services'
+      assign known_page = true
+    when 'about'
+      assign known_page = true
+    when 'pricing'
+      assign known_page = true
+    when 'contact-us'
+      assign known_page = true
+    when 'commercial'
+      assign known_page = true
+    when 'realtor-partner'
+      assign known_page = true
+    when 'faq'
+      assign known_page = true
+    when 'request-a-quote'
+      assign known_page = true
+    when 'referral'
+      assign known_page = true
+  endcase
+
+  unless known_page
+    if page.handle contains 'cleaning-services-in-'
+      assign known_page = true
+    endif
+  endunless
+-%}
+
+{% if known_page %}
+  {%- case page.handle -%}
+    {%- when 'services' -%}
+      {% render 'page-content-services' %}
+    {%- when 'about' -%}
+      {% render 'page-content-about' %}
+    {%- when 'pricing' -%}
+      {% render 'page-content-pricing' %}
+    {%- when 'contact-us' -%}
+      {% render 'page-content-contact-us' %}
+    {%- when 'commercial' -%}
+      {% render 'page-content-commercial' %}
+    {%- when 'realtor-partner' -%}
+      {% render 'page-content-realtor-partner' %}
+    {%- when 'faq' -%}
+      {% render 'page-content-faq' %}
+    {%- when 'request-a-quote' -%}
+      {% render 'page-content-request-a-quote' %}
+    {%- when 'referral' -%}
+      {% render 'page-content-referral' %}
+    {%- else -%}
+      {% if page.handle contains 'cleaning-services-in-' %}
+        {% render 'page-content-neighborhood' %}
+      {% endif %}
+  {%- endcase -%}
+{% else %}
+  <!-- Default: Branded Page Hero + Admin Content -->
+  <div class="dc-page-hero">
+    <div class="dc-page-hero-inner">
+      <h1 class="dc-page-hero-title{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+        {{ page.title | escape }}
+      </h1>
+    </div>
   </div>
-</div>
+
+  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
+    <div class="dc-page-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ page.content }}
+    </div>
+  </div>
+{% endif %}
 
 <style>
   .dc-page-hero {

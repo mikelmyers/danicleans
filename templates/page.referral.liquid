@@ -1,0 +1,334 @@
+{% comment %}
+  Referral Program Page — Dani Cleans
+  Turns happy customers into a lead generation engine.
+  Offer: Both the referrer and the new customer get a reward.
+{% endcomment %}
+
+{% assign form_success = false %}
+{% if request.query.success == 'true' and request.query.form_type == 'contact' %}
+  {% assign form_success = true %}
+{% endif %}
+
+<div class="ref-page">
+  <!-- Hero -->
+  <section class="ref-hero">
+    <div class="ref-container">
+      <p class="ref-tag">Referral Program</p>
+      <h1>Refer a Friend, Earn Rewards</h1>
+      <p class="ref-hero-sub">Love your clean home? Share the love. You get $25 off, your friend gets $25 off. Everybody wins.</p>
+      <a href="#ref-form" class="ref-hero-btn">Refer a Friend Now</a>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="ref-how">
+    <div class="ref-container">
+      <h2>How It Works</h2>
+      <div class="ref-steps">
+        <div class="ref-step">
+          <div class="ref-step-num">1</div>
+          <h3>Tell Us About Your Friend</h3>
+          <p>Fill out the quick form below with your friend's name and contact info. That's it.</p>
+        </div>
+        <div class="ref-step">
+          <div class="ref-step-num">2</div>
+          <h3>We Reach Out</h3>
+          <p>We'll contact them with a friendly intro and offer $25 off their first service — on your behalf.</p>
+        </div>
+        <div class="ref-step">
+          <div class="ref-step-num">3</div>
+          <h3>They Book a Service</h3>
+          <p>When they book and complete their first cleaning or lawn service, their $25 discount applies automatically.</p>
+        </div>
+        <div class="ref-step">
+          <div class="ref-step-num">4</div>
+          <h3>You Get $25 Credit</h3>
+          <p>Once their service is complete, you get a $25 credit applied to your next scheduled service. Easy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rewards Breakdown -->
+  <section class="ref-rewards">
+    <div class="ref-container">
+      <div class="ref-rewards-card">
+        <div class="ref-rewards-col">
+          <h3>You Get</h3>
+          <div class="ref-reward-amount">$25 Credit</div>
+          <p>Applied to your next service for every successful referral. Refer 4 friends and your next clean is free.</p>
+        </div>
+        <div class="ref-rewards-divider"></div>
+        <div class="ref-rewards-col">
+          <h3>They Get</h3>
+          <div class="ref-reward-amount">$25 Off</div>
+          <p>Your friend saves $25 on their first cleaning or lawn service. A great way to try us risk-free.</p>
+        </div>
+      </div>
+      <div class="ref-bonus">
+        <strong>No limit on referrals.</strong> Refer 10 friends? That's $250 in credits. Some of our customers haven't paid for a clean in months.
+      </div>
+    </div>
+  </section>
+
+  <!-- Referral Form -->
+  <section class="ref-form-section" id="ref-form">
+    <div class="ref-container">
+      <div class="ref-form-card">
+        {% if form_success %}
+          <div class="ref-success">
+            <div class="ref-success-icon">&#10003;</div>
+            <h2>Referral Submitted!</h2>
+            <p>Thanks for spreading the word. We'll reach out to your friend within 24 hours and let you know when your credit kicks in.</p>
+            <a href="#ref-form" class="ref-another" onclick="window.location.href=window.location.pathname;">Submit Another Referral</a>
+          </div>
+        {% else %}
+          <h2>Refer a Friend</h2>
+          <p class="ref-form-sub">Fill in your info and your friend's. We'll handle the rest.</p>
+
+          <form method="post" action="/contact" accept-charset="UTF-8" class="ref-form">
+            <input type="hidden" name="form_type" value="contact">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="contact[Source]" value="Referral Program">
+            <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
+
+            <div class="ref-form-group-label">Your Info (the referrer)</div>
+            <div class="ref-form-row">
+              <div class="ref-field">
+                <label for="RefYourName">Your Name *</label>
+                <input type="text" id="RefYourName" name="contact[name]" required placeholder="Your full name">
+              </div>
+              <div class="ref-field">
+                <label for="RefYourEmail">Your Email *</label>
+                <input type="email" id="RefYourEmail" name="contact[email]" required placeholder="your@email.com">
+              </div>
+            </div>
+            <div class="ref-form-row">
+              <div class="ref-field">
+                <label for="RefYourPhone">Your Phone</label>
+                <input type="tel" id="RefYourPhone" name="contact[Your Phone]" placeholder="(434) 555-1234">
+              </div>
+            </div>
+
+            <div class="ref-form-group-label">Your Friend's Info</div>
+            <div class="ref-form-row">
+              <div class="ref-field">
+                <label for="RefFriendName">Friend's Name *</label>
+                <input type="text" id="RefFriendName" name="contact[Friend Name]" required placeholder="Their full name">
+              </div>
+              <div class="ref-field">
+                <label for="RefFriendEmail">Friend's Email</label>
+                <input type="email" id="RefFriendEmail" name="contact[Friend Email]" placeholder="friend@email.com">
+              </div>
+            </div>
+            <div class="ref-form-row">
+              <div class="ref-field">
+                <label for="RefFriendPhone">Friend's Phone *</label>
+                <input type="tel" id="RefFriendPhone" name="contact[Friend Phone]" required placeholder="(434) 555-5678">
+              </div>
+              <div class="ref-field">
+                <label for="RefFriendService">Service They'd Need</label>
+                <select id="RefFriendService" name="contact[Friend Service Interest]">
+                  <option value="">Select...</option>
+                  <option value="Home Cleaning">Home Cleaning</option>
+                  <option value="Lawn Care">Lawn Care & Landscaping</option>
+                  <option value="Both">Both (Cleaning + Lawn)</option>
+                  <option value="Not Sure">Not Sure</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="ref-field">
+              <label for="RefNotes">Anything else?</label>
+              <textarea id="RefNotes" name="contact[body]" rows="3" placeholder="E.g., 'They just moved to Crozet' or 'She mentioned needing a deep clean'"></textarea>
+            </div>
+
+            <button type="submit" class="ref-submit">Submit Referral</button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="ref-faq">
+    <div class="ref-container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="ref-faq-list">
+        <details class="ref-faq-item">
+          <summary>Is there a limit to how many people I can refer?</summary>
+          <p>Nope. Refer as many friends as you want. There's no cap on credits. Some customers have earned hundreds in free service.</p>
+        </details>
+        <details class="ref-faq-item">
+          <summary>When do I get my credit?</summary>
+          <p>Your $25 credit is applied after your friend's first service is completed and paid for. We'll notify you by email.</p>
+        </details>
+        <details class="ref-faq-item">
+          <summary>Does my friend have to be a new customer?</summary>
+          <p>Yes — the referral program is for new customers who haven't used Dani Cleans before.</p>
+        </details>
+        <details class="ref-faq-item">
+          <summary>Can I combine credits?</summary>
+          <p>Absolutely. Credits stack and roll over. If you've earned $75 in credits, you can apply it all to one service or spread it across multiple.</p>
+        </details>
+        <details class="ref-faq-item">
+          <summary>Do I have to be a current customer to refer someone?</summary>
+          <p>Current and past customers are both eligible. As long as we can verify you've used our services, you're in.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ref-cta">
+    <div class="ref-container">
+      <h2>Know Someone Who Needs a Clean Home?</h2>
+      <p>Help them discover Dani Cleans — and earn $25 for yourself.</p>
+      <a href="#ref-form" class="ref-cta-btn">Refer a Friend</a>
+    </div>
+  </section>
+</div>
+
+<style>
+.ref-page { color: #1a3a2a; }
+.ref-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+/* Hero */
+.ref-hero {
+  background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 100%);
+  color: #fff; padding: 72px 20px; text-align: center;
+}
+.ref-tag { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; margin-bottom: 12px; }
+.ref-hero h1 { font-size: 42px; margin-bottom: 16px; line-height: 1.2; }
+.ref-hero-sub { font-size: 18px; opacity: 0.9; max-width: 550px; margin: 0 auto 28px; }
+.ref-hero-btn {
+  display: inline-block; padding: 16px 40px; background: #fff; color: #2d6a4f;
+  font-size: 17px; font-weight: 700; border-radius: 8px; text-decoration: none;
+  transition: all 0.2s;
+}
+.ref-hero-btn:hover { background: #f0f7f0; transform: translateY(-2px); }
+
+/* How It Works */
+.ref-how { padding: 64px 20px; }
+.ref-how h2 { text-align: center; font-size: 30px; margin-bottom: 40px; }
+.ref-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.ref-step { text-align: center; }
+.ref-step-num {
+  width: 52px; height: 52px; background: #2d6a4f; color: #fff;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; margin-bottom: 14px;
+}
+.ref-step h3 { font-size: 17px; margin-bottom: 8px; color: #1a3a2a; }
+.ref-step p { font-size: 14px; color: #555; line-height: 1.5; }
+
+/* Rewards */
+.ref-rewards { padding: 56px 20px; background: #f7faf7; }
+.ref-rewards-card {
+  display: flex; align-items: stretch; background: #fff;
+  border-radius: 16px; border: 2px solid #2d6a4f; overflow: hidden;
+  max-width: 700px; margin: 0 auto;
+}
+.ref-rewards-col { flex: 1; padding: 36px 32px; text-align: center; }
+.ref-rewards-col h3 { font-size: 15px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 8px; }
+.ref-reward-amount { font-size: 36px; font-weight: 800; color: #2d6a4f; margin-bottom: 8px; }
+.ref-rewards-col p { font-size: 14px; color: #555; line-height: 1.5; margin: 0; }
+.ref-rewards-divider { width: 2px; background: #e0e8e0; }
+.ref-bonus {
+  text-align: center; padding: 20px; font-size: 15px; color: #555; max-width: 600px; margin: 20px auto 0;
+}
+.ref-bonus strong { color: #2d6a4f; }
+
+/* Form */
+.ref-form-section { padding: 56px 20px; }
+.ref-form-card {
+  max-width: 700px; margin: 0 auto; background: #fff;
+  border: 2px solid #e0e8e0; border-radius: 16px; padding: 40px;
+}
+.ref-form-card h2 { text-align: center; font-size: 26px; margin-bottom: 4px; }
+.ref-form-sub { text-align: center; color: #666; margin-bottom: 24px; font-size: 15px; }
+.ref-form-group-label {
+  font-size: 14px; font-weight: 700; color: #2d6a4f;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 12px; padding-bottom: 6px;
+  border-bottom: 2px solid #e8f0e8;
+}
+.ref-form-group-label + .ref-form-row { margin-top: 0; }
+.ref-form-row { display: flex; gap: 14px; margin-bottom: 14px; }
+.ref-field { flex: 1; }
+.ref-field label {
+  display: block; font-size: 14px; font-weight: 600;
+  color: #1a3a2a; margin-bottom: 6px;
+}
+.ref-field input, .ref-field select, .ref-field textarea {
+  width: 100%; padding: 12px 14px; border: 2px solid #e0e8e0;
+  border-radius: 8px; font-size: 15px; font-family: inherit;
+  transition: border-color 0.2s;
+}
+.ref-field input:focus, .ref-field select:focus, .ref-field textarea:focus {
+  outline: none; border-color: #2d6a4f;
+}
+.ref-field textarea { resize: vertical; }
+.ref-submit {
+  width: 100%; padding: 16px; background: #2d6a4f; color: #fff;
+  border: none; border-radius: 8px; font-size: 17px; font-weight: 700;
+  cursor: pointer; font-family: inherit; transition: background 0.2s;
+  margin-top: 8px;
+}
+.ref-submit:hover { background: #245a42; }
+
+/* Success */
+.ref-success { text-align: center; padding: 32px 16px; }
+.ref-success-icon {
+  width: 64px; height: 64px; background: #e8f5e8; color: #2d6a4f;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 800; margin-bottom: 16px;
+}
+.ref-success h2 { margin-bottom: 8px; }
+.ref-success p { color: #555; font-size: 15px; margin-bottom: 16px; }
+.ref-another {
+  display: inline-block; padding: 12px 28px; background: #2d6a4f; color: #fff;
+  border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 15px;
+}
+.ref-another:hover { background: #245a42; }
+
+/* FAQ */
+.ref-faq { padding: 56px 20px; background: #f7faf7; }
+.ref-faq h2 { text-align: center; font-size: 28px; margin-bottom: 28px; }
+.ref-faq-list { max-width: 700px; margin: 0 auto; }
+.ref-faq-item {
+  background: #fff; border: 1px solid #e0e8e0; border-radius: 10px;
+  margin-bottom: 10px; overflow: hidden;
+}
+.ref-faq-item summary {
+  padding: 16px 20px; font-size: 15px; font-weight: 600;
+  color: #1a3a2a; cursor: pointer; list-style: none;
+}
+.ref-faq-item summary::-webkit-details-marker { display: none; }
+.ref-faq-item summary::after { content: "+"; float: right; color: #2d6a4f; font-size: 18px; font-weight: 700; }
+.ref-faq-item[open] summary::after { content: "−"; }
+.ref-faq-item p { padding: 0 20px 16px; font-size: 14px; color: #555; line-height: 1.6; margin: 0; }
+
+/* CTA */
+.ref-cta {
+  padding: 64px 20px; background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
+  color: #fff; text-align: center;
+}
+.ref-cta h2 { font-size: 30px; margin-bottom: 8px; }
+.ref-cta p { font-size: 17px; opacity: 0.9; margin-bottom: 24px; }
+.ref-cta-btn {
+  display: inline-block; padding: 16px 40px; background: #fff; color: #2d6a4f;
+  border-radius: 8px; font-size: 17px; font-weight: 700; text-decoration: none;
+  transition: all 0.2s;
+}
+.ref-cta-btn:hover { background: #f0f7f0; transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+  .ref-hero h1 { font-size: 30px; }
+  .ref-hero { padding: 48px 20px; }
+  .ref-steps { grid-template-columns: 1fr 1fr; }
+  .ref-rewards-card { flex-direction: column; }
+  .ref-rewards-divider { width: 100%; height: 2px; }
+  .ref-form-row { flex-direction: column; gap: 12px; }
+  .ref-form-card { padding: 28px 20px; }
+}
+</style>

@@ -1,0 +1,282 @@
+{% comment %}
+  Neighborhood Landing Page Template
+  More granular than city pages — targets hyperlocal searches like:
+  "house cleaning Belmont Charlottesville" or "lawn care Crozet VA"
+  These pages CRUSH local SEO because competitors don't go this deep.
+
+  Usage: Create a page titled "Cleaning Services in [Neighborhood]"
+  and assign this template.
+{% endcomment %}
+
+{% assign area_name = page.title | remove: "Cleaning Services in " | remove: "House Cleaning in " | remove: "Lawn Care in " | remove: "Cleaning & Landscaping in " %}
+{% if area_name == page.title %}
+  {% assign area_name = page.title | split: " in " | last | strip %}
+{% endif %}
+{% if area_name == blank or area_name == page.title %}
+  {% assign area_name = "your neighborhood" %}
+{% endif %}
+
+<div class="nbhd-landing">
+  <!-- Hero -->
+  <section class="nbhd-hero">
+    <div class="nbhd-inner">
+      <p class="nbhd-tag">Serving {{ area_name }} &amp; Surrounding Areas</p>
+      <h1>{{ page.title }}</h1>
+      <p class="nbhd-sub">Your neighbors in {{ area_name }} trust Dani Cleans for home cleaning and lawn care. Reliable, thorough, and backed by our 100% satisfaction guarantee.</p>
+      <div class="nbhd-ctas">
+        <a href="#nbhd-form" class="nbhd-btn primary">Get Your Free Estimate</a>
+        <a href="tel:4343510335" class="nbhd-btn secondary">Call 434-351-0335</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Offer -->
+  <section class="nbhd-services">
+    <div class="nbhd-inner">
+      <h2>What We Offer in {{ area_name }}</h2>
+      <div class="nbhd-services-grid">
+        <div class="nbhd-svc">
+          <h3>Home Cleaning</h3>
+          <ul>
+            <li>Weekly, bi-weekly, or monthly plans</li>
+            <li>Deep cleaning &amp; move-in/move-out</li>
+            <li>Post-construction cleanup</li>
+            <li>Eco-friendly products available</li>
+          </ul>
+          <a href="/pages/pricing?tab=cleaning">See Cleaning Prices</a>
+        </div>
+        <div class="nbhd-svc">
+          <h3>Lawn Care &amp; Landscaping</h3>
+          <ul>
+            <li>Mowing, edging, &amp; trimming</li>
+            <li>Landscaping design &amp; installation</li>
+            <li>Seasonal cleanup &amp; mulching</li>
+            <li>Gutter cleaning</li>
+          </ul>
+          <a href="/pages/pricing?tab=landscaping">See Lawn Care Prices</a>
+        </div>
+        <div class="nbhd-svc highlight">
+          <h3>Bundle &amp; Save</h3>
+          <ul>
+            <li>Cleaning + landscaping together</li>
+            <li>Save an extra 10% on both</li>
+            <li>One company, one bill</li>
+            <li>Same-day scheduling available</li>
+          </ul>
+          <a href="/pages/pricing?tab=bundle">See Bundle Savings</a>
+        </div>
+        <div class="nbhd-svc">
+          <h3>Pressure Washing</h3>
+          <ul>
+            <li>Driveways, patios &amp; walkways</li>
+            <li>Siding, fences &amp; decks</li>
+            <li>Surface prep for painting</li>
+            <li>Instant curb appeal boost</li>
+          </ul>
+          <a href="/pages/pricing">See Pricing</a>
+        </div>
+        <div class="nbhd-svc">
+          <h3>More Services</h3>
+          <ul>
+            <li>Window cleaning (interior/exterior)</li>
+            <li>Holiday light installation</li>
+            <li>Junk removal &amp; cleanouts</li>
+            <li>Commercial cleaning</li>
+          </ul>
+          <a href="/pages/services">View All Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Locals Choose Us -->
+  <section class="nbhd-why">
+    <div class="nbhd-inner">
+      <h2>Why {{ area_name }} Residents Choose Dani Cleans</h2>
+      <div class="nbhd-why-grid">
+        <div class="nbhd-why-item">
+          <strong>We Know the Area</strong>
+          <p>We live and work in the Charlottesville area. We know {{ area_name }} and treat your home like our own.</p>
+        </div>
+        <div class="nbhd-why-item">
+          <strong>Same Team Every Visit</strong>
+          <p>No random crews. You get the same familiar, background-checked team members each time.</p>
+        </div>
+        <div class="nbhd-why-item">
+          <strong>Satisfaction Guaranteed</strong>
+          <p>Not happy? We come back and redo it. Free. No questions asked. That's our promise.</p>
+        </div>
+        <div class="nbhd-why-item">
+          <strong>No Contracts</strong>
+          <p>Month-to-month. Pause or cancel anytime. We earn your business every single visit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="nbhd-reviews">
+    <div class="nbhd-inner">
+      <h2>What Your Neighbors Say</h2>
+      <div class="nbhd-review-grid">
+        <div class="nbhd-review">
+          <div class="nbhd-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Dani Cleans has been cleaning our home bi-weekly for over a year. They're consistent, thorough, and so easy to communicate with. Best service around."</p>
+          <span>— Happy Customer, {{ area_name }} Area</span>
+        </div>
+        <div class="nbhd-review">
+          <div class="nbhd-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"We bundle our cleaning and lawn care with Dani Cleans. It's so nice having one company handle everything. Our home and yard have never looked better."</p>
+          <span>— Satisfied Homeowner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Form -->
+  <section class="nbhd-form-section" id="nbhd-form">
+    <div class="nbhd-inner">
+      <div class="nbhd-form-card">
+        <h2>Get a Free Estimate for {{ area_name }}</h2>
+        <p>Most estimates delivered within 24 hours. No obligation.</p>
+        <form method="post" action="/contact" accept-charset="UTF-8">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[Source]" value="Neighborhood Page: {{ area_name }}">
+          <input type="hidden" name="return_to" value="{{ page.url }}?form_type=contact&success=true">
+
+          <div class="nbhd-form-row">
+            <input type="text" name="contact[name]" placeholder="Full Name *" required>
+            <input type="tel" name="contact[Phone Number]" placeholder="Phone *" required>
+          </div>
+          <div class="nbhd-form-row">
+            <input type="email" name="contact[email]" placeholder="Email *" required>
+            <select name="contact[Service Needed]" required>
+              <option value="">Service Needed *</option>
+              <option value="Recurring Cleaning">Recurring Cleaning</option>
+              <option value="Deep Cleaning">Deep Cleaning</option>
+              <option value="Move-In/Out Cleaning">Move-In / Move-Out Cleaning</option>
+              <option value="Lawn Mowing">Lawn Mowing & Care</option>
+              <option value="Landscaping">Landscaping</option>
+              <option value="Pressure Washing">Pressure Washing</option>
+              <option value="Window Cleaning">Window Cleaning</option>
+              <option value="Holiday Lights">Holiday Light Installation</option>
+              <option value="Junk Removal">Junk Removal</option>
+              <option value="Cleaning + Lawn Bundle">Bundle: Cleaning + Lawn Care (Save 10%)</option>
+            </select>
+          </div>
+          <input type="text" name="contact[Property Address]" placeholder="Property Address in {{ area_name }} *" required style="width:100%;padding:14px;border:2px solid #e0e8e0;border-radius:8px;font-size:15px;font-family:inherit;margin-bottom:12px;">
+          <textarea name="contact[body]" placeholder="Anything else we should know? (optional)" rows="3" style="width:100%;padding:14px;border:2px solid #e0e8e0;border-radius:8px;font-size:15px;font-family:inherit;resize:vertical;margin-bottom:12px;"></textarea>
+          <button type="submit" class="nbhd-submit">Get My Free Estimate</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nearby Areas -->
+  <section class="nbhd-nearby">
+    <div class="nbhd-inner">
+      <h2>Also Serving Nearby Areas</h2>
+      <p>In addition to {{ area_name }}, Dani Cleans proudly serves:</p>
+      <div class="nbhd-area-links">
+        <a href="/pages/cleaning-services-in-charlottesville">Charlottesville</a>
+        <a href="/pages/cleaning-services-in-crozet">Crozet</a>
+        <a href="/pages/cleaning-services-in-waynesboro">Waynesboro</a>
+        <a href="/pages/cleaning-services-in-staunton">Staunton</a>
+        <a href="/pages/cleaning-services-in-keswick">Keswick</a>
+        <a href="/pages/cleaning-services-in-earlysville">Earlysville</a>
+        <a href="/pages/cleaning-services-in-scottsville">Scottsville</a>
+        <a href="/pages/cleaning-services-in-gordonsville">Gordonsville</a>
+        <a href="/pages/cleaning-services-in-palmyra">Palmyra</a>
+        <a href="/pages/cleaning-services-in-free-union">Free Union</a>
+        <a href="/pages/cleaning-services-in-ivy">Ivy</a>
+        <a href="/pages/cleaning-services-in-north-garden">North Garden</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Dani Cleans",
+  "description": "Professional cleaning and landscaping services in {{ area_name }}. Locally owned, insured, satisfaction guaranteed.",
+  "url": "{{ shop.url }}{{ page.url }}",
+  "telephone": "+14343510335",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Charlottesville",
+    "addressRegion": "VA",
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "{{ area_name }}, Virginia"
+  },
+  "priceRange": "$$",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127"
+  }
+}
+</script>
+
+<style>
+.nbhd-landing { color: #1a3a2a; }
+.nbhd-inner { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.nbhd-hero { background: linear-gradient(135deg, #1a3a2a, #2d6a4f); color: #fff; padding: 60px 20px; text-align: center; }
+.nbhd-tag { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-bottom: 12px; }
+.nbhd-hero h1 { font-size: 36px; margin-bottom: 12px; line-height: 1.2; }
+.nbhd-sub { font-size: 17px; opacity: 0.9; max-width: 600px; margin: 0 auto 24px; }
+.nbhd-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.nbhd-btn { padding: 14px 32px; border-radius: 8px; font-size: 16px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+.nbhd-btn.primary { background: #fff; color: #2d6a4f; }
+.nbhd-btn.secondary { border: 2px solid rgba(255,255,255,0.5); color: #fff; }
+.nbhd-services { padding: 56px 20px; background: #f7faf7; }
+.nbhd-services h2 { text-align: center; font-size: 28px; margin-bottom: 28px; }
+.nbhd-services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+.nbhd-svc { background: #fff; border: 1px solid #e0e8e0; border-radius: 12px; padding: 28px; }
+.nbhd-svc.highlight { border-color: #2d6a4f; border-width: 2px; }
+.nbhd-svc h3 { font-size: 20px; margin-bottom: 12px; }
+.nbhd-svc ul { list-style: none; padding: 0; margin: 0 0 16px; }
+.nbhd-svc li { padding: 6px 0; font-size: 14px; color: #555; }
+.nbhd-svc li::before { content: "✓ "; color: #2d6a4f; font-weight: 700; }
+.nbhd-svc a { color: #2d6a4f; font-weight: 600; font-size: 14px; text-decoration: underline; }
+.nbhd-why { padding: 56px 20px; }
+.nbhd-why h2 { text-align: center; font-size: 28px; margin-bottom: 28px; }
+.nbhd-why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.nbhd-why-item { padding: 24px; background: #f7faf7; border-radius: 12px; }
+.nbhd-why-item strong { display: block; font-size: 17px; margin-bottom: 6px; color: #1a3a2a; }
+.nbhd-why-item p { font-size: 14px; color: #555; margin: 0; }
+.nbhd-reviews { padding: 56px 20px; background: #f7faf7; }
+.nbhd-reviews h2 { text-align: center; font-size: 28px; margin-bottom: 24px; }
+.nbhd-review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 800px; margin: 0 auto; }
+.nbhd-review { background: #fff; padding: 24px; border-radius: 12px; border: 1px solid #e0e8e0; }
+.nbhd-stars { color: #f5a623; font-size: 18px; margin-bottom: 8px; }
+.nbhd-review p { font-style: italic; color: #555; font-size: 15px; margin-bottom: 8px; line-height: 1.5; }
+.nbhd-review span { font-size: 13px; color: #888; }
+.nbhd-form-section { padding: 56px 20px; }
+.nbhd-form-card { max-width: 600px; margin: 0 auto; background: #fff; border: 2px solid #2d6a4f; border-radius: 16px; padding: 36px; text-align: center; }
+.nbhd-form-card h2 { font-size: 24px; margin-bottom: 4px; }
+.nbhd-form-card > p { color: #666; margin-bottom: 20px; font-size: 15px; }
+.nbhd-form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.nbhd-form-row input, .nbhd-form-row select { flex: 1; padding: 14px; border: 2px solid #e0e8e0; border-radius: 8px; font-size: 15px; font-family: inherit; }
+.nbhd-submit { width: 100%; padding: 16px; background: #2d6a4f; color: #fff; border: none; border-radius: 8px; font-size: 17px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.nbhd-submit:hover { background: #245a42; }
+.nbhd-nearby { padding: 48px 20px; background: #f7faf7; text-align: center; }
+.nbhd-nearby h2 { font-size: 22px; margin-bottom: 4px; }
+.nbhd-nearby > .nbhd-inner > p { color: #666; margin-bottom: 20px; }
+.nbhd-area-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.nbhd-area-links a { padding: 8px 16px; background: #fff; border: 1px solid #e0e8e0; border-radius: 20px; font-size: 14px; color: #2d6a4f; text-decoration: none; font-weight: 500; transition: all 0.2s; }
+.nbhd-area-links a:hover { background: #2d6a4f; color: #fff; }
+@media (max-width: 768px) {
+  .nbhd-services-grid { grid-template-columns: 1fr; }
+  .nbhd-why-grid { grid-template-columns: 1fr; }
+  .nbhd-review-grid { grid-template-columns: 1fr; }
+  .nbhd-hero h1 { font-size: 26px; }
+  .nbhd-form-row { flex-direction: column; }
+}
+</style>

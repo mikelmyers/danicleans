@@ -1,37 +1,48 @@
+{% assign review_submitted = false %}
+{% if request.query.review_submitted == 'true' %}
+  {% assign review_submitted = true %}
+{% endif %}
+
 <div class="review-form-wrapper">
-  <h2>Share Your Experience</h2>
-  <form method="post" action="/contact#review-submitted" accept-charset="UTF-8" class="review-form">
-    <input type="hidden" name="form_type" value="contact">
-    <input type="hidden" name="contact[tags]" value="Customer Review Submission">
+  {% if review_submitted %}
+    <div class="review-success">
+      <div class="review-success-icon">&#10003;</div>
+      <h2>Thank You!</h2>
+      <p>Your review has been submitted. We'll verify it shortly to keep spam away.</p>
+    </div>
+  {% else %}
+    <h2>Share Your Experience</h2>
+    <form method="post" action="/contact" accept-charset="UTF-8" class="review-form">
+      <input type="hidden" name="form_type" value="contact">
+      <input type="hidden" name="contact[tags]" value="Customer Review Submission">
+      <input type="hidden" name="contact[Source]" value="Review Form">
+      <input type="hidden" name="return_to" value="{{ request.path }}?review_submitted=true">
 
-    <label for="name">Name</label>
-    <input required type="text" id="name" name="contact[name]" placeholder="Your Name">
+      <label for="ReviewName">Name</label>
+      <input required type="text" id="ReviewName" name="contact[name]" placeholder="Your Name">
 
-    <label for="email">Email</label>
-    <input required type="email" id="email" name="contact[email]" placeholder="Your Email">
+      <label for="ReviewEmail">Email</label>
+      <input required type="email" id="ReviewEmail" name="contact[email]" placeholder="Your Email">
 
-    <div class="review-rating-field">
-      <label>Rating</label>
-      <div class="star-rating">
-        <div class="star-rating-group">
-          <input type="radio" id="rating-5" name="contact[rating]" value="5" checked><label for="rating-5">★</label>
-          <input type="radio" id="rating-4" name="contact[rating]" value="4"><label for="rating-4">★</label>
-          <input type="radio" id="rating-3" name="contact[rating]" value="3"><label for="rating-3">★</label>
-          <input type="radio" id="rating-2" name="contact[rating]" value="2"><label for="rating-2">★</label>
-          <input type="radio" id="rating-1" name="contact[rating]" value="1"><label for="rating-1">★</label>
+      <div class="review-rating-field">
+        <label>Rating</label>
+        <div class="star-rating">
+          <div class="star-rating-group">
+            <input type="radio" id="rating-5" name="contact[rating]" value="5" checked><label for="rating-5">&#9733;</label>
+            <input type="radio" id="rating-4" name="contact[rating]" value="4"><label for="rating-4">&#9733;</label>
+            <input type="radio" id="rating-3" name="contact[rating]" value="3"><label for="rating-3">&#9733;</label>
+            <input type="radio" id="rating-2" name="contact[rating]" value="2"><label for="rating-2">&#9733;</label>
+            <input type="radio" id="rating-1" name="contact[rating]" value="1"><label for="rating-1">&#9733;</label>
+          </div>
         </div>
       </div>
-    </div>
 
-    <label for="review">Your Review</label>
-    <textarea required id="review" name="contact[body]" rows="5" placeholder="What did you think?"></textarea>
+      <label for="ReviewBody">Your Review</label>
+      <textarea required id="ReviewBody" name="contact[body]" rows="5" placeholder="What did you think?"></textarea>
 
-    <button type="submit">Submit Review</button>
-
-    {% if form.posted_successfully? and request.path contains '/contact' %}
-      <p class="review-success">Thanks! We're verifying your review to keep spam away.</p>
-    {% endif %}
-  </form>
+      <button type="submit">Submit Review</button>
+    </form>
+  {% endif %}
 </div>
 
 <style>
@@ -52,10 +63,32 @@
   font-family: 'Assistant', sans-serif;
 }
 .review-success {
-  margin-top: 1rem;
-  color: green;
-  font-weight: bold;
+  text-align: center;
+  padding: 2rem 1rem;
   font-family: 'Assistant', sans-serif;
+}
+.review-success-icon {
+  width: 56px;
+  height: 56px;
+  background: #e8f5e8;
+  color: #2d6a4f;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.review-success h2 {
+  font-family: 'Assistant', sans-serif;
+  color: #1a3a2a;
+  margin-bottom: 8px;
+}
+.review-success p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
 }
 .review-rating-field {
   margin-bottom: 1rem;

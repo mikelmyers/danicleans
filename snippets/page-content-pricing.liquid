@@ -1,0 +1,485 @@
+{% comment %}
+  Pricing Page — Pushes Recurring Plans
+  The #1 revenue lever: get customers on weekly/bi-weekly plans.
+  40 customers x $500/month = $20K/month.
+  Designed to make recurring the obvious choice.
+{% endcomment %}
+
+<div class="pricing-page">
+  <!-- Hero -->
+  <section class="pricing-hero">
+    <div class="pricing-container">
+      <h1>Simple, Transparent Pricing</h1>
+      <p>No hidden fees. No contracts. Cancel anytime. Most Charlottesville families save 15-20% with a recurring plan.</p>
+    </div>
+  </section>
+
+  <!-- Toggle: Cleaning / Landscaping -->
+  <section class="pricing-toggle-section">
+    <div class="pricing-container">
+      <div class="pricing-toggle" id="pricingToggle">
+        <button class="pricing-tab active" data-tab="cleaning">Home Cleaning</button>
+        <button class="pricing-tab" data-tab="landscaping">Lawn & Landscaping</button>
+        <button class="pricing-tab" data-tab="bundle">Bundle & Save</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLEANING PLANS -->
+  <section class="pricing-plans" id="plans-cleaning">
+    <div class="pricing-container">
+      <div class="pricing-grid">
+        <!-- Monthly -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <h3>Monthly</h3>
+            <p class="pricing-card-desc">For homes that need a refresh</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$140</span>
+            <span class="pricing-per">/visit</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; Full home cleaning</li>
+            <li>&#10003; All supplies included</li>
+            <li>&#10003; Background-checked team</li>
+            <li>&#10003; Satisfaction guaranteed</li>
+            <li>&#10003; Cancel anytime</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=monthly-cleaning" class="pricing-cta secondary">Get Started</a>
+        </div>
+
+        <!-- Bi-Weekly — POPULAR -->
+        <div class="pricing-card popular">
+          <div class="pricing-badge">MOST POPULAR</div>
+          <div class="pricing-card-header">
+            <h3>Bi-Weekly</h3>
+            <p class="pricing-card-desc">Our most popular plan — always fresh</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$126</span>
+            <span class="pricing-per">/visit</span>
+            <span class="pricing-savings">Save 10% vs. one-time</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; <strong>Everything in Monthly</strong></li>
+            <li>&#10003; 10% recurring discount</li>
+            <li>&#10003; Priority scheduling</li>
+            <li>&#10003; Same team every visit</li>
+            <li>&#10003; Free re-clean if not satisfied</li>
+            <li>&#10003; Flexible skip/reschedule</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=biweekly-cleaning" class="pricing-cta primary">Get Started — Save 10%</a>
+        </div>
+
+        <!-- Weekly — BEST VALUE -->
+        <div class="pricing-card best-value">
+          <div class="pricing-badge value">BEST VALUE</div>
+          <div class="pricing-card-header">
+            <h3>Weekly</h3>
+            <p class="pricing-card-desc">For families who want it spotless</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$112</span>
+            <span class="pricing-per">/visit</span>
+            <span class="pricing-savings">Save 20% vs. one-time</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; <strong>Everything in Bi-Weekly</strong></li>
+            <li>&#10003; 20% recurring discount</li>
+            <li>&#10003; Top priority scheduling</li>
+            <li>&#10003; Inside fridge/oven 1x/month FREE</li>
+            <li>&#10003; Seasonal deep clean 1x/quarter FREE</li>
+            <li>&#10003; VIP support — direct phone line</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=weekly-cleaning" class="pricing-cta primary">Get Started — Save 20%</a>
+        </div>
+      </div>
+
+      <!-- One-time services -->
+      <div class="pricing-onetime">
+        <h3>One-Time Services</h3>
+        <div class="pricing-onetime-grid">
+          <div class="pricing-onetime-item">
+            <span>Deep Cleaning</span>
+            <span>From <strong>$250</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Move-In / Move-Out</span>
+            <span>From <strong>$280</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Post-Construction</span>
+            <span>From <strong>$350</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Office / Commercial</span>
+            <span><strong>Custom Quote</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Services -->
+      <div class="pricing-onetime" style="margin-top: 32px;">
+        <h3>Additional Home Services</h3>
+        <div class="pricing-onetime-grid">
+          <div class="pricing-onetime-item">
+            <span>Pressure Washing (Driveway)</span>
+            <span>From <strong>$150</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Pressure Washing (Full Exterior)</span>
+            <span>From <strong>$350</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Window Cleaning (Interior + Exterior)</span>
+            <span>From <strong>$200</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Holiday Light Installation</span>
+            <span>From <strong>$300</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Junk Removal (Partial Load)</span>
+            <span>From <strong>$150</strong></span>
+          </div>
+          <div class="pricing-onetime-item">
+            <span>Junk Removal (Full Load)</span>
+            <span>From <strong>$350</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANDSCAPING PLANS -->
+  <section class="pricing-plans" id="plans-landscaping" style="display:none;">
+    <div class="pricing-container">
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <h3>Per Visit</h3>
+            <p class="pricing-card-desc">One-time or as-needed service</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$65</span>
+            <span class="pricing-per">/visit</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; Lawn mowing & edging</li>
+            <li>&#10003; Trimming & blowing</li>
+            <li>&#10003; Professional equipment</li>
+            <li>&#10003; Insured</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=onetime-lawn" class="pricing-cta secondary">Get Started</a>
+        </div>
+
+        <div class="pricing-card popular">
+          <div class="pricing-badge">MOST POPULAR</div>
+          <div class="pricing-card-header">
+            <h3>Bi-Weekly</h3>
+            <p class="pricing-card-desc">Keep your lawn always sharp</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$55</span>
+            <span class="pricing-per">/visit</span>
+            <span class="pricing-savings">Save 15% vs. per visit</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; <strong>Everything in Per Visit</strong></li>
+            <li>&#10003; 15% recurring discount</li>
+            <li>&#10003; Priority scheduling</li>
+            <li>&#10003; Seasonal adjustments included</li>
+            <li>&#10003; Cancel anytime</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=biweekly-lawn" class="pricing-cta primary">Get Started — Save 15%</a>
+        </div>
+
+        <div class="pricing-card best-value">
+          <div class="pricing-badge value">BEST VALUE</div>
+          <div class="pricing-card-header">
+            <h3>Weekly</h3>
+            <p class="pricing-card-desc">Magazine-ready lawn year-round</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$48</span>
+            <span class="pricing-per">/visit</span>
+            <span class="pricing-savings">Save 25% vs. per visit</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; <strong>Everything in Bi-Weekly</strong></li>
+            <li>&#10003; 25% recurring discount</li>
+            <li>&#10003; Free hedge trim 1x/month</li>
+            <li>&#10003; Free leaf cleanup in fall</li>
+            <li>&#10003; Spring prep included</li>
+            <li>&#10003; VIP priority</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=weekly-lawn" class="pricing-cta primary">Get Started — Save 25%</a>
+        </div>
+      </div>
+
+      <div class="pricing-onetime">
+        <h3>One-Time Landscaping Services</h3>
+        <div class="pricing-onetime-grid">
+          <div class="pricing-onetime-item"><span>Landscaping Design</span><span>From <strong>$350</strong></span></div>
+          <div class="pricing-onetime-item"><span>Seasonal Cleanup</span><span>From <strong>$250</strong></span></div>
+          <div class="pricing-onetime-item"><span>Mulching & Beds</span><span>From <strong>$200</strong></span></div>
+          <div class="pricing-onetime-item"><span>Gutter Cleaning</span><span>From <strong>$150</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUNDLE PLANS -->
+  <section class="pricing-plans" id="plans-bundle" style="display:none;">
+    <div class="pricing-container">
+      <div class="pricing-bundle-hero">
+        <h2>The Ultimate Property Plan</h2>
+        <p>Combine cleaning + landscaping and save an extra 10% on top of your recurring discount. One company, one bill, one less thing to worry about.</p>
+      </div>
+
+      <div class="pricing-grid two-col">
+        <div class="pricing-card popular">
+          <div class="pricing-badge">MOST POPULAR BUNDLE</div>
+          <div class="pricing-card-header">
+            <h3>Bi-Weekly Bundle</h3>
+            <p class="pricing-card-desc">Cleaning + Lawn Care every 2 weeks</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$163</span>
+            <span class="pricing-per">/visit</span>
+            <span class="pricing-savings">Save up to 20% combined</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; Full home cleaning (bi-weekly)</li>
+            <li>&#10003; Lawn mowing & edging (bi-weekly)</li>
+            <li>&#10003; 10% bundle discount</li>
+            <li>&#10003; 10% recurring discount stacked</li>
+            <li>&#10003; Same day scheduling available</li>
+            <li>&#10003; One bill, one company</li>
+            <li>&#10003; Cancel either service anytime</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=biweekly-bundle" class="pricing-cta primary">Get Bundle Pricing</a>
+        </div>
+
+        <div class="pricing-card best-value">
+          <div class="pricing-badge value">MAXIMUM SAVINGS</div>
+          <div class="pricing-card-header">
+            <h3>Weekly Bundle</h3>
+            <p class="pricing-card-desc">Complete property care, every week</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-from">Starting at</span>
+            <span class="pricing-amount">$144</span>
+            <span class="pricing-per">/visit</span>
+            <span class="pricing-savings">Save up to 30% combined</span>
+          </div>
+          <ul class="pricing-features">
+            <li>&#10003; <strong>Everything in Bi-Weekly Bundle</strong></li>
+            <li>&#10003; Weekly cleaning + weekly lawn care</li>
+            <li>&#10003; 10% bundle + 20% recurring stacked</li>
+            <li>&#10003; Free monthly fridge + oven clean</li>
+            <li>&#10003; Free monthly hedge trimming</li>
+            <li>&#10003; Quarterly deep clean + seasonal yard cleanup FREE</li>
+            <li>&#10003; Dedicated account manager</li>
+          </ul>
+          <a href="/pages/request-a-quote?plan=weekly-bundle" class="pricing-cta primary">Get Bundle Pricing</a>
+        </div>
+      </div>
+
+      <div class="pricing-bundle-math">
+        <h3>The Math</h3>
+        <p>A typical 3-bedroom home on the <strong>Weekly Bundle</strong> plan:</p>
+        <div class="pricing-math-row">
+          <div class="pricing-math-item">
+            <span class="pricing-math-label">Cleaning (weekly)</span>
+            <span class="pricing-math-val">$155/visit</span>
+          </div>
+          <div class="pricing-math-item">
+            <span class="pricing-math-label">Lawn care (weekly)</span>
+            <span class="pricing-math-val">$65/visit</span>
+          </div>
+          <div class="pricing-math-item">
+            <span class="pricing-math-label">Weekly recurring (-20%)</span>
+            <span class="pricing-math-val savings">-$44/visit</span>
+          </div>
+          <div class="pricing-math-item">
+            <span class="pricing-math-label">Bundle discount (-10%)</span>
+            <span class="pricing-math-val savings">-$18/visit</span>
+          </div>
+          <div class="pricing-math-item total">
+            <span class="pricing-math-label">Your price</span>
+            <span class="pricing-math-val">$158/visit</span>
+          </div>
+          <div class="pricing-math-item monthly">
+            <span class="pricing-math-label">Monthly cost (4 visits)</span>
+            <span class="pricing-math-val"><strong>~$632/month</strong></span>
+          </div>
+        </div>
+        <p class="pricing-math-note">That's complete property maintenance — inside and out — for about $21/day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guarantee -->
+  <section class="pricing-guarantee">
+    <div class="pricing-container">
+      <div class="pricing-guarantee-inner">
+        <div class="pricing-guarantee-icon">&#128170;</div>
+        <h2>Our Iron-Clad Guarantee</h2>
+        <p>If you're not 100% satisfied with any service, we'll come back and redo it for free. No questions asked. If you're still not happy, we'll refund that visit. We've been in business {{ 'now' | date: '%Y' | minus: 2018 }} years because we stand behind every single job.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="pricing-final-cta">
+    <div class="pricing-container">
+      <h2>Ready to Get Started?</h2>
+      <p>Most customers are booked within 48 hours. No contracts, no commitments.</p>
+      <div class="pricing-final-buttons">
+        <a href="/pages/request-a-quote" class="pricing-cta primary large">Get Your Free Estimate</a>
+        <a href="tel:4343510335" class="pricing-cta secondary large">Call 434-351-0335</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+.pricing-page { color: #1a3a2a; }
+.pricing-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.pricing-hero {
+  background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
+  color: #fff; padding: 64px 20px; text-align: center;
+}
+.pricing-hero h1 { font-size: 40px; margin-bottom: 12px; }
+.pricing-hero p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+.pricing-toggle-section { padding: 32px 20px 0; background: #f7faf7; }
+.pricing-toggle {
+  display: flex; justify-content: center; gap: 4px;
+  background: #e0e8e0; border-radius: 10px; padding: 4px;
+  max-width: 500px; margin: 0 auto;
+}
+.pricing-tab {
+  flex: 1; padding: 12px 20px; border: none; background: transparent;
+  border-radius: 8px; font-size: 15px; font-weight: 600;
+  cursor: pointer; font-family: inherit; color: #555; transition: all 0.2s;
+}
+.pricing-tab.active { background: #2d6a4f; color: #fff; }
+.pricing-plans { padding: 40px 20px 64px; background: #f7faf7; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+.pricing-grid.two-col { grid-template-columns: repeat(2, 1fr); max-width: 800px; margin: 0 auto; }
+.pricing-card {
+  background: #fff; border: 2px solid #e0e8e0; border-radius: 16px;
+  padding: 32px 24px; position: relative; transition: transform 0.2s;
+}
+.pricing-card:hover { transform: translateY(-4px); }
+.pricing-card.popular { border-color: #2d6a4f; box-shadow: 0 8px 24px rgba(45,106,79,0.15); }
+.pricing-card.best-value { border-color: #1a3a2a; }
+.pricing-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: #2d6a4f; color: #fff; padding: 4px 16px; border-radius: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px; white-space: nowrap;
+}
+.pricing-badge.value { background: #1a3a2a; }
+.pricing-card-header h3 { font-size: 22px; margin-bottom: 4px; }
+.pricing-card-desc { font-size: 14px; color: #666; margin-bottom: 20px; }
+.pricing-card-price { margin-bottom: 20px; }
+.pricing-from { display: block; font-size: 13px; color: #999; }
+.pricing-amount { font-size: 48px; font-weight: 800; color: #2d6a4f; }
+.pricing-per { font-size: 16px; color: #666; }
+.pricing-savings {
+  display: block; font-size: 13px; color: #2d6a4f; font-weight: 600;
+  margin-top: 4px;
+}
+.pricing-features { list-style: none; padding: 0; margin: 0 0 24px; }
+.pricing-features li {
+  padding: 8px 0; border-bottom: 1px solid #f5f5f5; font-size: 14px; color: #444;
+}
+.pricing-features li:last-child { border-bottom: none; }
+.pricing-cta {
+  display: block; text-align: center; padding: 14px 24px; border-radius: 8px;
+  font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s;
+  font-family: inherit;
+}
+.pricing-cta.primary { background: #2d6a4f; color: #fff; }
+.pricing-cta.primary:hover { background: #245a42; }
+.pricing-cta.secondary { background: #fff; color: #2d6a4f; border: 2px solid #2d6a4f; }
+.pricing-cta.secondary:hover { background: #f0f7f0; }
+.pricing-cta.large { display: inline-block; padding: 16px 40px; font-size: 17px; }
+.pricing-onetime { margin-top: 48px; }
+.pricing-onetime h3 { text-align: center; margin-bottom: 20px; font-size: 22px; }
+.pricing-onetime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.pricing-onetime-item {
+  display: flex; justify-content: space-between; align-items: center;
+  background: #fff; padding: 16px 20px; border-radius: 8px; border: 1px solid #e0e8e0;
+  font-size: 15px;
+}
+.pricing-bundle-hero { text-align: center; margin-bottom: 36px; }
+.pricing-bundle-hero h2 { font-size: 28px; margin-bottom: 8px; }
+.pricing-bundle-hero p { font-size: 16px; color: #555; max-width: 600px; margin: 0 auto; }
+.pricing-bundle-math {
+  margin-top: 40px; background: #fff; border-radius: 12px;
+  padding: 32px; border: 1px solid #e0e8e0; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.pricing-bundle-math h3 { text-align: center; margin-bottom: 4px; }
+.pricing-bundle-math > p { text-align: center; color: #555; margin-bottom: 20px; font-size: 15px; }
+.pricing-math-row { }
+.pricing-math-item {
+  display: flex; justify-content: space-between; padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0; font-size: 15px;
+}
+.pricing-math-item.total { border-top: 2px solid #2d6a4f; border-bottom: none; font-weight: 700; margin-top: 8px; padding-top: 14px; }
+.pricing-math-item.monthly { border-bottom: none; background: #f0f7f0; margin: 8px -12px 0; padding: 12px; border-radius: 8px; }
+.pricing-math-val.savings { color: #2d6a4f; }
+.pricing-math-note { text-align: center; font-size: 14px; color: #2d6a4f; font-weight: 600; margin-top: 16px; }
+.pricing-guarantee { padding: 52px 20px; background: #fff; }
+.pricing-guarantee-inner { text-align: center; max-width: 700px; margin: 0 auto; }
+.pricing-guarantee-icon { font-size: 48px; margin-bottom: 12px; }
+.pricing-guarantee-inner h2 { margin-bottom: 12px; }
+.pricing-guarantee-inner p { color: #555; font-size: 16px; line-height: 1.6; }
+.pricing-final-cta { padding: 64px 20px; background: linear-gradient(135deg, #1a3a2a, #2d6a4f); color: #fff; text-align: center; }
+.pricing-final-cta h2 { font-size: 32px; margin-bottom: 8px; }
+.pricing-final-cta p { font-size: 16px; opacity: 0.9; margin-bottom: 28px; }
+.pricing-final-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.pricing-final-cta .pricing-cta.primary { background: #fff; color: #2d6a4f; }
+.pricing-final-cta .pricing-cta.secondary { border-color: rgba(255,255,255,0.5); color: #fff; background: transparent; }
+@media (max-width: 768px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .pricing-grid.two-col { grid-template-columns: 1fr; }
+  .pricing-hero h1 { font-size: 28px; }
+  .pricing-amount { font-size: 40px; }
+  .pricing-toggle { flex-direction: column; }
+}
+</style>
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.pricing-tab');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var target = tab.getAttribute('data-tab');
+      document.querySelectorAll('.pricing-plans').forEach(function(p) { p.style.display = 'none'; });
+      var panel = document.getElementById('plans-' + target);
+      if (panel) panel.style.display = 'block';
+    });
+  });
+
+  // Pre-select plan from URL params (e.g., from calculator or chatbot)
+  var params = new URLSearchParams(window.location.search);
+  var planParam = params.get('tab');
+  if (planParam) {
+    var targetTab = document.querySelector('.pricing-tab[data-tab="' + planParam + '"]');
+    if (targetTab) targetTab.click();
+  }
+})();
+</script>
